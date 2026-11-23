@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sejarah & Kondisi Desa - SIP-BUNIASIH ONLINE</title>
+    <!-- Google Fonts: Plus Jakarta Sans & Playfair Display untuk Judul yang Elegan -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: #070d19;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* ==========================================================================
+           1. NAVBAR ATAS
+           ========================================================================== */
+        .navbar {
+            background: rgba(10, 17, 32, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-wrapper {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 3px;
+        }
+
+        .logo-wrapper img { width: 100%; height: 100%; object-fit: contain; }
+
+        .brand-text h1 {
+            font-size: 15px;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        .brand-text span {
+            font-size: 11px;
+            color: #94a3b8;
+            font-weight: 500;
+            display: block;
+        }
+
+        .nav-divider { width: 1px; height: 28px; background: rgba(255, 255, 255, 0.12); margin: 0 8px; }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 8px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #cbd5e1;
+            font-size: 11.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            padding: 9px 15px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: all 0.25s ease;
+        }
+
+        .nav-menu a i { font-size: 12px; }
+
+        .nav-menu a.active {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
+        }
+
+        .nav-menu a:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.06);
+            color: #ffffff;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-pill {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            background: rgba(30, 41, 59, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 6px 14px 6px 8px;
+            border-radius: 50px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        .user-avatar-dot {
+            width: 24px; height: 24px; border-radius: 50%;
+            background: #0ea5e9; color: #ffffff;
+            display: flex; align-items: center; justify-content: center; font-size: 11px;
+        }
+
+        .btn-keluar {
+            background: rgba(127, 29, 29, 0.45);
+            border: 1px solid rgba(239, 68, 68, 0.45);
+            color: #fca5a5; padding: 7px 14px; border-radius: 50px;
+            font-size: 12px; font-weight: 600; cursor: pointer;
+            display: flex; align-items: center; gap: 6px; transition: all 0.25s ease;
+        }
+        .btn-keluar:hover { background: #dc2626; color: #ffffff; }
+
+        /* ==========================================================================
+           2. KONTEN UTAMA & HERO BANNER
+           ========================================================================== */
+        .main-wrapper {
+            max-width: 1300px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 24px 32px 50px;
+            flex: 1;
+        }
+
+        .hero-card {
+            position: relative;
+            border-radius: 22px;
+            overflow: hidden;
+            min-height: 310px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(105deg, #091e1a 0%, #0d2e26 42%, #132a4a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+            margin-bottom: 32px;
+        }
+
+        .hero-bg-gapura {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 58%;
+            height: 100%;
+            background-image: url('gapura_desa.jpg');
+            background-size: cover;
+            background-position: center 35%;
+            z-index: 1;
+        }
+
+        .hero-bg-gapura::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                #0b241f 0%,
+                rgba(11, 36, 31, 0.92) 18%,
+                rgba(13, 46, 38, 0.45) 45%,
+                rgba(15, 23, 42, 0.1) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 36px 44px;
+            max-width: 600px;
+        }
+
+        .location-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.16);
+            border: 1px solid rgba(52, 211, 153, 0.35);
+            color: #6ee7b7;
+            font-size: 11.5px;
+            font-weight: 600;
+            padding: 5px 14px;
+            border-radius: 50px;
+            margin-bottom: 16px;
+        }
+
+        .hero-content h2 {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.15;
+            color: #ffffff;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-content h2 .highlight-name {
+            color: #4ade80;
+            display: block;
+        }
+
+        .hero-content p {
+            font-size: 13.5px;
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            max-width: 470px;
+        }
+
+        .hero-footer-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-jelajahi {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 11px 22px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.35);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .btn-jelajahi:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.5);
+        }
+
+        .date-display {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12.5px;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
+        .date-display i { color: #94a3b8; }
+
+        /* ==========================================================================
+           3. KONTEN ARTIKEL SEJARAH & TABEL KEPALA DESA (RATA KANAN KIRI & TENGAH)
+           ========================================================================== */
+        .content-card {
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 45px 50px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            margin-bottom: 30px;
+        }
+
+        /* Styling Judul Ditengah, Font Elegan, Tanpa Nomor 2.1.1 */
+        .section-main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            font-weight: 800;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .section-main-title i {
+            color: #34d399;
+            font-size: 26px;
+        }
+
+        .section-sub-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #f1f5f9;
+            text-align: center;
+            margin-top: 45px;
+            margin-bottom: 20px;
+            letter-spacing: 0.4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .section-sub-title i {
+            color: #34d399;
+            font-size: 20px;
+        }
+
+        /* Paragraf Rata Kanan Kiri (Justify) dengan Font Premium */
+        .content-card p {
+            font-size: 15px;
+            color: #cbd5e1;
+            line-height: 1.9;
+            margin-bottom: 22px;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .intro-desc {
+            text-align: center !important;
+            font-size: 15.5px;
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        /* Styling Tabel Kepala Desa */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 20px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .data-table th {
+            background: linear-gradient(135deg, #064e3b 0%, #047857 100%);
+            color: #ffffff;
+            padding: 15px 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            text-align: center;
+        }
+
+        .data-table td {
+            padding: 14px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            color: #e2e8f0;
+            text-align: center;
+        }
+
+        .data-table td:nth-child(2) {
+            text-align: left; /* Nama rata kiri biar rapi */
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background: rgba(30, 41, 59, 0.4);
+        }
+
+        .data-table tbody tr:hover {
+            background: rgba(16, 185, 129, 0.12);
+        }
+
+        /* Footer */
+        .site-footer {
+            background: #060a14; border-top: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 16px 32px; display: flex; align-items: center; justify-content: space-between;
+            font-size: 12px; color: #94a3b8; margin-top: auto;
+        }
+        .footer-brand { display: flex; align-items: center; gap: 10px; }
+        .footer-brand strong { color: #ffffff; }
+
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .content-card { padding: 24px 20px; }
+            .section-main-title { font-size: 24px; }
+            .section-sub-title { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR ATAS -->
+    <header class="navbar">
+        <div class="nav-left">
+            <div class="brand-box">
+                <div class="logo-wrapper">
+                    <img src="logo-desa.png" alt="Logo Desa" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <i class="fa-solid fa-shield-halved" style="display:none; color:#4ade80; font-size:20px;"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>SIP-BUNIASIH ONLINE</h1>
+                    <span>Pemerintah Desa Buniasih</span>
+                </div>
+            </div>
+            <div class="nav-divider"></div>
+        </div>
+
+        <ul class="nav-menu">
+    <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Beranda</a></li>
+    <li><a href="bagan-struktur.html"><i class="fa-solid fa-sitemap"></i> Struktur Lembaga</a></li>
+    <li><a href="sejarah-desa.html" class="active"><i class="fa-solid fa-landmark"></i> Sejarah Desa</a></li>
+    <li><a href="database-penduduk.html"><i class="fa-solid fa-users"></i> Database Penduduk</a></li>
+    <li><a href="persuratan.html"><i class="fa-solid fa-file-signature"></i> Persuratan</a></li>
+    <li><a href="berita.html"><i class="fa-solid fa-newspaper"></i> Berita</a></li>
+</ul>
+
+        <div class="nav-right">
+            <div class="user-pill">
+                <div class="user-avatar-dot"><i class="fa-solid fa-user"></i></div>
+                <span id="navUserName">Muhamad Ishak</span>
+            </div>
+            <button type="button" class="btn-keluar" id="btnLogout">
+                <i class="fa-solid fa-right-from-bracket"></i> Keluar
+            </button>
+        </div>
+    </header>
+
+    <!-- KONTEN UTAMA -->
+    <main class="main-wrapper">
+
+        <!-- HERO BANNER -->
+        <section class="hero-card" id="sejarahTop">
+            <div class="hero-bg-gapura"></div>
+            
+            <div class="hero-content">
+                <div class="location-pill">
+                    <i class="fa-solid fa-leaf"></i> Desa Buniasih &bull; Kecamatan Maleber
+                </div>
+                <h2>
+                    SEJARAH &amp; KONDISI
+                    <span class="highlight-name">DESA BUNIASIH</span>
+                </h2>
+                <p>
+                    Menelusuri jejak awal mula berdirinya Desa Buniasih, pemekaran wilayah, hingga daftar kepemimpinan kepala desa dari masa ke masa.
+                </p>
+                <div class="hero-footer-row">
+                    <a href="#kontenSejarah" class="btn-jelajahi">
+                        Baca Selengkapnya <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                    <div class="date-display">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span id="realtimeDate">Memuat tanggal...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KARTU KONTEN SEJARAH DESA -->
+        <div class="content-card" id="kontenSejarah">
+            
+            <!-- JUDUL UTAMA DI TENGAH, TANPA 2.1.1 -->
+            <h2 class="section-main-title">
+                <i class="fa-solid fa-landmark-dome"></i> SEJARAH DESA BUNIASIH
+            </h2>
+
+            <p>
+                Pada awalnya desa Buniasih adalah termasuk wilayah Desa Langseb Kec. Lebakwangi. Dahulu Buniasih merupakan sebuah blok yang bernama Kliwon yang dipimpin kepala blok (kulisi). Blok Kliwon sendiri terbagi atas 2 kampung yaitu Buniaga dan Sulang
+            </p>
+            <p>
+                Kampung Buniaga dan Sulang secara geografis merupakan daerah pertanian yang mayoritas bermata pencaharian sebagai pertanian, dengan tingkat pendidikan formal sangat rendah. Hal ini disebabkan karena kesadaran masyarakat akan pendidikan masih rendah dan jarak ke sekolah sangat jauh, mereka lebih memilih pendidikan nonformal (Pesantren). Sehingga Kampung Buniaga dan Sulang lebih menonjol dalam bidang Pendidikan Agama dibanding Desa Induk
+            </p>
+            <p>
+                Pada waktu itu perkembangan pembangunan fisik dan sarana prasarana belum memadai, jarak tempuh pun ke desa Induk sekitar 2 km, terasa jauh sehingga menghambat roda pemerintahan dan pembangunan. Sehingga kedua kampung tersebut berhasrat memisahkan diri dari desa Langseb
+            </p>
+            <p>
+                Persiapan dan kesiapan terus dilakukan untuk pemberian nama Desa. Sehingga dari kedua Blok mengadakan musyawarah. Dalam musyawarah tersebut terjadi perdebatan yang cukup alot, karena dari kedua kampung masing - masing mengajukan nama Desa yang berbeda
+            </p>
+            <p>
+                Tokoh dari kampung Buniaga mengusulkan nama Desa Buniasih yaitu penggabungan dua Kampung <strong>Buni = Buniaga, Asih = Sulang</strong>, yang mengandung makna setelah digabungkan kedua kampung tersebut bisa bersatu padu satu Visi Misi untuk memajukan Desa diberbagai bidang. Sedangkan tokoh dari kampung Sulang mengajukan nama Desa Mekarjaya yang mengandung arti setelah dipekarkan semoga menjadi Desa yang jaya dan maju disegala bidang
+            </p>
+            <p>
+                Maka langkah voting pun dilakukan, dan menghasilkan nama Desa Buniasih yang memperoleh suara terbanyak. Dengan demikian nama Buniasih disepakati untuk menjadi nama Desa
+            </p>
+            <p>
+                Adapun tokoh masyarakat yang mewakili dari kedua Kampung tersebut yaitu, dari Buniaga Bapak Kyai Emed, Bapak Sadikin, dan Bapak Abdul Rohim, sementara dari Sulang Bapak KH. Udin, Bapak KH. Ibrohim, dan Bapak Iksan
+            </p>
+            <p>
+                Setelah dipelopori oleh tokoh masyarakat dari kedua kampung akhirnya mengusulkan pemekaran dari Desa Langseb. Setelah persyaratan lengkap akhirnya pada 1982 terbitlah SK Bupati No. 689/HR.021.1/SK/A/X/1982 tentang Penetapan Desa persiapan, dengan ditetapkan Pjs Kepala Desa yaitu Bpk. Rusdiana (kaur umum Desa Langseb)
+            </p>
+            <p>
+                Kemudian pada Tanggal 5 Maret 1984 keluarlah SK bupati Nomor 977/Hk/021.1/SK/A/III/1984 tentang Pengesahan dan Penetapan Desa Buniasih menjadi Desa Definitif dan diperintahkan segera membentuk panitia Pemilihan Kepala Desa
+            </p>
+            <p>
+                Setelah terbentuk Panitia Pemilihan Kepala Desa, maka disepakati masyarakat menginginkan Kepala Desa harus putra Desa asli. Kemudian muncul seorang calon Kepala Desa asli putra Desa Buniasih, yaitu Bapak Casmad, yang pada akhirnya terpilih menjadi Kepala Desa Buniasih Pertama setelah melewati pemilihan yang berlangsung jujur dan adil
+            </p>
+
+            <!-- SUB JUDUL KEPALA DESA DI TENGAH -->
+            <h3 class="section-sub-title">
+                <i class="fa-solid fa-user-tie"></i> DAFTAR KEPALA DESA BUNIASIH
+            </h3>
+            
+            <p class="intro-desc">Berikut adalah daftar nama-nama Kepala Desa Buniasih sejak awal mula berdiri sampai dengan sekarang:</p>
+
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;">No</th>
+                            <th style="width: 40%;">Nama</th>
+                            <th style="width: 30%;">Tahun Menjabat</th>
+                            <th style="width: 20%;">Keterangan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>U. Rusdiana</strong></td>
+                            <td>1982 – 1984</td>
+                            <td>Pjs[cite: 15]</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>Casmad</strong></td>
+                            <td>1984 – 2002</td>
+                            <td>Definitif[cite: 15, 16]</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>Muchtarudin</strong></td>
+                            <td>2002 – 2010</td>
+                            <td>Definitif[cite: 16]</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><strong>Amin</strong></td>
+                            <td>2010 – 2016</td>
+                            <td>Definitif[cite: 16]</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><strong>Rosid, SE</strong></td>
+                            <td>2016 – 2017</td>
+                            <td>Pjs[cite: 16]</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td><strong>Jamaludin, S.Pd</strong></td>
+                            <td>2017</td>
+                            <td>Pjs[cite: 16]</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td><strong>Amin</strong></td>
+                            <td>2017 – 2023</td>
+                            <td>Definitif[cite: 16]</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td><strong>Carka Abdul Halim</strong></td>
+                            <td>2023 – Sekarang</td>
+                            <td>Definitif[cite: 16]</td>
+                        </tr>
+                    </tbody>
+                </table>
+        <!-- BAGIAN LANJUTAN SETELAH TABEL NAMA-NAMA KEPALA DESA -->
+<style>
+    .profil-lanjutan-wrap {
+        margin-top: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        color: #e2e8f0;
+    }
+    .profil-card {
+        background: #0f172a;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 18px;
+        padding: 24px 26px;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+    }
+    .profil-card-title {
+        font-size: 17px;
+        font-weight: 800;
+        color: #ffffff;
+        padding-bottom: 12px;
+        margin-bottom: 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .profil-card-title .kode-bab {
+        background: rgba(34, 197, 94, 0.16);
+        border: 1px solid rgba(74, 222, 128, 0.4);
+        color: #4ade80;
+        padding: 3px 10px;
+        border-radius: 50px;
+        font-size: 12px;
+        font-weight: 800;
+    }
+    .sub-blok {
+        margin-bottom: 18px;
+    }
+    .sub-blok:last-child {
+        margin-bottom: 0;
+    }
+    .sub-blok h4 {
+        font-size: 14.5px;
+        font-weight: 800;
+        color: #4ade80;
+        margin-bottom: 8px;
+    }
+    .sub-blok p {
+        font-size: 13px;
+        line-height: 1.7;
+        color: #cbd5e1;
+        margin-bottom: 10px;
+        text-align: justify;
+    }
+    .batas-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin: 12px 0 14px;
+    }
+    @media(max-width: 720px) {
+        .batas-grid { grid-template-columns: 1fr; }
+    }
+    .batas-item {
+        background: rgba(30, 41, 59, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-left: 3px solid #22c55e;
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-size: 12.5px;
+        color: #e2e8f0;
+    }
+    .ciri-list {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 10px 0 12px;
+    }
+    .ciri-list li {
+        background: rgba(14, 165, 233, 0.12);
+        border: 1px solid rgba(56, 189, 248, 0.35);
+        color: #7dd3fc;
+        padding: 6px 14px;
+        border-radius: 50px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+    .tabel-judul {
+        text-align: center;
+        font-size: 13px;
+        font-weight: 800;
+        color: #f8fafc;
+        margin: 16px 0 8px;
+    }
+    .tabel-judul span {
+        display: block;
+        color: #4ade80;
+        margin-top: 2px;
+    }
+    .tabel-wrap {
+        width: 100%;
+        overflow-x: auto;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 8px;
+    }
+    .data-profil-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12.5px;
+        text-align: center;
+    }
+    .data-profil-table th {
+        background: rgba(20, 83, 45, 0.65);
+        color: #ffffff;
+        font-weight: 800;
+        padding: 10px 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .data-profil-table td {
+        padding: 8px 12px;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        color: #e2e8f0;
+    }
+    .data-profil-table tbody tr:nth-child(even) {
+        background: rgba(30, 41, 59, 0.45);
+    }
+    .data-profil-table tr.baris-total td {
+        background: rgba(34, 197, 94, 0.16);
+        font-weight: 800;
+        color: #4ade80;
+    }
+    .sumber-data {
+        font-size: 11.5px;
+        color: #94a3b8;
+        margin-bottom: 14px;
+        font-style: italic;
+    }
+</style>
+
+<div class="profil-lanjutan-wrap">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+    .profil-desa-wrap {
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: #e2e8f0;
+    }
+    .profil-panel {
+        background: linear-gradient(180deg, rgba(15, 23, 42, 0.96) 0%, rgba(11, 18, 34, 0.98) 100%);
+        border: 1px solid rgba(148, 163, 184, 0.14);
+        border-radius: 20px;
+        padding: 28px 30px;
+        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+    }
+    @media(max-width: 720px) {
+        .profil-panel { padding: 20px 18px; }
+    }
+    .profil-panel-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding-bottom: 14px;
+        margin-bottom: 22px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .profil-panel-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: 'Outfit', sans-serif;
+        font-size: 20px;
+        font-weight: 800;
+        color: #ffffff;
+        letter-spacing: -0.2px;
+    }
+    .profil-badge {
+        background: linear-gradient(135deg, rgba(34, 197, 94, 0.22), rgba(16, 185, 129, 0.12));
+        border: 1px solid rgba(74, 222, 128, 0.45);
+        color: #4ade80;
+        padding: 4px 12px;
+        border-radius: 999px;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+    }
+    .profil-subtag {
+        font-size: 12px;
+        color: #94a3b8;
+        font-weight: 600;
+    }
+
+    /* Satu lapis per sub-bagian tanpa kotak berlapis */
+    .profil-bagian {
+        margin-top: 24px;
+    }
+    .profil-bagian:first-of-type {
+        margin-top: 0;
+    }
+    .profil-subjudul {
+        font-family: 'Outfit', sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        color: #4ade80;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .profil-bagian p {
+        font-size: 13.5px;
+        line-height: 1.78;
+        color: #cbd5e1;
+        margin-bottom: 12px;
+        text-align: justify;
+    }
+
+    /* Batas Wilayah */
+    .batas-wilayah-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin: 14px 0 16px;
+    }
+    @media(max-width: 768px) {
+        .batas-wilayah-grid { grid-template-columns: 1fr; }
+    }
+    .batas-wilayah-item {
+        background: rgba(30, 41, 59, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-left: 3px solid #22c55e;
+        border-radius: 12px;
+        padding: 12px 15px;
+        font-size: 13px;
+        color: #f1f5f9;
+        line-height: 1.5;
+    }
+    .batas-wilayah-item strong {
+        color: #4ade80;
+    }
+
+    /* Ciri Wilayah */
+    .ciri-wilayah-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 12px 0 16px;
+    }
+    .ciri-pill {
+        background: rgba(14, 165, 233, 0.12);
+        border: 1px solid rgba(56, 189, 248, 0.35);
+        color: #7dd3fc;
+        padding: 7px 14px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    /* Poin upaya pencegahan AKI/AKB */
+    .upaya-kesehatan-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin: 12px 0 16px;
+    }
+    @media(max-width: 768px) {
+        .upaya-kesehatan-grid { grid-template-columns: 1fr; }
+    }
+    .upaya-kesehatan-item {
+        background: rgba(30, 41, 59, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-left: 3px solid #38bdf8;
+        border-radius: 12px;
+        padding: 12px 15px;
+        font-size: 13px;
+        color: #e2e8f0;
+        line-height: 1.55;
+    }
+
+    /* Judul & Tabel */
+    .rekap-judul {
+        text-align: center;
+        font-family: 'Outfit', sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: #f8fafc;
+        margin: 20px 0 10px;
+        letter-spacing: 0.2px;
+    }
+    .rekap-judul span {
+        display: block;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        color: #4ade80;
+        margin-top: 3px;
+    }
+    .rekap-table-box {
+        width: 100%;
+        overflow-x: auto;
+        border-radius: 14px;
+        border: 1px solid rgba(148, 163, 184, 0.16);
+        background: rgba(15, 23, 42, 0.65);
+    }
+    .rekap-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+        text-align: center;
+    }
+    .rekap-table th {
+        background: linear-gradient(180deg, rgba(22, 101, 52, 0.85) 0%, rgba(20, 83, 45, 0.92) 100%);
+        color: #ffffff;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        letter-spacing: 0.2px;
+        padding: 11px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .rekap-table td {
+        padding: 9px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        color: #e2e8f0;
+        font-variant-numeric: tabular-nums;
+    }
+    .rekap-table td.rata-kiri {
+        text-align: left;
+    }
+    .rekap-table tbody tr:hover {
+        background: rgba(34, 197, 94, 0.06);
+    }
+    .rekap-table tbody tr:nth-child(even) {
+        background: rgba(30, 41, 59, 0.35);
+    }
+    .rekap-table tr.baris-jumlah td {
+        background: rgba(34, 197, 94, 0.16);
+        color: #4ade80;
+        font-weight: 800;
+    }
+    .rekap-sumber {
+        font-size: 11.5px;
+        color: #94a3b8;
+        margin: 8px 0 18px;
+        font-style: italic;
+    }
+</style>
+
+<div class="profil-desa-wrap">
+
+    <!-- 2.1.2 KONDISI GEOGRAFIS DESA -->
+    <section class="profil-panel">
+        <div class="profil-panel-head">
+            <div class="profil-panel-title">
+                <span class="profil-badge">2.1.2</span>
+                <span>Kondisi Geografis Desa</span>
+            </div>
+            <span class="profil-subtag">Desa Buniasih &bull; Kec. Maleber &bull; Kab. Kuningan</span>
+        </div>
+
+        <div class="profil-bagian">
+            <h3 class="profil-subjudul">1. Letak dan Luas Wilayah</h3>
+            <p>Desa Buniasih merupakan salah satu desa di Kecamatan Maleber, berada di bagian Timur dari Ibukota Kabupaten Kuningan yang berjarak 13 km dari pusat kota. Dan berjarak 110 km arah timur dari kota Bandung sebagai Ibukota Provinsi Jawa Barat, dan berjarak 219 km dari Jakarta (Ibukota Negara). Dengan batas wilayah sebagai berikut :</p>
+
+            <div class="batas-wilayah-grid">
+                <div class="batas-wilayah-item"><strong>1) Sebelah Utara:</strong> Berbatasan dengan Desa Langseb Kec. Lebakwangi</div>
+                <div class="batas-wilayah-item"><strong>2) Sebelah Selatan:</strong> Berbatasan dengan Desa Mekarsari Kec. Maleber</div>
+                <div class="batas-wilayah-item"><strong>3) Sebelah Timur:</strong> Berbatasan dengan Desa Cinagara Kec. Lebakwangi</div>
+                <div class="batas-wilayah-item"><strong>4) Sebelah Barat:</strong> Berbatasan dengan Desa Dukuhtengah Kec. Maleber</div>
+            </div>
+
+            <p>Luas wilayah Desa Buniasih adalah 61,5 ha yang sebagian besar merupakan lahan pertanian sawah dan perkebunan. Hal inilah yang menjadi potensi utama di desa sehingga mata pencaharian pokok sebagian besar penduduk adalah bertani/berkebun.</p>
+        </div>
+
+        <div class="profil-bagian">
+            <h3 class="profil-subjudul">2. Topografi dan Jenis Tanah</h3>
+            <p>Topografi Desa Buniasih dengan temperatur suhu rata-rata berkisar antara 28&deg; C &ndash; 31&deg; C, dengan suhu maksimum 34&deg; C (pada musim kemarau) dan suhu minimum 23&deg; C (sekitar musim penghujan). Sedangkan angka rata-rata curah hujan per tahunnya adalah sekitar 2000-3000 mm.</p>
+            <p>Desa Buniasih merupakan daerah dataran rendah dengan ketinggian &plusmn; 100 &ndash; 200 meter di atas permukaan laut (mdpl) dengan kondisi dominan tanah atau lahan sawah. Sehingga dengan kondisi seperti yang dijelaskan di atas mencirikan Desa Buniasih sebagai :</p>
+            <div class="ciri-wilayah-row">
+                <span class="ciri-pill">Daerah Pertanian dan Perikanan</span>
+                <span class="ciri-pill">Daerah Perdagangan Darat</span>
+                <span class="ciri-pill">Daerah Transportasi Darat</span>
+            </div>
+        </div>
+
+        <div class="profil-bagian">
+            <h3 class="profil-subjudul">3. Iklim</h3>
+            <p>Iklim di Desa Buniasih termasuk yang beriklim tropis, sejak tahun 2022 kondisi iklim dan cuaca tidak bisa diprediksi, namun secara umum musim hujan berkisar antara bulan Oktober sampai dengan bulan April dan musim kemarau atau panas berkisar pada bulan Mei sampai dengan September setiap tahunnya.</p>
+        </div>
+    </section>
+
+    <!-- 2.1.3 KONDISI SOSIAL BUDAYA DESA -->
+    <section class="profil-panel">
+        <div class="profil-panel-head">
+            <div class="profil-panel-title">
+                <span class="profil-badge">2.1.3</span>
+                <span>Kondisi Sosial Budaya Desa</span>
+            </div>
+            <span class="profil-subtag">Total Database: 990 Jiwa (519 Laki-laki &bull; 470 Perempuan)</span>
+        </div>
+
+        <p style="font-size:13.5px; line-height:1.78; color:#cbd5e1; margin-bottom:16px;">Secara umum kondisi sosial budaya desa dapat dilihat dari beberapa faktor di antaranya:</p>
+
+        <!-- 1. KONDISI DEMOGRAFIS / KEPENDUDUKAN -->
+        <div class="profil-bagian">
+            <h3 class="profil-subjudul">1. Kondisi Demografis/Kependudukan</h3>
+            <p>Berdasarkan Database Kependudukan Desa Buniasih, jumlah penduduk yang tercatat secara keseluruhan berjumlah 990 jiwa yang tersebar di 6 (enam) RT dan 2 Dusun, yaitu Dusun 01 Buniaga dan Dusun 02. Dari jumlah penduduk tersebut, jumlah laki-laki sebanyak 519 jiwa dan perempuan sebanyak 470 jiwa.</p>
+            <p>Data ini akan selalu diperbarui secara berkala sesuai perkembangan kependudukan dan kegiatan pendataan/updating yang dilaksanakan oleh jajaran RT/RW serta perangkat Desa Buniasih.</p>
+
+            <div class="rekap-judul">Tabel 1 <span>Jumlah Penduduk Berdasarkan Jenis Kelamin</span></div>
+            <div class="rekap-table-box">
+                <table class="rekap-table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Jumlah</th>
+                            <th>Prosentase (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1.</td><td>Laki-laki</td><td>519</td><td>52,42%</td></tr>
+                        <tr><td>2.</td><td>Perempuan</td><td>470</td><td>47,47%</td></tr>
+                        <tr class="baris-jumlah"><td colspan="2">Total</td><td>990</td><td>100%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="rekap-sumber">Sumber : Database Kependudukan Desa Buniasih</div>
+
+            <div class="rekap-judul">Tabel 2 <span>Jumlah Penduduk Berdasarkan Struktur Usia</span></div>
+            <div class="rekap-table-box">
+                <table class="rekap-table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Usia (Tahun)</th>
+                            <th>Laki-laki</th>
+                            <th>Perempuan</th>
+                            <th>Jumlah</th>
+                            <th>Prosentase</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1.</td><td>0 - 4</td><td>28</td><td>30</td><td>58</td><td>5.8%</td></tr>
+                        <tr><td>2.</td><td>5 - 9</td><td>35</td><td>36</td><td>71</td><td>7.1%</td></tr>
+                        <tr><td>3.</td><td>10 - 14</td><td>49</td><td>47</td><td>96</td><td>9.5%</td></tr>
+                        <tr><td>4.</td><td>15 - 19</td><td>49</td><td>35</td><td>84</td><td>8.3%</td></tr>
+                        <tr><td>5.</td><td>20 - 24</td><td>62</td><td>40</td><td>102</td><td>10.1%</td></tr>
+                        <tr><td>6.</td><td>25 - 29</td><td>51</td><td>36</td><td>87</td><td>8.6%</td></tr>
+                        <tr><td>7.</td><td>30 - 34</td><td>28</td><td>32</td><td>60</td><td>6.0%</td></tr>
+                        <tr><td>8.</td><td>35 - 39</td><td>36</td><td>25</td><td>61</td><td>6.1%</td></tr>
+                        <tr><td>9.</td><td>40 - 44</td><td>38</td><td>40</td><td>78</td><td>7.8%</td></tr>
+                        <tr><td>10.</td><td>45 - 49</td><td>25</td><td>34</td><td>59</td><td>5.9%</td></tr>
+                        <tr><td>11.</td><td>50 - 55</td><td>40</td><td>42</td><td>82</td><td>8.2%</td></tr>
+                        <tr><td>12.</td><td>55 - 59</td><td>25</td><td>25</td><td>50</td><td>5.0%</td></tr>
+                        <tr><td>13.</td><td>60 - 64</td><td>26</td><td>15</td><td>41</td><td>4.1%</td></tr>
+                        <tr><td>14.</td><td>&gt; 64</td><td>40</td><td>37</td><td>77</td><td>7.7%</td></tr>
+                        <tr class="baris-jumlah"><td colspan="2">Total Database Penduduk</td><td>519</td><td>470</td><td>990</td><td>100%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="rekap-sumber">Sumber : Database Kependudukan Desa Buniasih</div>
+
+            <p>Dilihat dari angkatan kerja, data kependudukan berdasarkan kelompok usia kerja dapat dilihat dalam tabel sebagai berikut :</p>
+
+            <div class="rekap-judul">Tabel 3 <span>Jumlah Penduduk Berdasarkan Usia Kerja</span></div>
+            <div class="rekap-table-box">
+                <table class="rekap-table">
+                    <thead>
+                        <tr>
+                            <th>Angkatan Kerja</th>
+                            <th>Laki - Laki</th>
+                            <th>Perempuan</th>
+                            <th>Jumlah</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="rata-kiri">Usia Tenaga Kerja (15-65 th)</td><td>380</td><td>324</td><td>704</td></tr>
+                        <tr><td class="rata-kiri">Usia Bukan Tenaga Kerja</td><td>152</td><td>150</td><td>302</td></tr>
+                        <tr class="baris-jumlah"><td>Total Database Penduduk</td><td>519</td><td>470</td><td>990</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="rekap-sumber">Sumber : Database Kependudukan Desa Buniasih</div>
+        </div>
+
+        <!-- 2. KONDISI KESEHATAN MASYARAKAT -->
+        <div class="profil-bagian">
+            <h3 class="profil-subjudul">2. Kondisi Kesehatan Masyarakat</h3>
+            <p>Salah satu kunci keberhasilan pembangunan suatu desa adalah di bidang kesehatan, jika hal kesehatan masyarakat terjamin dan pemenuhan hak-hak dasar manusia di bidang kesehatan terpenuhi, maka pembangunan yang direncanakan dan akan dilaksanakan oleh pemerintah desa akan berhasil. Dalam hal menunjang kesehatan masyarakat perlu didukung dengan sarana kesehatan yang memadai, dengan 1 (satu) Polindes yang didukung oleh Bidan Desa dan Perawat Desa.</p>
+            <p>maksimal untuk pelayanan kesehatan dengan desa seluas desa Buniasih, untuk itu pada RPJM Desa tahun 2023 &ndash; 2031, menjadi skala prioritas pembangunan fasilitas kesehatan, meskipun tidak menjadi skala Prioritas Desa akan tetapi menjadi skala prioritas yang akan diusulkan dalam musrenbang kecamatan. Dengan 2 (Dua) Posyandu balita dan 2 (Dua) Posyandu lansia yang ada di desa Buniasih untuk bisanya memfasilitasi dan menjadi solusi untuk menyelesaikan permasalahan kesehatan balita yang ada di desa Buniasih. Suatu keuntungan letak Desa Buniasih yang berdekatan dengan Puskesmas Kecamatan Maleber dan banyak Rumah Sakit yang jaraknya cukup dekat dengan Desa Buniasih sehingga penanganan pertama untuk Pelayanan kesehatan bisa terpenuhi.</p>
+            <p>Selain itu juga sebagai bentuk dukungan terhadap pelaksanaan pembinaan kesehatan dan remaja di Desa Buniasih terdapat kader bina keluarga balita (BKB), bina keluarga lansia (BKL), dan bina keluarga remaja (BKR).</p>
+            <p>Kematian bayi adalah kematian yang terjadi antara saat setelah bayi dilahirkan sampai bayi belum berusia tepat satu tahun. Pada tahun 2022 dan 2023 di Desa Buniasih terdapat 0 bayi meninggal.</p>
+            <p>Selain angka kematian bayi yang digunakan untuk mengukur kesehatan masyarakat adalah angka kematian ibu (AKI). Pada tahun 2022 dan tahun 2023 tidak terdapat Kematian Ibu (AKI).</p>
+            <p>Upaya pencegahan kematian bayi dan kematian ibu yang dilakukan oleh Pemerintah Desa Buniasih antara lain :</p>
+            <div class="upaya-kesehatan-grid">
+                <div class="upaya-kesehatan-item"><strong>a.</strong> Partisipasi masyarakat melalui pemberdayaan kader sehat desa (PPKBD dan Sub PPKBD) untuk pendampingan ibu hamil beresiko tinggi</div>
+                <div class="upaya-kesehatan-item"><strong>b.</strong> Kegiatan-kegiatan kelas ibu hamil dan pemberian makanan tambahan ibu hamil</div>
+            </div>
+            <p>Persentase balita gizi buruk adalah persentase balita yang memiliki status gizi buruk terhadap jumlah balita. Standar yang digunakan untuk menilai status gizi balita dilihat dari berat badan menurut umur. Pada tahun 2022, angka gizi buruk di Desa Buniasih mencapai 0 % atau tidak terdapat kasus balita gizi buruk dari jumlah balita sebesar 56 balita. Upaya yang dilakukan untuk menanggulangi kasus balita gizi buruk, Pemerintah Desa bekerja sama dengan Puskesmas melakukan pendampingan, serta bantuan dari APBDesa.</p>
+        </div>
+
+        <!-- 3. PENDIDIKAN -->
+        <div class="profil-bagian">
+            <h3 class="profil-subjudul">3. Pendidikan</h3>
+            <p>Sektor Pendidikan adalah hal penting dan menjadi indakator suatu keberhasilan Desa dan bidang pendidikan menjadi tolak ukur tingkat kesejahteraan masyarakat suatu desa.</p>
+            <p>Dengan pendidikan yang tinggi akan mendongkrak tingkat kecakapan seseorang yang dapat mendorong munculnya keterampilan dan kreativitas untuk menjadi lebih berkembang berwirausaha. Jika itu berhasil akan muncul lapangan lapangan pekerjaan yang baru, sehingga masalah pengangguran akan teratasi dengan sendirinya. Dalam era digitalisasi pada saat ini, maka dengan pendidikan yang baik, masyarakat akan lebih mudah untuk menerima informasi informasi yang menunjang untuk lebih berkreatiftas.</p>
+
+            <div class="rekap-judul">Tabel 4 <span>Jumlah Penduduk Tamat sekolah berdasarkan tingkat pendidikan</span></div>
+            <div class="rekap-table-box">
+                <table class="rekap-table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Pendidikan</th>
+                            <th>Jumlah</th>
+                            <th>Prosentase</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1.</td><td class="rata-kiri">Tidak / Belum Sekolah</td><td>93</td><td>9.2%</td></tr>
+                        <tr><td>2.</td><td class="rata-kiri">Belum Tamat SD/Sederajat</td><td>112</td><td>11.1%</td></tr>
+                        <tr><td>3.</td><td class="rata-kiri">Tidak tamat SD/Sederajat</td><td>6</td><td>0.6%</td></tr>
+                        <tr><td>4.</td><td class="rata-kiri">Tamat SD/ Sederajat</td><td>272</td><td>27.0%</td></tr>
+                        <tr><td>5.</td><td class="rata-kiri">SLTP/Sederajat</td><td>168</td><td>16.7%</td></tr>
+                        <tr><td>6.</td><td class="rata-kiri">SLTA / Sederajat</td><td>304</td><td>30.2%</td></tr>
+                        <tr><td>7.</td><td class="rata-kiri">Diploma I / II</td><td>3</td><td>0.3%</td></tr>
+                        <tr><td>8.</td><td class="rata-kiri">Akademi/ Diploma III/S. Muda</td><td>4</td><td>0.4%</td></tr>
+                        <tr><td>9.</td><td class="rata-kiri">Diploma IV/ Strata I</td><td>43</td><td>4.3%</td></tr>
+                        <tr><td>10.</td><td class="rata-kiri">Strata II</td><td>1</td><td>0.1%</td></tr>
+                        <tr><td>11.</td><td class="rata-kiri">Strata III</td><td>0</td><td>0.0 %</td></tr>
+                        <tr class="baris-jumlah"><td colspan="2">JUMLAH (Database Penduduk: 519 L | 470 P)</td><td>990</td><td>100 %</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="rekap-sumber">Sumber : Database Kependudukan Desa Buniasih</div>
+        </div>
+
+        <!-- 4. MATA PENCAHARIAN -->
+        <div class="profil-bagian">
+            <h3 class="profil-subjudul">4. Mata Pencaharian</h3>
+            <p>Dengan Kondisi sosial yang berbeda antar dusun yang berada di Desa Buniasih, memungkinkan mata pencaharian yang ada di Desa Buniasih sangat beragam, dan berdasarkan karakteristik dusun yang berbeda.</p>
+
+            <div class="rekap-judul">Tabel 5 <span>Jumlah Penduduk berdasarkan Mata pencaharian</span></div>
+            <div class="rekap-table-box">
+                <table class="rekap-table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Mata Pencaharian</th>
+                            <th>Jumlah</th>
+                            <th>Prosentase</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1.</td><td class="rata-kiri">Belum/Tidak Bekerja</td><td>108</td><td>10.7%</td></tr>
+                        <tr><td>2.</td><td class="rata-kiri">Mengurus Rumah Tangga</td><td>238</td><td>23.7%</td></tr>
+                        <tr><td>3.</td><td class="rata-kiri">Pelajar/Mahasiswa</td><td>229</td><td>22.8%</td></tr>
+                        <tr><td>4.</td><td class="rata-kiri">Pensiunan</td><td>4</td><td>0.4%</td></tr>
+                        <tr><td>5.</td><td class="rata-kiri">Pegawai Negeri Sipil (PNS)</td><td>6</td><td>0.6%</td></tr>
+                        <tr><td>6.</td><td class="rata-kiri">Kepolisian RI (Polri)</td><td>0</td><td>00,00%</td></tr>
+                        <tr><td>7.</td><td class="rata-kiri">Perdagangan</td><td>7</td><td>0.7%</td></tr>
+                        <tr><td>8.</td><td class="rata-kiri">Petani/Perkebunan</td><td>10</td><td>1.0%</td></tr>
+                        <tr><td>9.</td><td class="rata-kiri">Industri</td><td>0</td><td>00,00%</td></tr>
+                        <tr><td>10.</td><td class="rata-kiri">Konstruksi</td><td>0</td><td>00,00%</td></tr>
+                        <tr><td>11.</td><td class="rata-kiri">Karyawan Swasta</td><td>98</td><td>9.7%</td></tr>
+                        <tr><td>12.</td><td class="rata-kiri">Karyawan BUMN</td><td>0</td><td>00,00%</td></tr>
+                        <tr><td>13.</td><td class="rata-kiri">Karyawan Honorer</td><td>8</td><td>0.8%</td></tr>
+                        <tr><td>14.</td><td class="rata-kiri">Buruh Harian Lepas</td><td>182</td><td>18.1%</td></tr>
+                        <tr><td>15.</td><td class="rata-kiri">Buruh Tani/Perkebunan</td><td>3</td><td>0.3%</td></tr>
+                        <tr><td>16.</td><td class="rata-kiri">Pembantu Rumah Tangga</td><td>0</td><td>00,00%</td></tr>
+                        <tr><td>17.</td><td class="rata-kiri">Tukang Batu</td><td>0</td><td>00,00%</td></tr>
+                        <tr><td>18.</td><td class="rata-kiri">Tukang Kayu</td><td>0</td><td>00,00%</td></tr>
+                        <tr><td>19.</td><td class="rata-kiri">Tukang Las/Pandai Besi</td><td>0</td><td>00,00%</td></tr>
+                        <tr><td>20.</td><td class="rata-kiri">Tukang Jahit</td><td>1</td><td>0,1%</td></tr>
+                        <tr><td>21.</td><td class="rata-kiri">Mekanik</td><td>0</td><td>00,00%</td></tr>
+                        <tr><td>22.</td><td class="rata-kiri">Juru Masak</td><td>0</td><td>00,00%</td></tr>
+                        <tr><td>23.</td><td class="rata-kiri">Dosen</td><td>0</td><td>00,00%</td></tr>
+                        <tr><td>24.</td><td class="rata-kiri">Guru</td><td>4</td><td>0.4%</td></tr>
+                        <tr><td>25.</td><td class="rata-kiri">Bidan</td><td>0</td><td>00,00%</td></tr>
+                        <tr><td>26.</td><td class="rata-kiri">Perawat</td><td>1</td><td>0.1%</td></tr>
+                        <tr><td>27.</td><td class="rata-kiri">Sopir</td><td>0</td><td>00,00%</td></tr>
+                        <tr><td>28.</td><td class="rata-kiri">Pedagang</td><td>32</td><td>3.2%</td></tr>
+                        <tr><td>29.</td><td class="rata-kiri">Perangkat Desa</td><td>10</td><td>1,00%</td></tr>
+                        <tr><td>30.</td><td class="rata-kiri">Wiraswasta</td><td>65</td><td>6,5%</td></tr>
+                        <tr class="baris-jumlah"><td colspan="2">JUMLAH (Database Penduduk: 519 L | 470 P)</td><td>990</td><td>100 %</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="rekap-sumber">Sumber : Database Kependudukan Desa Buniasih</div>
+        </div>
+
+        <!-- 5. KESEJAHTERAAN MASYARAKAT -->
+        <div class="profil-bagian">
+            <h3 class="profil-subjudul">5. Kesejahteraan Masyarakat</h3>
+            <p>Dengan berkembangnya jumlah penduduk di desa Buniasih, secara otomatis dituntut bagaimana terpenuhinya kesejahteraan masyarakat secara berkesinambungan. Pada Kondisi ekonomi yang sedang terpuruk akibat dari Pandemi Covid 19, maka pemerintah mengambil langkah secara sistematis dengan memberikan stimulan berupa bantuan langsung tunai (BLT) kepada masyarakat dan Program &ndash; program yang sudah ada lebih ditingkatkan, seperti BSP, PKH, BPNT, dan lain-lain, dan Dalam hal ini, melalui Dana Desa, Pemerintah Desa juga melaksanakan kegiatan yang sama dengan memberikan bantuan langsung</p>
+        </div>
+    </section>
+
+</div>
+    </main>
+    <!-- SCRIPT JS TANGGAL REALTIME -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dataUser = JSON.parse(localStorage.getItem('userAktifDesa'));
+            if (dataUser && dataUser.namaLengkap) {
+                document.getElementById('navUserName').textContent = dataUser.namaLengkap;
+            }
+
+            // Script Tanggal Otomatis Realtime
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const today = new Date();
+            document.getElementById('realtimeDate').textContent = today.toLocaleDateString('id-ID', options);
+
+            // Tombol Logout
+            document.getElementById('btnLogout').addEventListener('click', () => {
+                localStorage.removeItem('userAktifDesa');
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+    <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+      overflow-x: hidden;
+    }
+
+    .site-footer {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 100%;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      background: #14532d;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 2px;
+    }
+
+    .site-footer .footer-copy {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.4;
+    }
+
+    .site-footer .footer-dev {
+      font-size: 12px;
+      font-weight: 500;
+      color: #dcfce7;
+      line-height: 1.4;
+    }
+
+    .site-footer .footer-ver {
+      font-size: 11px;
+      font-weight: 500;
+      color: #bbf7d0;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 1024px) {
+      .navbar {
+        padding-left: 16px;
+        padding-right: 16px;
+        gap: 8px;
+      }
+
+      .nav-menu {
+        gap: 6px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 10px 12px;
+      }
+
+      .nav-menu {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .site-footer {
+        margin-top: 16px;
+        padding: 10px 12px;
+      }
+
+      .site-footer .footer-copy {
+        font-size: 11.5px;
+      }
+
+      .site-footer .footer-dev,
+      .site-footer .footer-ver {
+        font-size: 10.5px;
+      }
+    }
+  </style>
+
+  <footer class="site-footer">
+    <div class="footer-copy">&copy; 2026 SIP-BUNIASIH · Pemerintah Desa Buniasih</div>
+    <div class="footer-dev">Dikembangkan oleh Ahmad Novaldi</div>
+    <div class="footer-ver">Kec. Maleber, Kab. Kuningan · Hak Cipta Dilindungi</div>
+  </footer>
+</body>
+</html>

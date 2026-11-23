@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kabar Buniasih - Portal Berita Resmi Desa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body {
+            background-color: #070d19;
+            background-image: radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.06), transparent 40%),
+                              radial-gradient(circle at 90% 80%, rgba(14, 165, 233, 0.06), transparent 40%);
+            color: #f8fafc; min-height: 100vh; display: flex; flex-direction: column;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: rgba(10, 17, 32, 0.95); backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding: 12px 28px;
+            display: flex; align-items: center; justify-content: space-between; gap: 14px;
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .nav-left { display: flex; align-items: center; gap: 12px; }
+        .brand-box { display: flex; align-items: center; gap: 10px; }
+        .logo-wrapper {
+            width: 38px; height: 38px; border-radius: 10px; background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3); display: flex; align-items: center; justify-content: center; padding: 3px;
+        }
+        .logo-wrapper img { width: 100%; height: 100%; object-fit: contain; }
+        .brand-text h1 { font-size: 14px; font-weight: 800; color: #ffffff; }
+        .brand-text span { font-size: 10.5px; color: #94a3b8; display: block; }
+
+        .nav-menu { display: flex; align-items: center; list-style: none; gap: 6px; }
+        .nav-menu a {
+            text-decoration: none; color: #cbd5e1; font-size: 11px; font-weight: 700;
+            text-transform: uppercase; padding: 8px 14px; border-radius: 50px;
+            display: flex; align-items: center; gap: 6px; transition: 0.2s;
+        }
+        .nav-menu a.active { background: linear-gradient(135deg, #22c55e, #16a34a); color: #ffffff; }
+        .nav-menu a:hover:not(.active) { background: rgba(255, 255, 255, 0.06); color: #fff; }
+
+        .nav-right { display: flex; align-items: center; gap: 10px; }
+        .user-pill {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 6px 13px 6px 8px; border-radius: 50px; font-size: 12px; font-weight: 700; color: #f8fafc;
+        }
+        .user-avatar-dot {
+            width: 24px; height: 24px; border-radius: 50%; background: #0ea5e9;
+            display: flex; align-items: center; justify-content: center; font-size: 11px; color: #fff;
+        }
+        .btn-keluar {
+            background: rgba(127, 29, 29, 0.45); border: 1px solid rgba(239, 68, 68, 0.45);
+            color: #fca5a5; padding: 7px 14px; border-radius: 50px; font-size: 12px;
+            font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: 0.2s;
+        }
+        .btn-keluar:hover { background: rgba(153, 27, 27, 0.75); color: #ffffff; }
+
+        .btn-tambah-nav {
+            background: linear-gradient(135deg, #22c55e, #16a34a); border: none; color: #fff;
+            padding: 10px 20px; border-radius: 50px; font-size: 12.5px; font-weight: 700;
+            cursor: pointer; display: inline-flex; align-items: center; gap: 7px;
+            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.3); transition: 0.2s;
+        }
+        .btn-tambah-nav:hover { transform: translateY(-1px); }
+
+        /* CONTAINER UTAMA */
+        .container { max-width: 1200px; width: 100%; margin: 24px auto 60px; padding: 0 24px; flex: 1; }
+
+        /* HEADER BANNER PORTAL */
+        .portal-header-banner {
+            position: relative;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px;
+            padding: 26px 30px; margin-bottom: 20px;
+            display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        .portal-title { text-align: center; max-width: 720px; }
+        .portal-title h2 { font-size: 22px; font-weight: 800; color: #fff; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .portal-title h2 i { color: #4ade80; }
+        .portal-title p { font-size: 13px; color: #94a3b8; margin-top: 5px; }
+        .portal-banner-action {
+            position: absolute; right: 28px; top: 50%; transform: translateY(-50%);
+        }
+
+        /* BAR AKSI CEPAT (TAMBAH / EDIT / HAPUS / PUBLIKASI) */
+        .action-toolbar {
+            background: rgba(15, 23, 42, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 14px 20px;
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .toolbar-label {
+            font-size: 12.5px;
+            color: #94a3b8;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .toolbar-btns {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .btn-tool-tambah {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #fff; border: none; padding: 8px 15px; border-radius: 10px;
+            font-size: 12px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+        }
+        .btn-tool-edit {
+            background: rgba(217, 119, 6, 0.18); border: 1px solid rgba(245, 158, 11, 0.45);
+            color: #fbbf24; padding: 8px 15px; border-radius: 10px;
+            font-size: 12px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+        }
+        .btn-tool-hapus {
+            background: rgba(220, 38, 38, 0.18); border: 1px solid rgba(248, 113, 113, 0.45);
+            color: #fca5a5; padding: 8px 15px; border-radius: 10px;
+            font-size: 12px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+        }
+        .btn-tool-publikasi {
+            background: rgba(14, 165, 233, 0.18); border: 1px solid rgba(56, 189, 248, 0.45);
+            color: #7dd3fc; padding: 8px 15px; border-radius: 10px;
+            font-size: 12px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+        }
+
+        /* NOTIFIKASI STATUS */
+        .toast-status {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: rgba(20, 83, 45, 0.7);
+            border: 1px solid rgba(74, 222, 128, 0.45);
+            color: #dcfce7;
+            padding: 12px 18px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .toast-status.show { display: flex; }
+
+        /* GRID BERITA */
+        .news-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px;
+        }
+
+        .news-card {
+            background: #0f172a; border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(34, 197, 94, 0.15);
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+
+        .news-card-img {
+            width: 100%; height: 210px; background: #1e293b; position: relative; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .news-card-img img {
+            width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;
+        }
+        .news-card:hover .news-card-img img { transform: scale(1.05); }
+
+        .status-badge-pub {
+            position: absolute; top: 12px; left: 12px;
+            background: rgba(22, 163, 74, 0.92); color: #fff;
+            font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 999px;
+        }
+
+        .news-card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .news-card-title {
+            font-size: 16px; font-weight: 800; color: #fff; line-height: 1.4; margin-bottom: 10px;
+        }
+        .news-card-snippet {
+            font-size: 13px; color: #94a3b8; line-height: 1.6; margin-bottom: 16px;
+            display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+            text-align: justify;
+        }
+
+        .news-card-footer {
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 14px;
+        }
+        .btn-baca-berita {
+            background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3);
+            padding: 7px 13px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.2s;
+        }
+        .btn-baca-berita:hover { background: #22c55e; color: #fff; }
+
+        .admin-action-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+        .btn-card-edit {
+            background: rgba(217, 119, 6, 0.18); border: 1px solid rgba(245, 158, 11, 0.4);
+            color: #fbbf24; padding: 6px 10px; border-radius: 8px; font-size: 11.5px; font-weight: 700;
+            cursor: pointer; display: inline-flex; align-items: center; gap: 5px; transition: 0.2s;
+        }
+        .btn-card-edit:hover { background: #d97706; color: #fff; }
+
+        .btn-card-pub {
+            background: rgba(14, 165, 233, 0.18); border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #7dd3fc; padding: 6px 10px; border-radius: 8px; font-size: 11.5px; font-weight: 700;
+            cursor: pointer; display: inline-flex; align-items: center; gap: 5px; transition: 0.2s;
+        }
+        .btn-card-pub:hover { background: #0284c7; color: #fff; }
+
+        .btn-card-del {
+            background: rgba(220, 38, 38, 0.18); border: 1px solid rgba(248, 113, 113, 0.4);
+            color: #fca5a5; padding: 6px 10px; border-radius: 8px; font-size: 11.5px; font-weight: 700;
+            cursor: pointer; display: inline-flex; align-items: center; gap: 5px; transition: 0.2s;
+        }
+        .btn-card-del:hover { background: #dc2626; color: #fff; }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            background: #0f172a; border: 1px dashed rgba(255, 255, 255, 0.16);
+            border-radius: 18px; padding: 42px 24px; text-align: center; color: #94a3b8;
+        }
+
+        /* MODAL BACA FULL ARTIKEL */
+        .modal-reader-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px);
+            display: none; align-items: center; justify-content: center; z-index: 3000; padding: 20px;
+        }
+        .modal-reader-overlay.show { display: flex; }
+        .modal-reader-box {
+            background: #0f172a; border: 1px solid rgba(255,255,255,0.15); border-radius: 20px;
+            width: 100%; max-width: 750px; max-height: 90vh; overflow-y: auto; padding: 30px; position: relative;
+        }
+        .reader-close {
+            position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none;
+            color: #fff; width: 36px; height: 36px; border-radius: 50%; font-size: 18px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; z-index: 10;
+        }
+        .reader-close:hover { background: #ef4444; }
+
+        .reader-kicker {
+            display: inline-flex; align-items: center; gap: 7px;
+            background: rgba(34, 197, 94, 0.14); border: 1px solid rgba(74, 222, 128, 0.35);
+            color: #4ade80; font-size: 12px; font-weight: 800; letter-spacing: 0.4px;
+            padding: 5px 12px; border-radius: 999px; margin-bottom: 14px;
+        }
+        .reader-foto { width: 100%; max-height: 380px; object-fit: cover; border-radius: 14px; margin-bottom: 20px; }
+        .reader-title { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 14px; line-height: 1.4; }
+        .reader-text { font-size: 14.5px; color: #cbd5e1; line-height: 1.8; text-align: justify; white-space: pre-line; margin-bottom: 24px; }
+
+        .reader-share-box {
+            background: #1e293b; border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 12px;
+            padding: 14px 18px; display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 12px; position: relative; z-index: 10;
+        }
+        .btn-reader-url {
+            background: transparent; border: none; padding: 4px 2px;
+            font-size: 12.5px; color: #38bdf8; font-family: monospace;
+            text-decoration: underline; word-break: break-all; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 6px; text-align: left;
+        }
+        .btn-reader-url:hover { color: #7dd3fc; }
+        .reader-share-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .btn-copy-link {
+            background: rgba(148, 163, 184, 0.16); border: 1px solid rgba(148, 163, 184, 0.35);
+            color: #e2e8f0; padding: 8px 13px; border-radius: 8px; font-size: 12px;
+            font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+        }
+        .btn-copy-link:hover { background: #334155; color: #fff; }
+        .btn-share-wa { background: #16a34a; color: #fff; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+
+        /* MODAL FORM ADMIN (TAMBAH / EDIT / HAPUS / PUBLIKASI BERITA) */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.82); backdrop-filter: blur(5px);
+            display: none; align-items: center; justify-content: center; z-index: 2000; padding: 16px;
+        }
+        .modal-overlay.show { display: flex; }
+        .modal-box {
+            background: #0f172a; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 20px;
+            width: 100%; max-width: 650px; max-height: 92vh; overflow-y: auto; padding: 24px;
+        }
+        .modal-header {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 12px; margin-bottom: 18px;
+        }
+        .form-group { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
+        .form-group label { font-size: 12.5px; font-weight: 700; color: #cbd5e1; }
+
+        .foto-center-upload {
+            border: 2px dashed rgba(74, 222, 128, 0.45); border-radius: 16px; padding: 24px;
+            text-align: center; background: rgba(16, 185, 129, 0.05); cursor: pointer;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;
+        }
+        .foto-center-upload img { max-width: 100%; max-height: 220px; border-radius: 12px; margin-top: 12px; display: none; }
+
+        .form-group input, .form-group textarea {
+            padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.15);
+            background: #1e293b; color: #fff; font-size: 13.5px; outline: none;
+        }
+        .form-group textarea { min-height: 170px; line-height: 1.65; text-align: justify; resize: vertical; }
+
+        .modal-bottom-actions {
+            display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: 10px;
+            margin-top: 20px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .btn-batal { background: #1e293b; color: #cbd5e1; border: none; padding: 11px 16px; border-radius: 12px; font-weight: 700; cursor: pointer; margin-right: auto; }
+        .btn-edit-mode { background: #d97706; color: #fff; border: none; padding: 11px 16px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+        .btn-hapus-modal { background: rgba(220, 38, 38, 0.2); border: 1px solid rgba(248, 113, 113, 0.45); color: #fca5a5; padding: 11px 16px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+        .btn-hapus-modal:hover { background: #dc2626; color: #fff; }
+        .btn-publikasi { background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff; border: none; padding: 11px 22px; border-radius: 12px; font-size: 13.5px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; }
+
+        @media (max-width: 960px) {
+            .portal-header-banner { flex-direction: column; gap: 16px; padding: 22px 20px; }
+            .portal-banner-action { position: static; transform: none; }
+        }
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .news-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="nav-left">
+            <div class="brand-box">
+                <div class="logo-wrapper">
+                    <img src="logo-desa.png" alt="Logo" onerror="this.style.display='none';">
+                </div>
+                <div class="brand-text">
+                    <h1>SIP-BUNIASIH ONLINE</h1>
+                    <span>Pemerintah Desa Buniasih</span>
+                </div>
+            </div>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Beranda</a></li>
+            <li><a href="bagan-struktur.html"><i class="fa-solid fa-sitemap"></i> Struktur Lembaga</a></li>
+            <li><a href="sejarah-desa.html"><i class="fa-solid fa-landmark"></i> Sejarah Desa</a></li>
+            <li><a href="database-penduduk.html"><i class="fa-solid fa-users"></i> Database Penduduk</a></li>
+            <li><a href="persuratan.html"><i class="fa-solid fa-file-signature"></i> Persuratan</a></li>
+            <li><a href="berita.html" class="active"><i class="fa-solid fa-newspaper"></i> Berita</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <div class="user-pill">
+                <div class="user-avatar-dot"><i class="fa-solid fa-user"></i></div>
+                <span id="navUserName">Muhamad Ishak</span>
+            </div>
+            <button type="button" class="btn-keluar" id="btnLogout">
+                <i class="fa-solid fa-right-from-bracket"></i> Keluar
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- BANNER HEADER -->
+        <div class="portal-header-banner">
+            <div class="portal-title">
+                <h2><i class="fa-solid fa-satellite-dish"></i> KABAR BUNIASIH</h2>
+                <p>Portal Informasi Resmi Kegiatan Pemerintahan, Pembangunan &amp; Kemasyarakatan Desa Buniasih</p>
+            </div>
+            <div class="portal-banner-action">
+                <button type="button" class="btn-tambah-nav" onclick="bukaModalTambah()">
+                    <i class="fa-solid fa-plus"></i> Tambah Berita
+                </button>
+            </div>
+        </div>
+
+        <!-- TOOLBAR AKSI: TAMBAH | EDIT | HAPUS | PUBLIKASI -->
+        <div class="action-toolbar">
+            <div class="toolbar-label">
+                <i class="fa-solid fa-sliders" style="color:#4ade80;"></i>
+                <span>Kelola Berita Kabar Buniasih:</span>
+            </div>
+            <div class="toolbar-btns">
+                <button type="button" class="btn-tool-tambah" onclick="bukaModalTambah()">
+                    <i class="fa-solid fa-plus"></i> Tambah Berita
+                </button>
+                <button type="button" class="btn-tool-edit" onclick="editBeritaTerbaru()">
+                    <i class="fa-solid fa-pen"></i> Edit Berita
+                </button>
+                <button type="button" class="btn-tool-hapus" onclick="hapusBeritaTerbaru()">
+                    <i class="fa-solid fa-trash"></i> Hapus Berita
+                </button>
+                <button type="button" class="btn-tool-publikasi" onclick="publikasikanBeritaTerbaru()">
+                    <i class="fa-solid fa-paper-plane"></i> Publikasi
+                </button>
+            </div>
+        </div>
+
+        <!-- PESAN STATUS AKSI -->
+        <div class="toast-status" id="toastStatus">
+            <span id="toastText"><i class="fa-solid fa-circle-check"></i> Berita berhasil dipublikasikan.</span>
+            <button type="button" onclick="tutupToast()" style="background:none; border:none; color:#dcfce7; cursor:pointer; font-size:16px;">&times;</button>
+        </div>
+
+        <!-- GRID KARTU BERITA MODERN -->
+        <div class="news-grid" id="gridBerita"></div>
+    </main>
+
+    <!-- MODAL BACA FULL ARTIKEL -->
+    <div class="modal-reader-overlay" id="modalReader">
+        <div class="modal-reader-box">
+            <button type="button" class="reader-close" onclick="tutupReader()">&times;</button>
+            <div class="reader-kicker"><i class="fa-solid fa-satellite-dish"></i> KABAR BUNIASIH</div>
+            <img id="readerImg" class="reader-foto" alt="Foto Dokumentasi Berita">
+            <h2 id="readerTitle" class="reader-title"></h2>
+            <div id="readerContent" class="reader-text"></div>
+
+            <div class="reader-share-box">
+                <button type="button" id="readerLinkTxt" class="btn-reader-url" onclick="bukaBeritaDariLink()"></button>
+                <div class="reader-share-actions">
+                    <button type="button" class="btn-copy-link" onclick="salinLinkBerita()">
+                        <i class="fa-regular fa-copy"></i> Salin Link
+                    </button>
+                    <button type="button" class="btn-share-wa" onclick="bagikanWAAktif()">
+                        <i class="fa-brands fa-whatsapp"></i> Bagikan ke WA
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL FORM ADMIN (TAMBAH / EDIT / HAPUS / PUBLIKASI BERITA) -->
+    <div class="modal-overlay" id="modalBerita">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modalJudulHeader" style="font-size:16px; font-weight:800;">Tambah &amp; Publikasi Berita Baru</h3>
+                <button type="button" onclick="tutupModal()" style="background:none; border:none; color:#94a3b8; font-size:22px; cursor:pointer;">&times;</button>
+            </div>
+
+            <form id="formBerita">
+                <input type="hidden" id="idEdit" value="">
+
+                <!-- 1. FOTO DOKUMENTASI DI TENGAH -->
+                <div class="form-group">
+                    <label style="text-align:center;">1. Foto Dokumentasi Kegiatan</label>
+                    <label class="foto-center-upload" for="inputFoto">
+                        <i class="fa-solid fa-camera" style="font-size:26px; color:#4ade80; margin-bottom:6px;"></i>
+                        <span style="font-size:13px; font-weight:700; color:#fff;">Klik untuk Mengunggah Foto Dokumentasi</span>
+                        <input type="file" id="inputFoto" accept="image/*" style="display:none;">
+                        <img id="previewFoto" alt="Preview Foto">
+                    </label>
+                </div>
+
+                <!-- 2. JUDUL BERITA -->
+                <div class="form-group">
+                    <label>2. Judul Berita *</label>
+                    <input type="text" id="inputJudul" required placeholder="Contoh: Musyawarah Desa Penetapan RKPDes Buniasih">
+                </div>
+
+                <!-- 3. ISI BERITA 5W1H -->
+                <div class="form-group">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <label>3. Isi Berita (5W + 1H) *</label>
+                        <button type="button" onclick="pakaiTemplate5W1H()" style="background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.4); color:#38bdf8; padding:4px 10px; border-radius:7px; font-size:11px; font-weight:700; cursor:pointer;">
+                            + Template 5W1H
+                        </button>
+                    </div>
+                    <textarea id="inputIsi" required placeholder="Tuliskan isi berita lengkap memuat unsur Apa, Siapa, Kapan, Di mana, Mengapa, Bagaimana..."></textarea>
+                </div>
+
+                <!-- 4. TOMBOL AKSI: BATAL, HAPUS, EDIT, PUBLIKASI -->
+                <div class="modal-bottom-actions">
+                    <button type="button" class="btn-batal" onclick="tutupModal()">Batal</button>
+                    <button type="button" class="btn-hapus-modal" id="btnHapusModal" style="display:none;" onclick="hapusDariModal()">
+                        <i class="fa-solid fa-trash"></i> Hapus
+                    </button>
+                    <button type="button" class="btn-edit-mode" onclick="fokusEditBerita()">
+                        <i class="fa-solid fa-pen"></i> Edit
+                    </button>
+                    <button type="submit" class="btn-publikasi" id="btnSubmitPublikasi">
+                        <i class="fa-solid fa-paper-plane"></i> Publikasi
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const DB_KEY = 'kabar_buniasih_portal_v15';
+        let dataBerita = [];
+        let fotoBase64 = '';
+        let idAktifReader = null;
+        let linkAktifReader = '';
+
+        const fotoDefaultSvg = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+                <defs>
+                    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#0f172a"/>
+                        <stop offset="100%" stop-color="#14532d"/>
+                    </linearGradient>
+                </defs>
+                <rect width="800" height="450" fill="url(#bg)"/>
+                <circle cx="400" cy="185" r="54" fill="rgba(74,222,128,0.18)" stroke="#4ade80" stroke-width="3"/>
+                <text x="400" y="200" text-anchor="middle" fill="#4ade80" font-family="Arial, sans-serif" font-size="36" font-weight="bold">KB</text>
+                <text x="400" y="275" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="26" font-weight="bold">KABAR BUNIASIH</text>
+                <text x="400" y="310" text-anchor="middle" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="16">Pemerintah Desa Buniasih - Kec. Maleber - Kab. Kuningan</text>
+            </svg>
+        `);
+
+        const defaultBerita = [
+            {
+                id: 'musrenbang-2026',
+                judul: 'Musyawarah Desa Buniasih Bahas Prioritas Pembangunan Tahun 2026',
+                foto: fotoDefaultSvg,
+                isi: 'BUNIASIH – Pemerintah Desa Buniasih bersama Badan Permusyawaratan Desa (BPD), perangkat desa, serta tokoh masyarakat Dusun 01 Buniaga dan Dusun 02 menggelar Musyawarah Desa (Musdes) bertempat di Balai Desa Buniasih.\n\nKegiatan ini dilaksanakan untuk menyepakati rencana prioritas pembangunan infrastruktur desa serta peningkatan pelayanan masyarakat agar berjalan tepat sasaran dan terpublikasi secara terbuka.'
+            }
+        ];
+
+        function buatSlugJudul(judul) {
+            return (judul || 'berita-buniasih')
+                .toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .trim()
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-');
+        }
+
+        function buatLabelLinkBerita(item) {
+            const slug = buatSlugJudul(item && item.judul ? item.judul : item);
+            return `https://kabarbuniasih.com/${slug}/`;
+        }
+
+        function encodeBeritaPayload(item) {
+            const payload = JSON.stringify({
+                id: item.id,
+                judul: item.judul,
+                isi: item.isi,
+                foto: item.foto && item.foto.length < 120000 ? item.foto : fotoDefaultSvg
+            });
+            return encodeURIComponent(btoa(unescape(encodeURIComponent(payload))));
+        }
+
+        function decodeBeritaPayload(encoded) {
+            try {
+                const jsonStr = decodeURIComponent(escape(atob(decodeURIComponent(encoded))));
+                return JSON.parse(jsonStr);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function buatUrlBisaDibuka(item) {
+            const base = window.location.href.split('?')[0].split('#')[0];
+            const encoded = encodeBeritaPayload(item);
+            if (base.startsWith('http://') || base.startsWith('https://')) {
+                return `${base}?id=${encodeURIComponent(item.id)}#b=${encoded}`;
+            }
+            const matchHtdocs = base.match(/htdocs\/(.+)$/i);
+            const pathRelatif = matchHtdocs ? matchHtdocs[1] : 'praktik_lapangan/berita.html';
+            return `http://localhost/${pathRelatif}?id=${encodeURIComponent(item.id)}#b=${encoded}`;
+        }
+
+        function tampilkanToast(pesan) {
+            const toast = document.getElementById('toastStatus');
+            document.getElementById('toastText').innerHTML = `<i class="fa-solid fa-circle-check"></i> ${pesan}`;
+            toast.classList.add('show');
+        }
+
+        function tutupToast() {
+            document.getElementById('toastStatus').classList.remove('show');
+        }
+
+        function muatData() {
+            const saved = localStorage.getItem(DB_KEY);
+            dataBerita = saved ? JSON.parse(saved) : defaultBerita;
+            if (!saved) simpanData();
+
+            if (window.location.hash && window.location.hash.includes('#b=')) {
+                const rawHash = window.location.hash.split('#b=')[1].split('&')[0];
+                const sharedItem = decodeBeritaPayload(rawHash);
+                if (sharedItem && sharedItem.judul && sharedItem.isi) {
+                    const exists = dataBerita.some(b => b.id === sharedItem.id);
+                    if (!exists) {
+                        dataBerita.unshift(sharedItem);
+                        simpanData();
+                    }
+                }
+            }
+
+            renderGrid();
+        }
+
+        function simpanData() {
+            localStorage.setItem(DB_KEY, JSON.stringify(dataBerita));
+        }
+
+        function renderGrid() {
+            const grid = document.getElementById('gridBerita');
+            if (!dataBerita.length) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fa-regular fa-newspaper" style="font-size:32px; color:#4ade80; margin-bottom:10px; display:block;"></i>
+                        <h3 style="color:#fff; font-size:16px; margin-bottom:6px;">Belum Ada Berita Terpublikasi</h3>
+                        <p style="font-size:13px; margin-bottom:16px;">Klik tombol <strong>+ Tambah Berita</strong> untuk membuat dan mempublikasikan berita baru.</p>
+                        <button type="button" class="btn-tambah-nav" onclick="bukaModalTambah()">
+                            <i class="fa-solid fa-plus"></i> Tambah Berita
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = dataBerita.map(item => `
+                <div class="news-card">
+                    <div class="news-card-img">
+                        <span class="status-badge-pub"><i class="fa-solid fa-check"></i> Terpublikasi</span>
+                        <img src="${item.foto}" alt="${item.judul}">
+                    </div>
+                    <div class="news-card-body">
+                        <div>
+                            <h3 class="news-card-title">${item.judul}</h3>
+                            <p class="news-card-snippet">${item.isi}</p>
+                        </div>
+                        <div class="news-card-footer">
+                            <button type="button" class="btn-baca-berita" onclick="bukaReader('${item.id}')">
+                                <i class="fa-solid fa-book-open"></i> Baca Selengkapnya
+                            </button>
+                            <div class="admin-action-row">
+                                <button type="button" class="btn-card-edit" onclick="bukaModalEdit('${item.id}')" title="Edit Berita">
+                                    <i class="fa-solid fa-pen"></i> Edit
+                                </button>
+                                <button type="button" class="btn-card-pub" onclick="publikasikanItem('${item.id}')" title="Publikasi Ulang Berita">
+                                    <i class="fa-solid fa-paper-plane"></i> Publikasi
+                                </button>
+                                <button type="button" class="btn-card-del" onclick="hapusBerita('${item.id}')" title="Hapus Berita">
+                                    <i class="fa-solid fa-trash"></i> Hapus
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function bukaReader(id) {
+            const item = dataBerita.find(b => b.id === id) || dataBerita[0];
+            if (!item) return;
+            idAktifReader = item.id;
+            linkAktifReader = buatLabelLinkBerita(item);
+
+            document.getElementById('readerImg').src = item.foto;
+            document.getElementById('readerTitle').textContent = item.judul;
+            document.getElementById('readerContent').textContent = item.isi;
+            document.getElementById('readerLinkTxt').textContent = linkAktifReader;
+
+            document.getElementById('modalReader').classList.add('show');
+            document.querySelector('.modal-reader-box').scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function bukaBeritaDariLink() {
+            const item = dataBerita.find(b => b.id === idAktifReader) || dataBerita[0];
+            if (!item) return;
+            bukaReader(item.id);
+            tampilkanToast('Menampilkan isi berita: ' + item.judul);
+        }
+
+        function tutupReader() {
+            document.getElementById('modalReader').classList.remove('show');
+        }
+
+        function salinLinkBerita() {
+            const item = dataBerita.find(b => b.id === idAktifReader) || dataBerita[0];
+            const urlDibuka = item ? buatUrlBisaDibuka(item) : window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(urlDibuka).then(() => {
+                    tampilkanToast('Link berhasil disalin (bisa dibuka di laptop maupun HP): ' + buatLabelLinkBerita(item));
+                }).catch(() => {
+                    tampilkanToast('Link berhasil disalin.');
+                });
+            } else {
+                tampilkanToast('Link berhasil disalin.');
+            }
+        }
+
+        function bagikanWAAktif() {
+            const item = dataBerita.find(b => b.id === idAktifReader) || dataBerita[0];
+            if (!item) return;
+            const linkBuka = buatUrlBisaDibuka(item);
+            const ringkasan = item.isi.substring(0, 130) + '...';
+            const teks = encodeURIComponent(`*KABAR BUNIASIH*\n*${item.judul}*\n\n${ringkasan}\n\nBuka berita:\n${linkBuka}`);
+            window.open(`https://wa.me/?text=${teks}`, '_blank', 'noopener,noreferrer');
+        }
+
+        function bukaModalTambah() {
+            document.getElementById('modalJudulHeader').textContent = 'Tambah & Publikasi Berita Baru';
+            document.getElementById('btnSubmitPublikasi').innerHTML = '<i class="fa-solid fa-paper-plane"></i> Publikasi';
+            document.getElementById('btnHapusModal').style.display = 'none';
+            document.getElementById('idEdit').value = '';
+            document.getElementById('formBerita').reset();
+            fotoBase64 = '';
+            document.getElementById('previewFoto').style.display = 'none';
+            document.getElementById('modalBerita').classList.add('show');
+            setTimeout(() => document.getElementById('inputJudul').focus(), 80);
+        }
+
+        function bukaModalEdit(id) {
+            const item = dataBerita.find(b => b.id === id);
+            if (!item) return;
+            document.getElementById('modalJudulHeader').textContent = 'Edit & Publikasikan Ulang Berita';
+            document.getElementById('btnSubmitPublikasi').innerHTML = '<i class="fa-solid fa-paper-plane"></i> Publikasi Perubahan';
+            document.getElementById('btnHapusModal').style.display = 'inline-flex';
+            document.getElementById('idEdit').value = item.id;
+            document.getElementById('inputJudul').value = item.judul;
+            document.getElementById('inputIsi').value = item.isi;
+            fotoBase64 = item.foto;
+            const prev = document.getElementById('previewFoto');
+            prev.src = item.foto;
+            prev.style.display = 'block';
+            document.getElementById('modalBerita').classList.add('show');
+            setTimeout(() => document.getElementById('inputJudul').focus(), 80);
+        }
+
+        function editBeritaTerbaru() {
+            if (!dataBerita.length) {
+                alert('Belum ada berita untuk diedit. Silakan klik Tambah Berita.');
+                return;
+            }
+            bukaModalEdit(dataBerita[0].id);
+        }
+
+        function hapusBeritaTerbaru() {
+            if (!dataBerita.length) {
+                alert('Tidak ada berita yang bisa dihapus.');
+                return;
+            }
+            hapusBerita(dataBerita[0].id);
+        }
+
+        function publikasikanBeritaTerbaru() {
+            if (!dataBerita.length) {
+                bukaModalTambah();
+                return;
+            }
+            publikasikanItem(dataBerita[0].id);
+        }
+
+        function publikasikanItem(id) {
+            const item = dataBerita.find(b => b.id === id);
+            if (!item) return;
+            simpanData();
+            renderGrid();
+            tampilkanToast(`Berita "${item.judul}" telah dipublikasikan di Kabar Buniasih.`);
+        }
+
+        function fokusEditBerita() {
+            const inputJudul = document.getElementById('inputJudul');
+            inputJudul.focus();
+            inputJudul.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function tutupModal() {
+            document.getElementById('modalBerita').classList.remove('show');
+        }
+
+        function pakaiTemplate5W1H() {
+            document.getElementById('inputIsi').value =
+`BUNIASIH – [APA & SIAPA: Tuliskan acara apa dan siapa saja yang hadir] bertempat di [DI MANA: Lokasi acara di Desa Buniasih] pada [KAPAN: Hari dan tanggal kegiatan].
+
+Kegiatan ini dilaksanakan untuk [MENGAPA: Tujuan kegiatan]. Dalam pelaksanaannya, [BAGAIMANA: Jalannya kegiatan dari awal hingga selesai].`;
+        }
+
+        document.getElementById('inputFoto').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                fotoBase64 = ev.target.result;
+                const prev = document.getElementById('previewFoto');
+                prev.src = fotoBase64;
+                prev.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        });
+
+        document.getElementById('formBerita').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const idEdit = document.getElementById('idEdit').value;
+            const judul = document.getElementById('inputJudul').value.trim();
+            const isi = document.getElementById('inputIsi').value.trim();
+
+            if (!judul || !isi) return;
+
+            if (idEdit) {
+                const idx = dataBerita.findIndex(b => b.id === idEdit);
+                if (idx !== -1) {
+                    dataBerita[idx].judul = judul;
+                    dataBerita[idx].isi = isi;
+                    if (fotoBase64) dataBerita[idx].foto = fotoBase64;
+                }
+                simpanData();
+                renderGrid();
+                tutupModal();
+                tampilkanToast(`Perubahan berita "${judul}" berhasil dipublikasikan.`);
+            } else {
+                dataBerita.unshift({
+                    id: 'berita-' + Date.now(),
+                    judul,
+                    foto: fotoBase64 || fotoDefaultSvg,
+                    isi
+                });
+                simpanData();
+                renderGrid();
+                tutupModal();
+                tampilkanToast(`Berita "${judul}" berhasil dipublikasikan ke portal.`);
+            }
+        });
+
+        function hapusBerita(id) {
+            const target = dataBerita.find(b => b.id === id);
+            const judulTarget = target ? target.judul : 'berita ini';
+            if (confirm(`Yakin ingin menghapus "${judulTarget}"?`)) {
+                dataBerita = dataBerita.filter(b => b.id !== id);
+                simpanData();
+                renderGrid();
+                tutupModal();
+                tampilkanToast(`Berita "${judulTarget}" telah dihapus.`);
+            }
+        }
+
+        function hapusDariModal() {
+            const idEdit = document.getElementById('idEdit').value;
+            if (idEdit) {
+                hapusBerita(idEdit);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = JSON.parse(localStorage.getItem('userAktifDesa'));
+            if (user && user.namaLengkap) {
+                document.getElementById('navUserName').textContent = user.namaLengkap;
+            }
+
+            document.getElementById('btnLogout').addEventListener('click', () => {
+                localStorage.removeItem('userAktifDesa');
+                window.location.href = 'index.html';
+            });
+
+            muatData();
+
+            const params = new URLSearchParams(window.location.search);
+            const idParam = params.get('id');
+            if (idParam) {
+                bukaReader(idParam);
+            }
+        });
+    </script>
+    <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+      overflow-x: hidden;
+    }
+
+    .site-footer {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 100%;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      background: #14532d;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 2px;
+    }
+
+    .site-footer .footer-copy {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.4;
+    }
+
+    .site-footer .footer-dev {
+      font-size: 12px;
+      font-weight: 500;
+      color: #dcfce7;
+      line-height: 1.4;
+    }
+
+    .site-footer .footer-ver {
+      font-size: 11px;
+      font-weight: 500;
+      color: #bbf7d0;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 1024px) {
+      .navbar {
+        padding-left: 16px;
+        padding-right: 16px;
+        gap: 8px;
+      }
+
+      .nav-menu {
+        gap: 6px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 10px 12px;
+      }
+
+      .nav-menu {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .site-footer {
+        margin-top: 16px;
+        padding: 10px 12px;
+      }
+
+      .site-footer .footer-copy {
+        font-size: 11.5px;
+      }
+
+      .site-footer .footer-dev,
+      .site-footer .footer-ver {
+        font-size: 10.5px;
+      }
+    }
+  </style>
+
+  <footer class="site-footer">
+    <div class="footer-copy">&copy; 2026 SIP-BUNIASIH · Pemerintah Desa Buniasih</div>
+    <div class="footer-dev">Dikembangkan oleh Ahmad Novaldi</div>
+    <div class="footer-ver">Kec. Maleber, Kab. Kuningan · Hak Cipta Dilindungi</div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Struktur Lengkap Lembaga - SIP-BUNIASIH ONLINE</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: #070d19;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* ==========================================================================
+           1. NAVBAR ATAS
+           ========================================================================== */
+        .navbar {
+            background: rgba(10, 17, 32, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-wrapper {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 3px;
+        }
+
+        .logo-wrapper img { width: 100%; height: 100%; object-fit: contain; }
+
+        .brand-text h1 {
+            font-size: 15px;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        .brand-text span {
+            font-size: 11px;
+            color: #94a3b8;
+            font-weight: 500;
+            display: block;
+        }
+
+        .nav-divider { width: 1px; height: 28px; background: rgba(255, 255, 255, 0.12); margin: 0 8px; }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 8px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #cbd5e1;
+            font-size: 11.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            padding: 9px 15px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: all 0.25s ease;
+        }
+
+        .nav-menu a i { font-size: 12px; }
+
+        .nav-menu a.active {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
+        }
+
+        .nav-menu a:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.06);
+            color: #ffffff;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-pill {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            background: rgba(30, 41, 59, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 6px 14px 6px 8px;
+            border-radius: 50px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        .user-avatar-dot {
+            width: 24px; height: 24px; border-radius: 50%;
+            background: #0ea5e9; color: #ffffff;
+            display: flex; align-items: center; justify-content: center; font-size: 11px;
+        }
+
+        .btn-keluar {
+            background: rgba(127, 29, 29, 0.45);
+            border: 1px solid rgba(239, 68, 68, 0.45);
+            color: #fca5a5; padding: 7px 14px; border-radius: 50px;
+            font-size: 12px; font-weight: 600; cursor: pointer;
+            display: flex; align-items: center; gap: 6px; transition: all 0.25s ease;
+        }
+        .btn-keluar:hover { background: #dc2626; color: #ffffff; }
+
+        /* ==========================================================================
+           2. KONTEN UTAMA & HERO BANNER
+           ========================================================================== */
+        .main-wrapper {
+            max-width: 1300px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 24px 32px 50px;
+            flex: 1;
+        }
+
+        .hero-card {
+            position: relative;
+            border-radius: 22px;
+            overflow: hidden;
+            min-height: 310px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(105deg, #091e1a 0%, #0d2e26 42%, #132a4a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+            margin-bottom: 32px;
+        }
+
+        .hero-bg-gapura {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 58%;
+            height: 100%;
+            background-image: url('gapura_desa.jpg');
+            background-size: cover;
+            background-position: center 35%;
+            z-index: 1;
+        }
+
+        .hero-bg-gapura::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                #0b241f 0%,
+                rgba(11, 36, 31, 0.92) 18%,
+                rgba(13, 46, 38, 0.45) 45%,
+                rgba(15, 23, 42, 0.1) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 36px 44px;
+            max-width: 600px;
+        }
+
+        .location-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.16);
+            border: 1px solid rgba(52, 211, 153, 0.35);
+            color: #6ee7b7;
+            font-size: 11.5px;
+            font-weight: 600;
+            padding: 5px 14px;
+            border-radius: 50px;
+            margin-bottom: 16px;
+        }
+
+        .hero-content h2 {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.15;
+            color: #ffffff;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-content h2 .highlight-name {
+            color: #4ade80;
+            display: block;
+        }
+
+        .hero-content p {
+            font-size: 13.5px;
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            max-width: 470px;
+        }
+
+        .hero-footer-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-jelajahi {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 11px 22px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.35);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .btn-jelajahi:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.5);
+        }
+
+        .date-display {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12.5px;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
+        .date-display i { color: #94a3b8; }
+
+        .hero-dots {
+            position: absolute;
+            bottom: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            gap: 6px;
+        }
+
+        .hero-dots span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .hero-dots span.active {
+            width: 18px;
+            border-radius: 10px;
+            background: #4ade80;
+        }
+
+        /* Styling 7 Panel Full Kebawah */
+        .full-panel {
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            margin-bottom: 32px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .full-panel-header {
+            background: linear-gradient(90deg, #064e3b 0%, #047857 100%);
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .full-panel-header.bpd-header { background: linear-gradient(90deg, #78350f 0%, #b45309 100%); }
+        .full-panel-header.linmas-header { background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 100%); }
+        .full-panel-header.posyandu-header { background: linear-gradient(90deg, #0284c7 0%, #0369a1 100%); }
+
+        .full-panel-body {
+            padding: 28px 20px;
+            overflow-x: auto;
+        }
+
+        /* Diagram Struktur Pohon */
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .node-box {
+            background: #1e293b;
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 12px 22px;
+            text-align: center;
+            min-width: 240px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .node-box.head { background: linear-gradient(135deg, #047857 0%, #065f46 100%); border-color: #34d399; }
+        .node-box.bpd { border-color: #f59e0b; background: linear-gradient(135deg, #78350f 0%, #451a03 100%); }
+        .node-box.linmas { border-color: #3b82f6; background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%); }
+        .node-box.posyandu { border-color: #0284c7; background: linear-gradient(135deg, #0369a1 0%, #075985 100%); }
+
+        .node-title { font-size: 10.5px; font-weight: 700; color: #a7f3d0; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; text-align: center; }
+        .node-name { font-size: 13.5px; font-weight: 800; color: #ffffff; text-align: center; }
+
+        .line-vertical { width: 2px; height: 28px; background: #10b981; margin: 0 auto; }
+
+        .org-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        /* Footer */
+        .site-footer {
+            background: #060a14; border-top: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 16px 32px; display: flex; align-items: center; justify-content: space-between;
+            font-size: 12px; color: #94a3b8; margin-top: auto;
+        }
+        .footer-brand { display: flex; align-items: center; gap: 10px; }
+        .footer-brand strong { color: #ffffff; }
+
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR ATAS -->
+    <header class="navbar">
+        <div class="nav-left">
+            <div class="brand-box">
+                <div class="logo-wrapper">
+                    <img src="logo-desa.png" alt="Logo Desa" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <i class="fa-solid fa-shield-halved" style="display:none; color:#4ade80; font-size:20px;"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>SIP-BUNIASIH ONLINE</h1>
+                    <span>Pemerintah Desa Buniasih</span>
+                </div>
+            </div>
+            <div class="nav-divider"></div>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Beranda</a></li>
+            <li><a href="bagan-struktur.html" class="active"><i class="fa-solid fa-sitemap"></i> Struktur Lembaga</a></li>
+            <li><a href="sejarah-desa.html"><i class="fa-solid fa-landmark"></i> Sejarah Desa</a></li>
+            <li><a href="database-penduduk.html"><i class="fa-solid fa-users"></i> Database Penduduk</a></li>
+            <li><a href="persuratan.html"><i class="fa-solid fa-file-signature"></i> Persuratan</a></li>
+            <li><a href="berita.html"><i class="fa-solid fa-newspaper"></i> Berita</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <div class="user-pill">
+                <div class="user-avatar-dot"><i class="fa-solid fa-user"></i></div>
+                <span id="navUserName">Muhamad Ishak</span>
+            </div>
+            <button type="button" class="btn-keluar" id="btnLogout">
+                <i class="fa-solid fa-right-from-bracket"></i> Keluar
+            </button>
+        </div>
+    </header>
+
+    <!-- KONTEN UTAMA -->
+    <main class="main-wrapper">
+
+        <!-- HERO BANNER (DENGAN TANGGAL OTOMATIS REALTIME) -->
+        <section class="hero-card">
+            <div class="hero-bg-gapura"></div>
+            
+            <div class="hero-content">
+                <div class="location-pill">
+                    <i class="fa-solid fa-leaf"></i> Desa Buniasih &bull; Kecamatan Maleber
+                </div>
+                <h2>
+                    STRUKTUR LEMBAGA
+                    <span class="highlight-name">DESA BUNIASIH</span>
+                </h2>
+                <p>
+                    Bagan organisasi resmi Pemerintahan Desa, BPD, Linmas, dan Posyandu Masa Bakti 2023 - Sekarang.
+                </p>
+                <div class="hero-footer-row">
+                    <a href="#panel1" class="btn-jelajahi">
+                        Mulai Jelajahi <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                    <div class="date-display">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span id="realtimeDate">Memuat tanggal...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-dots">
+                <span class="active"></span>
+                <span></span>
+                <span></span>
+            </div>
+        </section>
+
+        <!-- PANEL 1: STRUKTUR PEMERINTAHAN DESA -->
+        <div class="full-panel" id="panel1">
+            <div class="full-panel-header">
+                <i class="fa-solid fa-users-gear"></i> 1. Struktur Organisasi Pemerintahan Desa Buniasih (2023 - Sekarang)
+            </div>
+            <div class="full-panel-body">
+                <div class="org-chart">
+                    <div class="node-box head">
+                        <div class="node-title">Kepala Desa</div>
+                        <div class="node-name">CARKA ABDUL HALIM</div>
+                    </div>
+                    <div class="line-vertical"></div>
+                    <div class="node-box">
+                        <div class="node-title">Sekretaris</div>
+                        <div class="node-name">JENAL ARIPIN, S.AP</div>
+                    </div>
+                    <div class="line-vertical"></div>
+                    <div class="org-row">
+                        <div class="node-box">
+                            <div class="node-title">Kaur Umum</div>
+                            <div class="node-name">MAMAN A. RAHMAN</div>
+                        </div>
+                        <div class="node-box">
+                            <div class="node-title">Kaur Perencanaan</div>
+                            <div class="node-name">MINTARSIH</div>
+                        </div>
+                        <div class="node-box">
+                            <div class="node-title">Kaur Keuangan</div>
+                            <div class="node-name">EMON RUHAMAN, ST</div>
+                        </div>
+                    </div>
+                    <div class="line-vertical"></div>
+                    <div class="org-row">
+                        <div class="node-box">
+                            <div class="node-title">Kasi Pemerintahan</div>
+                            <div class="node-name">MUHAMAD ISHAK, S.Pd</div>
+                        </div>
+                        <div class="node-box">
+                            <div class="node-title">Kasi Kesejahteraan</div>
+                            <div class="node-name">BADRI</div>
+                        </div>
+                        <div class="node-box">
+                            <div class="node-title">Kasi Pelayanan</div>
+                            <div class="node-name">RUSLAN</div>
+                        </div>
+                    </div>
+                    <div class="line-vertical"></div>
+                    <div class="org-row">
+                        <div class="node-box">
+                            <div class="node-title">Kepala Dusun I</div>
+                            <div class="node-name">SAMSUDIN RUSLANI</div>
+                        </div>
+                        <div class="node-box">
+                            <div class="node-title">Kepala Dusun II</div>
+                            <div class="node-name">E. SAMSUN</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 2: BPD -->
+        <div class="full-panel">
+            <div class="full-panel-header bpd-header">
+                <i class="fa-solid fa-building-columns"></i> 2. Badan Permusyawaratan Desa (BPD)
+            </div>
+            <div class="full-panel-body">
+                <div class="org-chart">
+                    <div class="node-box bpd">
+                        <div class="node-title">Ketua BPD</div>
+                        <div class="node-name">ECON NURHASAN, S.Pd</div>
+                    </div>
+                    <div class="line-vertical" style="background: #f59e0b;"></div>
+                    <div class="org-row">
+                        <div class="node-box bpd">
+                            <div class="node-title">Wakil Ketua</div>
+                            <div class="node-name">ASRODI</div>
+                        </div>
+                        <div class="node-box bpd">
+                            <div class="node-title">Sekretaris</div>
+                            <div class="node-name">ROSTINI</div>
+                        </div>
+                    </div>
+                    <div class="line-vertical" style="background: #f59e0b;"></div>
+                    <div class="org-row" style="flex-direction: column; gap: 15px; align-items: center; width: 100%;">
+                        <div class="node-box bpd" style="width: 100%; max-width: 650px;">
+                            <div class="node-title">Bidang Penyelenggaraan Pemerintahan &amp; Pembinaan Kemasyarakatan</div>
+                            <div class="node-name">ERO KUSNARA</div>
+                        </div>
+                        <div class="node-box bpd" style="width: 100%; max-width: 650px;">
+                            <div class="node-title">Bidang Pembangunan &amp; Pemberdayaan Masyarakat Desa</div>
+                            <div class="node-name">RIKI SUPARMAN</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 3: LINMAS -->
+        <div class="full-panel">
+            <div class="full-panel-header linmas-header">
+                <i class="fa-solid fa-shield-halved"></i> 3. Perlindungan Masyarakat (Linmas)
+            </div>
+            <div class="full-panel-body">
+                <div class="org-chart">
+                    <div class="node-box linmas">
+                        <div class="node-title">Camat Maleber (Kasat Pol PP)</div>
+                        <div class="node-name">CAMAT MALEBER</div>
+                    </div>
+                    <div class="line-vertical" style="background: #3b82f6;"></div>
+                    <div class="node-box linmas">
+                        <div class="node-title">Kasatgas Linmas (Kepala Desa)</div>
+                        <div class="node-name">CARKA ABDUL HALIM</div>
+                    </div>
+                    <div class="line-vertical" style="background: #3b82f6;"></div>
+                    <div class="node-box linmas">
+                        <div class="node-title">Kasatlak Linmas</div>
+                        <div class="node-name">MUHAMAD ISHAK, S.Pd</div>
+                    </div>
+                    <div class="line-vertical" style="background: #3b82f6;"></div>
+                    <div class="org-row">
+                        <div class="node-box linmas">
+                            <div class="node-title">Dusun Buniaga</div>
+                            <div class="node-name">IWAN &amp; MULYADI</div>
+                        </div>
+                        <div class="node-box linmas">
+                            <div class="node-title">Dusun Sulang</div>
+                            <div class="node-name">D. HIDAYAT &amp; NYAMAN</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 4: POKJA POSYANDU -->
+        <div class="full-panel">
+            <div class="full-panel-header posyandu-header">
+                <i class="fa-solid fa-kit-medical"></i> 4. Organisasi Pokja Posyandu Desa Buniasih
+            </div>
+            <div class="full-panel-body">
+                <div class="org-chart">
+                    <div class="node-box posyandu">
+                        <div class="node-title">Pembina</div>
+                        <div class="node-name">KEPALA DESA</div>
+                    </div>
+                    <div class="line-vertical" style="background: #0284c7;"></div>
+                    <div class="node-box posyandu">
+                        <div class="node-title">Ketua</div>
+                        <div class="node-name">ADAH SAADAH</div>
+                    </div>
+                    <div class="line-vertical" style="background: #0284c7;"></div>
+                    <div class="org-row">
+                        <div class="node-box posyandu">
+                            <div class="node-title">Sekretaris</div>
+                            <div class="node-name">TARMIDAH</div>
+                        </div>
+                        <div class="node-box posyandu">
+                            <div class="node-title">Bendahara</div>
+                            <div class="node-name">MINTARSIH</div>
+                        </div>
+                    </div>
+                    <div class="line-vertical" style="background: #0284c7;"></div>
+                    <div class="org-row" style="gap: 15px; width: 100%; max-width: 900px;">
+                        <div class="node-box posyandu" style="flex: 1; min-width: 260px;">
+                            <div class="node-title">Bidang Kelembagaan</div>
+                            <div class="node-name">ROSTINI</div>
+                        </div>
+                        <div class="node-box posyandu" style="flex: 1; min-width: 260px;">
+                            <div class="node-title">Bidang Pelayanan KB</div>
+                            <div class="node-name">BD. DEDE SAROAH</div>
+                        </div>
+                        <div class="node-box posyandu" style="flex: 1; min-width: 260px;">
+                            <div class="node-title">Bidang Informasi &amp; Kie</div>
+                            <div class="node-name">IJAH HADIJAH</div>
+                        </div>
+                        <div class="node-box posyandu" style="flex: 1; min-width: 260px;">
+                            <div class="node-title">Bidang Sistem Informasi Posyandu</div>
+                            <div class="node-name">SITI SUHARTINI</div>
+                        </div>
+                        <div class="node-box posyandu" style="flex: 1; min-width: 260px;">
+                            <div class="node-title">Bidang SDM</div>
+                            <div class="node-name">NIA RUSNIAWATI</div>
+                        </div>
+                        <div class="node-box posyandu" style="flex: 1; min-width: 260px;">
+                            <div class="node-title">Bidang Program</div>
+                            <div class="node-name">SRI ASTUTI</div>
+                        </div>
+                        <div class="node-box posyandu" style="flex: 1; min-width: 260px; margin: 0 auto;">
+                            <div class="node-title">Bidang PKP</div>
+                            <div class="node-name">AZZAH FAUZIYAH</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 5: POSYANDU MELATI -->
+        <div class="full-panel">
+            <div class="full-panel-header posyandu-header">
+                <i class="fa-solid fa-child-reaching"></i> 5. Posyandu Melati (Dusun I Buniaga)
+            </div>
+            <div class="full-panel-body">
+                <div class="org-chart">
+                    <div class="node-box posyandu">
+                        <div class="node-title">Pembina</div>
+                        <div class="node-name">KEPALA DESA</div>
+                    </div>
+                    <div class="line-vertical" style="background: #0284c7;"></div>
+                    <div class="node-box posyandu">
+                        <div class="node-title">Ketua</div>
+                        <div class="node-name">JAENAB</div>
+                    </div>
+                    <div class="line-vertical" style="background: #0284c7;"></div>
+                    <div class="org-row">
+                        <div class="node-box posyandu">
+                            <div class="node-title">Sekretaris</div>
+                            <div class="node-name">NIA RUSNIAWATI</div>
+                        </div>
+                        <div class="node-box posyandu">
+                            <div class="node-title">Bendahara</div>
+                            <div class="node-name">ROSTINI</div>
+                        </div>
+                    </div>
+                    <div class="line-vertical" style="background: #0284c7;"></div>
+                    <div class="node-box posyandu" style="width: 100%; max-width: 500px;">
+                        <div class="node-title">Anggota</div>
+                        <div class="node-name" style="font-size: 13px;">ICIH WARNESIH, YANI NURYANI, KURNIAWATI</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 6: POSYANDU MAWAR -->
+        <div class="full-panel">
+            <div class="full-panel-header posyandu-header">
+                <i class="fa-solid fa-baby"></i> 6. Posyandu Mawar (Dusun II)
+            </div>
+            <div class="full-panel-body">
+                <div class="org-chart">
+                    <div class="node-box posyandu">
+                        <div class="node-title">Pembina</div>
+                        <div class="node-name">KEPALA DESA</div>
+                    </div>
+                    <div class="line-vertical" style="background: #0284c7;"></div>
+                    <div class="node-box posyandu">
+                        <div class="node-title">Ketua</div>
+                        <div class="node-name">ENING WASTIAH</div>
+                    </div>
+                    <div class="line-vertical" style="background: #0284c7;"></div>
+                    <div class="org-row">
+                        <div class="node-box posyandu">
+                            <div class="node-title">Sekretaris</div>
+                            <div class="node-name">MINTARSIH</div>
+                        </div>
+                        <div class="node-box posyandu">
+                            <div class="node-title">Bendahara</div>
+                            <div class="node-name">IJAH HADIJAH</div>
+                        </div>
+                    </div>
+                    <div class="line-vertical" style="background: #0284c7;"></div>
+                    <div class="node-box posyandu" style="width: 100%; max-width: 500px;">
+                        <div class="node-title">Anggota</div>
+                        <div class="node-name" style="font-size: 13px;">EUIS SUTIHAT, AZZAH FAUZIYAH, SRI ASTUTI</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 7. LEMBAGA PEMBERDAYAAN MASYARAKAT (LPM) -->
+        <div class="full-panel">
+            <div class="full-panel-header" style="background: linear-gradient(135deg, #b45309 0%, #d97706 100%);">
+                <i class="fa-solid fa-handshake"></i> 3. Lembaga Pemberdayaan Masyarakat (LPM)
+            </div>
+            <div class="full-panel-body">
+                <div class="org-chart">
+                    <div class="node-box amber">
+                        <div class="node-title">Ketua LPM</div>
+                        <div class="node-name">EBO</div>
+                    </div>
+                    <div class="line-vertical" style="background: #fbbf24;"></div>
+                    <div class="org-row">
+                        <div class="node-box amber">
+                            <div class="node-title">Sekretaris</div>
+                            <div class="node-name">SAMSUDIN</div>
+                        </div>
+                        <div class="node-box amber">
+                            <div class="node-title">Bendahara</div>
+                            <div class="node-name">BANDI</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      <!-- PANEL 8: PENGURUS PKK DESA BUNIASIH (KAPITAL SEMUA, RAPI, WARNA PINK SERAGAM) -->
+        <div class="full-panel">
+            <div class="full-panel-header pkk-header">
+                <i class="fa-solid fa-people-roof"></i> 7. Pengurus PKK Desa Buniasih
+            </div>
+            <div class="full-panel-body">
+                <div class="org-chart">
+                    <div class="node-box pink">
+                        <div class="node-title">Ketua PKK</div>
+                        <div class="node-name">IIS NURASIAH</div>
+                    </div>
+                    <div class="line-vertical" style="background: #f472b6;"></div>
+                    <div class="org-row">
+                        <div class="node-box pink">
+                            <div class="node-title">Sekretaris</div>
+                            <div class="node-name">IJAH HADIJAH</div>
+                        </div>
+                        <div class="node-box pink">
+                            <div class="node-title">Bendahara</div>
+                            <div class="node-name">YULI PURNAMASARI</div>
+                        </div>
+                    </div>
+                    <div class="line-vertical" style="background: #f472b6;"></div>
+                    
+                    <!-- BARIS ATAS: POKJA I & II -->
+                    <div class="org-row" style="width: 100%;">
+                        <div class="node-box pink" style="flex: 1; min-width: 280px; text-align: left; padding: 14px 20px;">
+                            <div class="node-title" style="color: #fbcfe8; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px; margin-bottom: 8px; text-align: center;">POKJA I</div>
+                            <div style="font-size: 12.5px; font-weight: 700; line-height: 1.7; color: #ffffff; text-transform: uppercase;">
+                                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed rgba(255,255,255,0.08); padding-bottom: 3px; margin-bottom: 3px;">
+                                    <span>K Ketua:</span> <span style="text-align: right;">AZZAH FAUZIYAH</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed rgba(255,255,255,0.08); padding-bottom: 3px; margin-bottom: 3px;">
+                                    <span>Sekretaris:</span> <span style="text-align: right;">KURNIAWATI</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>Anggota:</span> <span style="text-align: right;">YULIANA, SITI AISAH</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="node-box pink" style="flex: 1; min-width: 280px; text-align: left; padding: 14px 20px;">
+                            <div class="node-title" style="color: #fbcfe8; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px; margin-bottom: 8px; text-align: center;">POKJA II</div>
+                            <div style="font-size: 12.5px; font-weight: 700; line-height: 1.7; color: #ffffff; text-transform: uppercase;">
+                                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed rgba(255,255,255,0.08); padding-bottom: 3px; margin-bottom: 3px;">
+                                    <span>Ketua:</span> <span style="text-align: right;">TARMIDAH</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed rgba(255,255,255,0.08); padding-bottom: 3px; margin-bottom: 3px;">
+                                    <span>Sekretaris:</span> <span style="text-align: right;">ANIS MARDIYANI</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>Anggota:</span> <span style="text-align: right;">IIS SUSILAWATI, NING WASTIAH</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="line-vertical" style="background: #f472b6; height: 22px;"></div>
+
+                    <!-- BARIS BAWAH: POKJA III & IV -->
+                    <div class="org-row" style="width: 100%;">
+                        <div class="node-box pink" style="flex: 1; min-width: 280px; text-align: left; padding: 14px 20px;">
+                            <div class="node-title" style="color: #fbcfe8; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px; margin-bottom: 8px; text-align: center;">POKJA III</div>
+                            <div style="font-size: 12.5px; font-weight: 700; line-height: 1.7; color: #ffffff; text-transform: uppercase;">
+                                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed rgba(255,255,255,0.08); padding-bottom: 3px; margin-bottom: 3px;">
+                                    <span>Ketua:</span> <span style="text-align: right;">ROSTINI</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed rgba(255,255,255,0.08); padding-bottom: 3px; margin-bottom: 3px;">
+                                    <span>Sekretaris:</span> <span style="text-align: right;">MINTARSIH</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>Anggota:</span> <span style="text-align: right;">JAENAB, YANI NURYANI</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="node-box pink" style="flex: 1; min-width: 280px; text-align: left; padding: 14px 20px;">
+                            <div class="node-title" style="color: #fbcfe8; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px; margin-bottom: 8px; text-align: center;">POKJA IV</div>
+                            <div style="font-size: 12.5px; font-weight: 700; line-height: 1.7; color: #ffffff; text-transform: uppercase;">
+                                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed rgba(255,255,255,0.08); padding-bottom: 3px; margin-bottom: 3px;">
+                                    <span>Ketua:</span> <span style="text-align: right;">NIA RUSNIAWATI</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed rgba(255,255,255,0.08); padding-bottom: 3px; margin-bottom: 3px;">
+                                    <span>Sekretaris:</span> <span style="text-align: right;">SITI SUHARTINI</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>Anggota:</span> <span style="text-align: right;">EUIS SUTIHAT, SRI ASTUTI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- PANEL 9: PENGURUS KARANG TARUNA TUNAS KARYA (BAGAN BERJENJANG KIRI-KANAN) -->
+        <div class="full-panel">
+            <div class="full-panel-header taruna-header">
+                <i class="fa-solid fa-users-rectangle"></i> 8. Pengurus Karang Taruna Tunas Karya (Periode 2023 – 2029)
+            </div>
+            <div class="full-panel-body">
+                <div class="org-chart">
+                    <!-- KETUA UMUM -->
+                    <div class="node-box blue">
+                        <div class="node-title">Ketua Umum</div>
+                        <div class="node-name">JAJA KASJA</div>
+                    </div>
+                    <div class="line-vertical" style="background: #60a5fa;"></div>
+
+                    <!-- KETUA I & KETUA II -->
+                    <div class="org-row" style="width: 100%;">
+                        <div class="node-box blue" style="flex: 1; min-width: 280px;">
+                            <div class="node-title">Ketua I</div>
+                            <div class="node-name">TIO ROSDIAN</div>
+                        </div>
+                        <div class="node-box blue" style="flex: 1; min-width: 280px;">
+                            <div class="node-title">Ketua II</div>
+                            <div class="node-name">RUDIANTO</div>
+                        </div>
+                    </div>
+                    <div class="line-vertical" style="background: #60a5fa; height: 20px;"></div>
+
+                    <!-- SEKRETARIS (KIRI) & BENDAHARA (KANAN) -->
+                    <div class="org-row" style="width: 100%;">
+                        <!-- Sisi Kiri: Sekretaris & Sekretaris II -->
+                        <div style="flex: 1; min-width: 280px; display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                            <div class="node-box blue" style="width: 100%;">
+                                <div class="node-title">Sekretaris</div>
+                                <div class="node-name">YENI NOVIYANI</div>
+                            </div>
+                            <div class="line-vertical" style="background: #60a5fa; height: 14px;"></div>
+                            <div class="node-box blue" style="width: 100%;">
+                                <div class="node-title">Sekretaris II</div>
+                                <div class="node-name">IRA UMAIROH</div>
+                            </div>
+                        </div>
+
+                        <!-- Sisi Kanan: Bendahara & Bendahara II -->
+                        <div style="flex: 1; min-width: 280px; display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                            <div class="node-box blue" style="width: 100%;">
+                                <div class="node-title">Bendahara</div>
+                                <div class="node-name">RATNA NENGSIH</div>
+                            </div>
+                            <div class="line-vertical" style="background: #60a5fa; height: 14px;"></div>
+                            <div class="node-box blue" style="width: 100%;">
+                                <div class="node-title">Bendahara II</div>
+                                <div class="node-name">JUANDA</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line-vertical" style="background: #60a5fa; height: 20px;"></div>
+            <!-- TINGKAT 1 BIDANG: UKS (KIRI) & UEP (KANAN) -->
+                    <div class="org-row" style="width: 100%;">
+                        <div class="node-box blue" style="flex: 1; min-width: 280px; text-align: center; padding: 14px 20px;">
+                            <div class="node-title" style="color: #bfdbfe; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px; margin-bottom: 8px; text-align: center;">BIDANG UKS</div>
+                            <div style="font-size: 12.5px; font-weight: 700; line-height: 1.6; color: #ffffff; text-transform: uppercase; text-align: center;">
+                                BISYAR ABDUL AZIZ, RIKI ERLANGGA, RIKA HASTUTI
+                            </div>
+                        </div>
+                        <div class="node-box blue" style="flex: 1; min-width: 280px; text-align: center; padding: 14px 20px;">
+                            <div class="node-title" style="color: #bfdbfe; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px; margin-bottom: 8px; text-align: center;">BIDANG UEP</div>
+                            <div style="font-size: 12.5px; font-weight: 700; line-height: 1.6; color: #ffffff; text-transform: uppercase; text-align: center;">
+                                KASMAD, FEBRIYANTI MUSFIROH, WAHYU HIDAYAT
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line-vertical" style="background: #60a5fa; height: 20px;"></div>
+
+                    <!-- TINGKAT 2 BIDANG: AGAMA (KIRI) & OLAHRAGA & KESENIAN (KANAN) -->
+                    <div class="org-row" style="width: 100%;">
+                        <div class="node-box blue" style="flex: 1; min-width: 280px; text-align: center; padding: 14px 20px;">
+                            <div class="node-title" style="color: #bfdbfe; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px; margin-bottom: 8px; text-align: center;">BIDANG AGAMA</div>
+                            <div style="font-size: 12.5px; font-weight: 700; line-height: 1.6; color: #ffffff; text-transform: uppercase; text-align: center;">
+                                AHMAD BAEDOWI, ABU BAKAR, M. ZAINUL MUHIBIN
+                            </div>
+                        </div>
+                        <div class="node-box blue" style="flex: 1; min-width: 280px; text-align: center; padding: 14px 20px;">
+                            <div class="node-title" style="color: #bfdbfe; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px; margin-bottom: 8px; text-align: center;">BIDANG OLAHRAGA DAN KESENIAN</div>
+                            <div style="font-size: 12.5px; font-weight: 700; line-height: 1.6; color: #ffffff; text-transform: uppercase; text-align: center;">
+                                FAISAL, JOHANI, ADI SETIAWAN
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line-vertical" style="background: #60a5fa; height: 20px;"></div>
+
+                    <!-- TINGKAT 3 BIDANG: HUKUM DAN HAM (KIRI) & PENGEMBANGAN ORGANISASI (KANAN) -->
+                    <div class="org-row" style="width: 100%;">
+                        <div class="node-box blue" style="flex: 1; min-width: 280px; text-align: center; padding: 14px 20px;">
+                            <div class="node-title" style="color: #bfdbfe; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px; margin-bottom: 8px; text-align: center;">BIDANG HUKUM DAN HAM</div>
+                            <div style="font-size: 12.5px; font-weight: 700; line-height: 1.6; color: #ffffff; text-transform: uppercase; text-align: center;">
+                                RIYAN SARIFUDIN, LUTFI INDAH SARI, LINDAWATI
+                            </div>
+                        </div>
+                        <div class="node-box blue" style="flex: 1; min-width: 280px; text-align: center; padding: 14px 20px;">
+                            <div class="node-title" style="color: #bfdbfe; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px; margin-bottom: 8px; text-align: center;">BIDANG PENGEMBANGAN ORGANISASI</div>
+                            <div style="font-size: 12.5px; font-weight: 700; line-height: 1.6; color: #ffffff; text-transform: uppercase; text-align: center;">
+                                RONI TURANGGA, M. PADLI HIDAYAH, SITI SALAMAH
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line-vertical" style="background: #60a5fa; height: 20px;"></div>
+
+                    <!-- TINGKAT 4 BIDANG: BELA NEGARA & BUDAYA (KIRI) & PERANAN WANITA (KANAN) -->
+                    <div class="org-row" style="width: 100%;">
+                        <div class="node-box blue" style="flex: 1; min-width: 280px; text-align: center; padding: 14px 20px;">
+                            <div class="node-title" style="color: #bfdbfe; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px; margin-bottom: 8px; text-align: center;">BIDANG BELA NEGARA DAN BUDAYA</div>
+                            <div style="font-size: 12.5px; font-weight: 700; line-height: 1.6; color: #ffffff; text-transform: uppercase; text-align: center;">
+                                AHMAD NOVALDI, RIDHA UDIN, DINA TRI SEPTIANI
+                            </div>
+                        </div>
+                        <div class="node-box blue" style="flex: 1; min-width: 280px; text-align: center; padding: 14px 20px;">
+                            <div class="node-title" style="color: #bfdbfe; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px; margin-bottom: 8px; text-align: center;">BIDANG PERANAN WANITA</div>
+                            <div style="font-size: 12.5px; font-weight: 700; line-height: 1.6; color: #ffffff; text-transform: uppercase; text-align: center;">
+                                YULIANA, GINANDIA ZAHIROH, TITA NURCAHYA
+                            </div>
+                        </div>
+                    </div>
+            <!-- PANEL 9: DAFTAR PENGURUS RT (DENGAN JARAK / MARGIN ATAS) -->
+        <div class="full-panel" style="margin-top: 40px;">
+            <div class="full-panel-header rt-header">
+                <i class="fa-solid fa-house-chimney-user"></i> 9. Daftar Pengurus RT Desa Buniasih
+            </div>
+            <div class="full-panel-body">
+                <div class="org-chart">
+                    <div class="node-box amber">
+                        <div class="node-title">Koordinator / Ketua RT</div>
+                        <div class="node-name">WILAYAH RT 001 S.D. RT 006</div>
+                    </div>
+                    <div class="line-vertical" style="background: #fbbf24; height: 22px;"></div>
+
+                    <!-- BARIS 1: RT 001 & RT 002 -->
+                    <div class="org-row" style="width: 100%;">
+                        <div class="node-box amber" style="flex: 1; min-width: 280px; text-align: center; padding: 14px 20px;">
+                            <div class="node-title" style="color: #fef08a; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px; margin-bottom: 6px;">RT 001</div>
+                            <div class="node-name" style="font-size: 13.5px; font-weight: 800; color: #ffffff; text-transform: uppercase;">
+                                EDI KOMARYADI
+                            </div>
+                        </div>
+                        <div class="node-box amber" style="flex: 1; min-width: 280px; text-align: center; padding: 14px 20px;">
+                            <div class="node-title" style="color: #fef08a; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px; margin-bottom: 6px;">RT 002</div>
+                            <div class="node-name" style="font-size: 13.5px; font-weight: 800; color: #ffffff; text-transform: uppercase;">
+                                WAHYUDIN
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line-vertical" style="background: #fbbf24; height: 16px;"></div>
+
+                    <!-- BARIS 2: RT 003 & RT 004 -->
+                    <div class="org-row" style="width: 100%;">
+                        <div class="node-box amber" style="flex: 1; min-width: 280px; text-align: center; padding: 14px 20px;">
+                            <div class="node-title" style="color: #fef08a; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px; margin-bottom: 6px;">RT 003</div>
+                            <div class="node-name" style="font-size: 13.5px; font-weight: 800; color: #ffffff; text-transform: uppercase;">
+                                RAHMAT SANUSI
+                            </div>
+                        </div>
+                        <div class="node-box amber" style="flex: 1; min-width: 280px; text-align: center; padding: 14px 20px;">
+                            <div class="node-title" style="color: #fef08a; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px; margin-bottom: 6px;">RT 004</div>
+                            <div class="node-name" style="font-size: 13.5px; font-weight: 800; color: #ffffff; text-transform: uppercase;">
+                                ANDA FAUZAN
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line-vertical" style="background: #fbbf24; height: 16px;"></div>
+
+                    <!-- BARIS 3: RT 005 & RT 006 -->
+                    <div class="org-row" style="width: 100%;">
+                        <div class="node-box amber" style="flex: 1; min-width: 280px; text-align: center; padding: 14px 20px;">
+                            <div class="node-title" style="color: #fef08a; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px; margin-bottom: 6px;">RT 005</div>
+                            <div class="node-name" style="font-size: 13.5px; font-weight: 800; color: #ffffff; text-transform: uppercase;">
+                                SAHUDI
+                            </div>
+                        </div>
+                        <div class="node-box amber" style="flex: 1; min-width: 280px; text-align: center; padding: 14px 20px;">
+                            <div class="node-title" style="color: #fef08a; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px; margin-bottom: 6px;">RT 006</div>
+                            <div class="node-name" style="font-size: 13.5px; font-weight: 800; color: #ffffff; text-transform: uppercase;">
+                                ROHMAN
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- SCRIPT JS UNTUK USER & TANGGAL OTOMATIS REALTIME -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dataUser = JSON.parse(localStorage.getItem('userAktifDesa'));
+            if (dataUser && dataUser.namaLengkap) {
+                document.getElementById('navUserName').textContent = dataUser.namaLengkap;
+            }
+
+            // Script Tanggal Otomatis Realtime
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const today = new Date();
+            document.getElementById('realtimeDate').textContent = today.toLocaleDateString('id-ID', options);
+
+            // Tombol Logout
+            document.getElementById('btnLogout').addEventListener('click', () => {
+                localStorage.removeItem('userAktifDesa');
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+    <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+      overflow-x: hidden;
+    }
+
+    .site-footer {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 100%;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      background: #14532d;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 2px;
+    }
+
+    .site-footer .footer-copy {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.4;
+    }
+
+    .site-footer .footer-dev {
+      font-size: 12px;
+      font-weight: 500;
+      color: #dcfce7;
+      line-height: 1.4;
+    }
+
+    .site-footer .footer-ver {
+      font-size: 11px;
+      font-weight: 500;
+      color: #bbf7d0;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 1024px) {
+      .navbar {
+        padding-left: 16px;
+        padding-right: 16px;
+        gap: 8px;
+      }
+
+      .nav-menu {
+        gap: 6px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 10px 12px;
+      }
+
+      .nav-menu {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .site-footer {
+        margin-top: 16px;
+        padding: 10px 12px;
+      }
+
+      .site-footer .footer-copy {
+        font-size: 11.5px;
+      }
+
+      .site-footer .footer-dev,
+      .site-footer .footer-ver {
+        font-size: 10.5px;
+      }
+    }
+  </style>
+
+  <footer class="site-footer">
+    <div class="footer-copy">&copy; 2026 SIP-BUNIASIH · Pemerintah Desa Buniasih</div>
+    <div class="footer-dev">Dikembangkan oleh Ahmad Novaldi</div>
+    <div class="footer-ver">Kec. Maleber, Kab. Kuningan · Hak Cipta Dilindungi</div>
+  </footer>
+</body>
+</html>

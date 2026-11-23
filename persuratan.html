@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layanan Persuratan - SIP-BUNIASIH ONLINE</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: #070d19;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* ==========================================================================
+           1. NAVBAR ATAS
+           ========================================================================== */
+        .navbar {
+            background: rgba(10, 17, 32, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-left { display: flex; align-items: center; gap: 14px; }
+        .brand-box { display: flex; align-items: center; gap: 12px; }
+
+        .logo-wrapper {
+            width: 42px; height: 42px; border-radius: 10px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; padding: 3px;
+        }
+        .logo-wrapper img { width: 100%; height: 100%; object-fit: contain; }
+
+        .brand-text h1 { font-size: 15px; font-weight: 800; color: #ffffff; line-height: 1.2; }
+        .brand-text span { font-size: 11px; color: #94a3b8; font-weight: 500; display: block; }
+        .nav-divider { width: 1px; height: 28px; background: rgba(255, 255, 255, 0.12); margin: 0 8px; }
+
+        .nav-menu { display: flex; align-items: center; list-style: none; gap: 8px; }
+        .nav-menu a {
+            text-decoration: none; color: #cbd5e1; font-size: 11.5px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.4px; padding: 9px 15px;
+            border-radius: 50px; display: flex; align-items: center; gap: 7px;
+            transition: all 0.25s ease;
+        }
+        .nav-menu a i { font-size: 12px; }
+        .nav-menu a.active {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: #ffffff; box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
+        }
+        .nav-menu a:hover:not(.active) { background: rgba(255, 255, 255, 0.06); color: #ffffff; }
+
+        .nav-right { display: flex; align-items: center; gap: 10px; }
+        .user-pill {
+            display: flex; align-items: center; gap: 9px;
+            background: rgba(30, 41, 59, 0.75); border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 6px 14px 6px 8px; border-radius: 50px;
+            font-size: 12.5px; font-weight: 600; color: #f1f5f9;
+        }
+        .user-avatar-dot {
+            width: 24px; height: 24px; border-radius: 50%; background: #0ea5e9; color: #ffffff;
+            display: flex; align-items: center; justify-content: center; font-size: 11px;
+        }
+        .btn-keluar {
+            background: rgba(127, 29, 29, 0.45); border: 1px solid rgba(239, 68, 68, 0.45);
+            color: #fca5a5; padding: 7px 14px; border-radius: 50px;
+            font-size: 12px; font-weight: 600; cursor: pointer;
+            display: flex; align-items: center; gap: 6px; transition: all 0.25s ease;
+        }
+        .btn-keluar:hover { background: #dc2626; color: #ffffff; }
+
+        /* ==========================================================================
+           2. HERO BANNER
+           ========================================================================== */
+        .main-wrapper {
+            max-width: 1380px; width: 100%; margin: 0 auto;
+            padding: 24px 32px 50px; flex: 1;
+        }
+
+        .hero-card {
+            position: relative; border-radius: 22px; overflow: hidden; min-height: 260px;
+            display: flex; align-items: center;
+            background: linear-gradient(105deg, #091e1a 0%, #0d2e26 42%, #132a4a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45); margin-bottom: 28px;
+        }
+        .hero-bg-gapura {
+            position: absolute; top: 0; right: 0; width: 58%; height: 100%;
+            background-image: url('gapura_desa.jpg'); background-size: cover;
+            background-position: center 35%; z-index: 1;
+        }
+        .hero-bg-gapura::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(90deg, #0b241f 0%, rgba(11, 36, 31, 0.92) 18%, rgba(13, 46, 38, 0.45) 45%, rgba(15, 23, 42, 0.1) 100%);
+        }
+        .hero-content { position: relative; z-index: 2; padding: 32px 44px; max-width: 630px; }
+        .location-pill {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(16, 185, 129, 0.16); border: 1px solid rgba(52, 211, 153, 0.35);
+            color: #6ee7b7; font-size: 11.5px; font-weight: 600;
+            padding: 5px 14px; border-radius: 50px; margin-bottom: 14px;
+        }
+        .hero-content h2 { font-size: 34px; font-weight: 800; line-height: 1.15; color: #ffffff; margin-bottom: 12px; }
+        .hero-content h2 .highlight-name { color: #4ade80; display: block; }
+        .hero-content p { font-size: 13.5px; color: #cbd5e1; line-height: 1.6; margin-bottom: 20px; max-width: 500px; }
+        .hero-footer-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .date-display { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #cbd5e1; font-weight: 500; }
+
+        /* ==========================================================================
+           3. PILIHAN 11 JENIS SURAT (GRID KARTU)
+           ========================================================================== */
+        .section-header-bar {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 16px; flex-wrap: wrap; gap: 10px;
+        }
+        .section-header-bar h3 { font-size: 18px; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 10px; }
+        .section-header-bar h3 i { color: #4ade80; }
+
+        .surat-selector-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .surat-type-btn {
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 14px 16px;
+            text-align: left;
+            color: #cbd5e1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s ease;
+        }
+        .surat-type-btn i {
+            width: 34px; height: 34px; border-radius: 9px;
+            background: rgba(16, 185, 129, 0.12); color: #34d399;
+            display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;
+        }
+        .surat-type-btn span { font-size: 12.5px; font-weight: 700; line-height: 1.3; }
+        .surat-type-btn:hover {
+            border-color: rgba(52, 211, 153, 0.45);
+            background: #131f38;
+            transform: translateY(-2px);
+        }
+        .surat-type-btn.active {
+            background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+            border-color: #34d399;
+            color: #ffffff;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25);
+        }
+        .surat-type-btn.active i {
+            background: #22c55e; color: #ffffff;
+        }
+
+        /* ==========================================================================
+           4. WORKSPACE PEMBUATAN SURAT (KIRI: FORM INPUT, KANAN: PREVIEW KERTAS)
+           ========================================================================== */
+        .workspace-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 24px;
+            align-items: start;
+            margin-bottom: 36px;
+        }
+
+        .form-panel {
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 26px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+        }
+
+        .form-panel-title {
+            font-size: 16px; font-weight: 800; color: #ffffff;
+            padding-bottom: 14px; margin-bottom: 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .badge-kode {
+            background: rgba(16, 185, 129, 0.16); color: #4ade80;
+            font-size: 11px; padding: 4px 10px; border-radius: 50px; border: 1px solid rgba(52, 211, 153, 0.3);
+        }
+
+        .form-group { margin-bottom: 14px; }
+        .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .form-group label {
+            display: block; font-size: 12px; font-weight: 600; color: #94a3b8; margin-bottom: 6px;
+        }
+        .form-control {
+            width: 100%; background: #1e293b; border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px; padding: 10px 13px; color: #ffffff; font-size: 13px;
+            outline: none; transition: border-color 0.2s;
+        }
+        .form-control:focus { border-color: #22c55e; }
+        textarea.form-control { resize: vertical; min-height: 75px; }
+
+        .dynamic-section-box {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px dashed rgba(52, 211, 153, 0.35);
+            border-radius: 12px;
+            padding: 14px;
+            margin: 14px 0;
+        }
+        .dynamic-section-label {
+            font-size: 11.5px; font-weight: 700; color: #4ade80;
+            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; display: block;
+        }
+
+        .action-buttons {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px;
+        }
+        .btn-action {
+            padding: 12px 18px; border-radius: 12px; font-size: 13px; font-weight: 700;
+            cursor: pointer; border: none; display: flex; align-items: center; justify-content: center;
+            gap: 8px; transition: all 0.2s ease;
+        }
+        .btn-simpan-arsip {
+            background: rgba(14, 165, 233, 0.18); border: 1px solid rgba(56, 189, 248, 0.45);
+            color: #38bdf8;
+        }
+        .btn-simpan-arsip:hover { background: #0284c7; color: #ffffff; }
+
+        .btn-cetak-pdf {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: #ffffff; box-shadow: 0 6px 18px rgba(34, 197, 94, 0.35);
+        }
+        .btn-cetak-pdf:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(34, 197, 94, 0.5); }
+
+        /* ==========================================================================
+           5. AREA PREVIEW SURAT RESMI (KERTAS A4 PUTIH STANDAR DINAS)
+           ========================================================================== */
+        .preview-wrapper {
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+        .preview-toolbar {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 12.5px; color: #cbd5e1; font-weight: 600;
+        }
+
+        /* Lembar Kertas A4 */
+        .paper-a4 {
+            background: #ffffff;
+            color: #000000;
+            width: 100%;
+            min-height: 840px;
+            padding: 42px 52px;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            font-family: 'Times New Roman', Times, serif !important;
+        }
+        .paper-a4 * {
+            font-family: 'Times New Roman', Times, serif !important;
+            color: #000000;
+        }
+
+        /* Kop Surat Resmi */
+        .kop-surat {
+            display: flex;
+            align-items: center;
+            border-bottom: 3px double #000000;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .kop-logo {
+            width: 72px;
+            height: 82px;
+            object-fit: contain;
+            margin-right: 14px;
+        }
+        .kop-text {
+            flex: 1;
+            text-align: center;
+            padding-right: 20px;
+        }
+        .kop-text h4 { font-size: 15px; font-weight: bold; letter-spacing: 0.5px; line-height: 1.2; }
+        .kop-text h3 { font-size: 16px; font-weight: bold; letter-spacing: 0.5px; line-height: 1.2; }
+        .kop-text h2 { font-size: 20px; font-weight: bold; letter-spacing: 1px; line-height: 1.25; }
+        .kop-text p { font-size: 11.5px; font-style: italic; margin-top: 3px; }
+
+        /* Judul & Nomor Surat */
+        .surat-header-judul {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .surat-header-judul h2 {
+            font-size: 15.5px;
+            font-weight: bold;
+            text-decoration: underline;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .surat-header-judul p {
+            font-size: 13.5px;
+            margin-top: 2px;
+        }
+
+        /* Isi Surat */
+        .surat-body {
+            font-size: 13.5px;
+            line-height: 1.65;
+            text-align: justify;
+        }
+        .surat-body p {
+            margin-bottom: 12px;
+            text-indent: 32px;
+        }
+        .surat-body p.no-indent {
+            text-indent: 0;
+        }
+
+        .biodata-table {
+            width: 100%;
+            margin: 10px 0 14px 28px;
+            border-collapse: collapse;
+            font-size: 13.5px;
+        }
+        .biodata-table td {
+            padding: 3px 4px;
+            vertical-align: top;
+        }
+        .biodata-table td.lbl { width: 185px; }
+        .biodata-table td.sep { width: 15px; text-align: center; }
+        .biodata-table td.val { font-weight: normal; }
+
+        /* Tanda Tangan Kepala Desa */
+        .ttd-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .ttd-box {
+            width: 260px;
+            text-align: center;
+            font-size: 13.5px;
+            line-height: 1.45;
+        }
+        .ttd-space {
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ttd-nama {
+            font-weight: bold;
+            text-decoration: underline;
+            text-transform: uppercase;
+        }
+
+        /* ==========================================================================
+           6. TABEL ARSIP SURAT KELUAR
+           ========================================================================== */
+        .arsip-card {
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 26px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+        .table-responsive { width: 100%; overflow-x: auto; margin-top: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); }
+        .arsip-table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; }
+        .arsip-table th {
+            background: #1e293b; color: #94a3b8; padding: 12px 16px; font-weight: 700; text-transform: uppercase; font-size: 11.5px;
+        }
+        .arsip-table td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.06); color: #e2e8f0; }
+        .btn-mini {
+            padding: 5px 10px; border-radius: 6px; font-size: 11.5px; font-weight: 600; cursor: pointer; border: none; margin-right: 4px;
+        }
+        .btn-mini.load { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+        .btn-mini.del { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+
+        /* Footer */
+        .site-footer {
+            background: #060a14; border-top: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 16px 32px; display: flex; align-items: center; justify-content: space-between;
+            font-size: 12px; color: #94a3b8; margin-top: auto;
+        }
+        .footer-brand { display: flex; align-items: center; gap: 10px; }
+        .footer-brand strong { color: #ffffff; }
+
+        /* ==========================================================================
+           7. MODE CETAK / PRINT PDF (HANYA MENCETAK LEMBAR SURAT A4)
+           ========================================================================== */
+        @media print {
+            body { background: #ffffff !important; }
+            .navbar, .hero-card, .section-header-bar, .surat-selector-grid,
+            .form-panel, .preview-toolbar, .arsip-card, .site-footer {
+                display: none !important;
+            }
+            .main-wrapper { padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
+            .workspace-grid { display: block !important; margin: 0 !important; }
+            .preview-wrapper {
+                background: #ffffff !important; border: none !important; padding: 0 !important; box-shadow: none !important;
+            }
+            .paper-a4 {
+                box-shadow: none !important; padding: 10mm 15mm !important; width: 100% !important; min-height: auto !important;
+            }
+        }
+
+        @media (max-width: 1080px) {
+            .workspace-grid { grid-template-columns: 1fr; }
+            .nav-menu { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR ATAS -->
+    <header class="navbar">
+        <div class="nav-left">
+            <div class="brand-box">
+                <div class="logo-wrapper">
+                    <img src="logo-desa.png" alt="Logo Desa" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <i class="fa-solid fa-shield-halved" style="display:none; color:#4ade80; font-size:20px;"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>SIP-BUNIASIH ONLINE</h1>
+                    <span>Pemerintah Desa Buniasih</span>
+                </div>
+            </div>
+            <div class="nav-divider"></div>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Beranda</a></li>
+            <li><a href="bagan-struktur.html"><i class="fa-solid fa-sitemap"></i> Struktur Lembaga</a></li>
+            <li><a href="sejarah-desa.html"><i class="fa-solid fa-landmark"></i> Sejarah Desa</a></li>
+            <li><a href="database-penduduk.html"><i class="fa-solid fa-users"></i> Database Penduduk</a></li>
+            <li><a href="persuratan.html" class="active"><i class="fa-solid fa-file-signature"></i> Persuratan</a></li>
+            <li><a href="berita.html"><i class="fa-solid fa-newspaper"></i> Berita</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <div class="user-pill">
+                <div class="user-avatar-dot"><i class="fa-solid fa-user"></i></div>
+                <span id="navUserName">Muhamad Ishak</span>
+            </div>
+            <button type="button" class="btn-keluar" id="btnLogout">
+                <i class="fa-solid fa-right-from-bracket"></i> Keluar
+            </button>
+        </div>
+    </header>
+
+    <!-- KONTEN UTAMA -->
+    <main class="main-wrapper">
+
+        <!-- HERO BANNER -->
+        <section class="hero-card">
+            <div class="hero-bg-gapura"></div>
+            <div class="hero-content">
+                <div class="location-pill">
+                    <i class="fa-solid fa-leaf"></i> Desa Buniasih &bull; Kecamatan Maleber
+                </div>
+                <h2>
+                    LAYANAN PERSURATAN 
+                    <span class="highlight-name">DESA BUNIASIH</span>
+                </h2>
+                <p>
+                    Pembuatan surat administrasi kependudukan dan surat keterangan desa secara otomatis, dilengkapi penomoran standar dinas, preview langsung, dan cetak PDF.
+                </p>
+                <div class="hero-footer-row">
+                    <div class="date-display">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span id="realtimeDate">Memuat tanggal...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. PILIH JENIS SURAT -->
+        <div class="section-header-bar">
+            <h3><i class="fa-solid fa-folder-plus"></i> 1. Pilih Jenis Layanan Surat</h3>
+            <span style="font-size: 12px; color: #94a3b8;">Klik salah satu jenis surat di bawah untuk membuat dokumen</span>
+        </div>
+
+        <div class="surat-selector-grid" id="suratSelectorGrid">
+            <!-- Tombol-tombol jenis surat di-render otomatis oleh JS -->
+        </div>
+
+        <!-- 2. WORKSPACE FORM & LIVE PREVIEW -->
+        <div class="workspace-grid">
+            
+            <!-- PANEL KIRI: FORMULIR INPUT DATA -->
+            <div class="form-panel">
+                <div class="form-panel-title">
+                    <span id="formTitleLabel">Formulir Surat Keterangan Domisili</span>
+                    <span class="badge-kode" id="badgeKodeSurat">Kode: 470</span>
+                </div>
+
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label>Nomor Surat (Otomatis)</label>
+                        <input type="text" id="inpNoSurat" class="form-control" oninput="updatePreview()">
+                    </div>
+                    <div class="form-group">
+                        <label>Tanggal Surat</label>
+                        <input type="text" id="inpTglSurat" class="form-control" oninput="updatePreview()">
+                    </div>
+                </div>
+
+                <!-- Data Pemohon Utama -->
+                <div class="form-group" id="groupNama">
+                    <label id="lblNama">Nama Lengkap Pemohon</label>
+                    <input type="text" id="inpNama" class="form-control" placeholder="Contoh: AHMAD NOVALDI" oninput="updatePreview()">
+                </div>
+
+                <div class="form-row-2" id="groupNikTtl">
+                    <div class="form-group">
+                        <label>NIK (16 Digit)</label>
+                        <input type="text" id="inpNik" class="form-control" placeholder="3208xxxxxxxxxxxx" oninput="updatePreview()">
+                    </div>
+                    <div class="form-group">
+                        <label>Tempat, Tanggal Lahir</label>
+                        <input type="text" id="inpTtl" class="form-control" placeholder="Kuningan, 15 Mei 2001" oninput="updatePreview()">
+                    </div>
+                </div>
+
+                <div class="form-row-2" id="groupJkAgama">
+                    <div class="form-group">
+                        <label>Jenis Kelamin</label>
+                        <select id="inpJk" class="form-control" onchange="updatePreview()">
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Agama</label>
+                        <select id="inpAgama" class="form-control" onchange="updatePreview()">
+                            <option value="Islam">Islam</option>
+                            <option value="Kristen">Kristen</option>
+                            <option value="Katolik">Katolik</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Buddha">Buddha</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row-2" id="groupStatusPekerjaan">
+                    <div class="form-group">
+                        <label>Status Perkawinan</label>
+                        <select id="inpStatusKawin" class="form-control" onchange="updatePreview()">
+                            <option value="Belum Kawin">Belum Kawin</option>
+                            <option value="Kawin">Kawin</option>
+                            <option value="Cerai Hidup">Cerai Hidup</option>
+                            <option value="Cerai Mati">Cerai Mati</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Pekerjaan</label>
+                        <input type="text" id="inpPekerjaan" class="form-control" placeholder="Contoh: Wiraswasta / Pelajar" oninput="updatePreview()">
+                    </div>
+                </div>
+
+                <div class="form-group" id="groupAlamat">
+                    <label>Alamat Lengkap (Dusun / RT / RW)</label>
+                    <input type="text" id="inpAlamat" class="form-control" value="Dusun 01 Buniaga RT 002 RW 001, Desa Buniasih, Kec. Maleber, Kab. Kuningan" oninput="updatePreview()">
+                </div>
+
+                <!-- KOLOM KHUSUS DINAMIS SESUAI JENIS SURAT -->
+                <div class="dynamic-section-box" id="dynamicFieldsContainer">
+                    <!-- Diisi otomatis oleh JavaScript sesuai surat yang dipilih -->
+                </div>
+
+                <div class="form-group">
+                    <label>Keperluan / Keterangan Tambahan</label>
+                    <textarea id="inpKeperluan" class="form-control" oninput="updatePreview()">Persyaratan Administrasi Kependudukan / Melamar Pekerjaan</textarea>
+                </div>
+
+                <div class="action-buttons">
+                    <button type="button" class="btn-action btn-simpan-arsip" onclick="simpanKeArsip()">
+                        <i class="fa-solid fa-box-archive"></i> Simpan ke Arsip
+                    </button>
+                    <button type="button" class="btn-action btn-cetak-pdf" onclick="cetakSuratPDF()">
+                        <i class="fa-solid fa-print"></i> Cetak / Simpan PDF
+                    </button>
+                </div>
+            </div>
+
+            <!-- PANEL KANAN: LIVE PREVIEW LEMBAR KERTAS A4 -->
+            <div class="preview-wrapper">
+                <div class="preview-toolbar">
+                    <span><i class="fa-solid fa-eye" style="color: #4ade80; margin-right: 6px;"></i> Live Preview Dokumen Resmi (Ukuran A4)</span>
+                    <span style="font-size: 11px; color: #94a3b8;">Otomatis terisi saat mengetik</span>
+                </div>
+
+                <div class="paper-a4" id="printableArea">
+                    <!-- KOP SURAT -->
+                    <div class="kop-surat">
+                        <img src="logo-desa.png" alt="Logo Kabupaten Kuningan" class="kop-logo" onerror="this.style.visibility='hidden'">
+                        <div class="kop-text">
+                            <h4>PEMERINTAH KABUPATEN KUNINGAN</h4>
+                            <h3>KECAMATAN MALEBER</h3>
+                            <h2>PEMERINTAH DESA BUNIASIH</h2>
+                            <p>Alamat : Jl. Raya Desa Buniasih Kecamatan Maleber Kabupaten Kuningan Kode Pos 45574</p>
+                        </div>
+                    </div>
+
+                    <!-- JUDUL & NOMOR SURAT -->
+                    <div class="surat-header-judul" id="prevHeaderJudul">
+                        <h2 id="prevJudulSurat">SURAT KETERANGAN DOMISILI</h2>
+                        <p>Nomor : <span id="prevNoSurat">470 / 001 / XI / 2026</span></p>
+                    </div>
+
+                    <!-- ISI SURAT DINAMIS -->
+                    <div class="surat-body" id="prevBodyContent">
+                        <!-- Konten redaksi surat dirender otomatis di sini -->
+                    </div>
+
+                    <!-- TANDA TANGAN KEPALA DESA -->
+                    <div class="ttd-container">
+                        <div class="ttd-box">
+                            <p>Buniasih, <span id="prevTglSurat">13 November 2026</span></p>
+                            <p>Kepala Desa Buniasih,</p>
+                            <div class="ttd-space"></div>
+                            <p class="ttd-nama">CARKA ABDUL HALIM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 3. ARSIP SURAT KELUAR -->
+        <div class="arsip-card">
+            <div class="section-header-bar" style="margin-bottom: 6px;">
+                <h3><i class="fa-solid fa-box-archive"></i> 2. Arsip Register Surat Keluar Desa Buniasih</h3>
+                <span style="font-size: 12px; color: #94a3b8;">Total Tersimpan: <strong id="totalArsipCount" style="color: #4ade80;">0</strong> Surat</span>
+            </div>
+            <div class="table-responsive">
+                <table class="arsip-table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nomor Surat</th>
+                            <th>Jenis Surat</th>
+                            <th>Nama Pemohon / Subjek</th>
+                            <th>Tanggal</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="arsipTableBody">
+                        <tr>
+                            <td colspan="6" style="text-align: center; color: #64748b; padding: 24px;">Belum ada surat yang disimpan ke arsip. Klik tombol "Simpan ke Arsip" setelah mengisi data.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+    <!-- SCRIPT LENGKAP PERSURATAN OTOMATIS -->
+    <script>
+        // Daftar 11 Jenis Surat Lengkap dengan Kode Klasifikasi & Konfigurasi
+        const daftarSurat = [
+            { id: 'domisili', nama: 'Surat Keterangan Domisili', kode: '470', icon: 'fa-house-user' },
+            { id: 'sktm', nama: 'Surat Keterangan Tidak Mampu', kode: '401', icon: 'fa-hand-holding-heart' },
+            { id: 'kelahiran', nama: 'Surat Keterangan Kelahiran', kode: '472.11', icon: 'fa-baby' },
+            { id: 'kematian', nama: 'Surat Keterangan Kematian', kode: '472.12', icon: 'fa-book-skull' },
+            { id: 'kependudukan', nama: 'Surat Keterangan Kependudukan', kode: '474', icon: 'fa-id-card' },
+            { id: 'pengantar', nama: 'Surat Pengantar', kode: '470', icon: 'fa-envelope-open-text' },
+            { id: 'permohonan', nama: 'Surat Permohonan Resmi', kode: '005', icon: 'fa-file-signature' },
+            { id: 'usaha', nama: 'Surat Keterangan Usaha', kode: '503', icon: 'fa-store' },
+            { id: 'skck', nama: 'Surat Pengantar SKCK', kode: '331', icon: 'fa-shield-halved' },
+            { id: 'belum_menikah', nama: 'Surat Keterangan Belum Menikah', kode: '474.2', icon: 'fa-ring' },
+            { id: 'lainnya', nama: 'Surat Keterangan Lainnya', kode: '470', icon: 'fa-file-lines' }
+        ];
+
+        let suratAktif = daftarSurat[0];
+        let arsipSurat = JSON.parse(localStorage.getItem('arsipSuratBuniasih')) || [];
+
+        // Konversi Bulan ke Romawi
+        function getBulanRomawi(monthIndex) {
+            const romawi = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+            return romawi[monthIndex];
+        }
+
+        // Format Tanggal Indonesia Tanpa Nama Hari (Contoh: 13 November 2026)
+        function getTanggalSuratIndo() {
+            const today = new Date();
+            return today.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+        }
+
+        // Generate Nomor Surat Otomatis
+        function generateNomorSurat(kode) {
+            const today = new Date();
+            const urut = String(arsipSurat.length + 1).padStart(3, '0');
+            const bln = getBulanRomawi(today.getMonth());
+            const thn = today.getFullYear();
+            return `${kode} / ${urut} / ${bln} / ${thn}`;
+        }
+
+        // Render Tombol Pilihan 11 Jenis Surat
+        function renderSelector() {
+            const grid = document.getElementById('suratSelectorGrid');
+            grid.innerHTML = '';
+            daftarSurat.forEach(item => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = `surat-type-btn ${item.id === suratAktif.id ? 'active' : ''}`;
+                btn.innerHTML = `<i class="fa-solid ${item.icon}"></i><span>${item.nama}</span>`;
+                btn.onclick = () => pilihJenisSurat(item);
+                grid.appendChild(btn);
+            });
+        }
+
+        // Saat Jenis Surat Dipilih
+        function pilihJenisSurat(item) {
+            suratAktif = item;
+            renderSelector();
+
+            document.getElementById('formTitleLabel').textContent = 'Formulir ' + item.nama;
+            document.getElementById('badgeKodeSurat').textContent = 'Kode: ' + item.kode;
+            document.getElementById('inpNoSurat').value = generateNomorSurat(item.kode);
+
+            // Atur visibilitas form standar vs khusus
+            const isPermohonan = (item.id === 'permohonan');
+            document.getElementById('groupNikTtl').style.display = isPermohonan ? 'none' : 'grid';
+            document.getElementById('groupJkAgama').style.display = isPermohonan ? 'none' : 'grid';
+            document.getElementById('groupStatusPekerjaan').style.display = isPermohonan ? 'none' : 'grid';
+            document.getElementById('groupAlamat').style.display = isPermohonan ? 'none' : 'block';
+            document.getElementById('lblNama').textContent = isPermohonan ? 'Kepada Yth. (Tujuan Surat)' : (item.id === 'kematian' ? 'Nama Lengkap Almarhum / Almarhumah' : 'Nama Lengkap Pemohon');
+
+            renderDynamicFields(item.id);
+            updatePreview();
+        }
+
+        // Render Kolom Input Tambahan Khusus Per Jenis Surat
+        function renderDynamicFields(id) {
+            const box = document.getElementById('dynamicFieldsContainer');
+            let html = '';
+
+            if (id === 'usaha') {
+                html = `
+                    <span class="dynamic-section-label"><i class="fa-solid fa-store"></i> Detail Usaha Warga</span>
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>Nama Usaha / Toko</label>
+                            <input type="text" id="ext1" class="form-control" value="Warung Sembako & Kelontong Berkah" oninput="updatePreview()">
+                        </div>
+                        <div class="form-group">
+                            <label>Jenis / Bidang Usaha</label>
+                            <input type="text" id="ext2" class="form-control" value="Perdagangan Eceran / Sembako" oninput="updatePreview()">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label>Alamat Lokasi Usaha</label>
+                        <input type="text" id="ext3" class="form-control" value="Dusun 01 Buniaga RT 002 RW 001 Desa Buniasih" oninput="updatePreview()">
+                    </div>
+                `;
+            } else if (id === 'kelahiran') {
+                html = `
+                    <span class="dynamic-section-label"><i class="fa-solid fa-baby"></i> Data Kelahiran Anak & Orang Tua</span>
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>Nama Lengkap Bayi / Anak</label>
+                            <input type="text" id="ext1" class="form-control" value="MUHAMMAD AL-FATIH" oninput="updatePreview()">
+                        </div>
+                        <div class="form-group">
+                            <label>Hari, Tanggal & Jam Lahir</label>
+                            <input type="text" id="ext2" class="form-control" value="Jumat, 13 November 2026 Pukul 07.30 WIB" oninput="updatePreview()">
+                        </div>
+                    </div>
+                    <div class="form-row-2" style="margin-bottom:0;">
+                        <div class="form-group" style="margin-bottom:0;">
+                            <label>Nama Ayah Kandung</label>
+                            <input type="text" id="ext3" class="form-control" value="HENDRA GUNAWAN" oninput="updatePreview()">
+                        </div>
+                        <div class="form-group" style="margin-bottom:0;">
+                            <label>Nama Ibu Kandung</label>
+                            <input type="text" id="ext4" class="form-control" value="SITI NURHALIZA" oninput="updatePreview()">
+                        </div>
+                    </div>
+                `;
+            } else if (id === 'kematian') {
+                html = `
+                    <span class="dynamic-section-label"><i class="fa-solid fa-book-skull"></i> Data Peristiwa Kematian</span>
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>Hari & Tanggal Meninggal</label>
+                            <input type="text" id="ext1" class="form-control" value="Kamis, 12 November 2026" oninput="updatePreview()">
+                        </div>
+                        <div class="form-group">
+                            <label>Tempat Meninggal</label>
+                            <input type="text" id="ext2" class="form-control" value="Rumah Kediaman di Desa Buniasih" oninput="updatePreview()">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label>Penyebab Kematian</label>
+                        <input type="text" id="ext3" class="form-control" value="Sakit / Usia Lanjut" oninput="updatePreview()">
+                    </div>
+                `;
+            } else if (id === 'permohonan') {
+                html = `
+                    <span class="dynamic-section-label"><i class="fa-solid fa-file-signature"></i> Detail Permohonan Resmi</span>
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>Perihal Permohonan</label>
+                            <input type="text" id="ext1" class="form-control" value="Permohonan Bantuan Sarana Prasarana Infrastruktur Desa" oninput="updatePreview()">
+                        </div>
+                        <div class="form-group">
+                            <label>Lampiran</label>
+                            <input type="text" id="ext2" class="form-control" value="1 (Satu) Berkas Proposal" oninput="updatePreview()">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label>Isi Pokok Permohonan</label>
+                        <textarea id="ext3" class="form-control" oninput="updatePreview()">Sehubungan dengan upaya peningkatan pelayanan dan pembangunan infrastruktur di wilayah Desa Buniasih Kecamatan Maleber Kabupaten Kuningan, bersama ini kami mengajukan permohonan dukungan dan realisasi program kegiatan dimaksud.</textarea>
+                    </div>
+                `;
+            } else if (id === 'lainnya') {
+                html = `
+                    <span class="dynamic-section-label"><i class="fa-solid fa-pen-to-square"></i> Kustomisasi Judul & Isi Surat</span>
+                    <div class="form-group">
+                        <label>Judul Surat Keterangan</label>
+                        <input type="text" id="ext1" class="form-control" value="SURAT KETERANGAN BEDA NAMA / IDENTITAS" oninput="updatePreview()">
+                    </div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label>Isi Pernyataan Keterangan Khusus</label>
+                        <textarea id="ext2" class="form-control" oninput="updatePreview()">Bahwa nama yang tercantum pada Kartu Tanda Penduduk (KTP) dan Ijazah/Buku Nikah tersebut di atas adalah benar-benar satu orang yang sama serta berdomisili di Desa Buniasih Kecamatan Maleber Kabupaten Kuningan.</textarea>
+                    </div>
+                `;
+            } else {
+                // Untuk Domisili, SKTM, Kependudukan, Pengantar, SKCK, Belum Menikah
+                html = `
+                    <span class="dynamic-section-label"><i class="fa-solid fa-circle-info"></i> Keterangan Tambahan (Opsional)</span>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label>Nomor Pengantar RT/RW (Jika ada)</label>
+                        <input type="text" id="ext1" class="form-control" value="Nomor : 012/RT.02/RW.01/XI/2026" oninput="updatePreview()">
+                    </div>
+                `;
+            }
+            box.innerHTML = html;
+        }
+
+        // Update Live Preview Lembar A4
+        function updatePreview() {
+            const noSurat = document.getElementById('inpNoSurat').value || '-';
+            const tglSurat = document.getElementById('inpTglSurat').value || getTanggalSuratIndo();
+            const nama = (document.getElementById('inpNama').value || '[NAMA LENGKAP]').toUpperCase();
+            const nik = document.getElementById('inpNik').value || '3208xxxxxxxxxxxx';
+            const ttl = document.getElementById('inpTtl').value || 'Kuningan, 01 Januari 2000';
+            const jk = document.getElementById('inpJk').value;
+            const agama = document.getElementById('inpAgama').value;
+            const statusKawin = document.getElementById('inpStatusKawin').value;
+            const pekerjaan = document.getElementById('inpPekerjaan').value || 'Wiraswasta';
+            const alamat = document.getElementById('inpAlamat').value;
+            const keperluan = document.getElementById('inpKeperluan').value;
+
+            const ext1 = document.getElementById('ext1') ? document.getElementById('ext1').value : '';
+            const ext2 = document.getElementById('ext2') ? document.getElementById('ext2').value : '';
+            const ext3 = document.getElementById('ext3') ? document.getElementById('ext3').value : '';
+            const ext4 = document.getElementById('ext4') ? document.getElementById('ext4').value : '';
+
+            document.getElementById('prevNoSurat').textContent = noSurat;
+            document.getElementById('prevTglSurat').textContent = tglSurat;
+
+            // Set Judul Surat
+            const judulEl = document.getElementById('prevJudulSurat');
+            const headerJudulEl = document.getElementById('prevHeaderJudul');
+            
+            if (suratAktif.id === 'permohonan') {
+                headerJudulEl.style.display = 'none';
+            } else {
+                headerJudulEl.style.display = 'block';
+                judulEl.textContent = (suratAktif.id === 'lainnya' && ext1) ? ext1.toUpperCase() : suratAktif.nama.toUpperCase();
+            }
+
+            // Tabel Biodata Standar
+            const biodataHTML = `
+                <table class="biodata-table">
+                    <tr><td class="lbl">Nama Lengkap</td><td class="sep">:</td><td class="val"><strong>${nama}</strong></td></tr>
+                    <tr><td class="lbl">NIK</td><td class="sep">:</td><td class="val">${nik}</td></tr>
+                    <tr><td class="lbl">Tempat / Tanggal Lahir</td><td class="sep">:</td><td class="val">${ttl}</td></tr>
+                    <tr><td class="lbl">Jenis Kelamin</td><td class="sep">:</td><td class="val">${jk}</td></tr>
+                    <tr><td class="lbl">Agama</td><td class="sep">:</td><td class="val">${agama}</td></tr>
+                    <tr><td class="lbl">Status Perkawinan</td><td class="sep">:</td><td class="val">${statusKawin}</td></tr>
+                    <tr><td class="lbl">Pekerjaan</td><td class="sep">:</td><td class="val">${pekerjaan}</td></tr>
+                    <tr><td class="lbl">Alamat</td><td class="sep">:</td><td class="val">${alamat}</td></tr>
+                </table>
+            `;
+
+            const pembuka = `<p>Yang bertanda tangan di bawah ini Kepala Desa Buniasih Kecamatan Maleber Kabupaten Kuningan, dengan ini menerangkan dengan sebenarnya bahwa :</p>`;
+            const penutup = `<p>Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>`;
+
+            let bodyHTML = '';
+
+            switch (suratAktif.id) {
+                case 'domisili':
+                    bodyHTML = `
+                        ${pembuka}
+                        ${biodataHTML}
+                        <p>Berdasarkan catatan kependudukan yang ada pada kantor kami serta surat pengantar RT/RW (${ext1}), nama tersebut di atas adalah benar-benar warga kami yang berdomisili dan bertempat tinggal tetap pada alamat tersebut di atas.</p>
+                        <p>Surat Keterangan Domisili ini diberikan kepada yang bersangkutan untuk keperluan : <strong>${keperluan}</strong>.</p>
+                        ${penutup}
+                    `;
+                    break;
+
+                case 'sktm':
+                    bodyHTML = `
+                        ${pembuka}
+                        ${biodataHTML}
+                        <p>Berdasarkan pengamatan kami dan surat keterangan dari Ketua RT/RW setempat (${ext1}), orang tersebut di atas adalah benar-benar warga Desa Buniasih yang tergolong dalam keluarga <strong>Kurang Mampu / Prasejahtera</strong>.</p>
+                        <p>Surat Keterangan Tidak Mampu (SKTM) ini diberikan untuk keperluan : <strong>${keperluan}</strong>.</p>
+                        ${penutup}
+                    `;
+                    break;
+
+                case 'kelahiran':
+                    bodyHTML = `
+                        <p>Yang bertanda tangan di bawah ini Kepala Desa Buniasih Kecamatan Maleber Kabupaten Kuningan, dengan ini menerangkan bahwa pada :</p>
+                        <table class="biodata-table">
+                            <tr><td class="lbl">Hari / Tanggal / Jam</td><td class="sep">:</td><td class="val">${ext2}</td></tr>
+                            <tr><td class="lbl">Tempat Kelahiran</td><td class="sep">:</td><td class="val">Desa Buniasih, Kec. Maleber, Kab. Kuningan</td></tr>
+                        </table>
+                        <p class="no-indent">Telah lahir seorang anak :</p>
+                        <table class="biodata-table">
+                            <tr><td class="lbl">Nama Lengkap Anak</td><td class="sep">:</td><td class="val"><strong>${ext1.toUpperCase()}</strong></td></tr>
+                            <tr><td class="lbl">Jenis Kelamin</td><td class="sep">:</td><td class="val">${jk}</td></tr>
+                            <tr><td class="lbl">Nama Ayah Kandung</td><td class="sep">:</td><td class="val">${ext3.toUpperCase()}</td></tr>
+                            <tr><td class="lbl">Nama Ibu Kandung</td><td class="sep">:</td><td class="val">${ext4.toUpperCase()}</td></tr>
+                            <tr><td class="lbl">Alamat Orang Tua</td><td class="sep">:</td><td class="val">${alamat}</td></tr>
+                        </table>
+                        <p>Surat Keterangan Kelahiran ini dibuat berdasarkan laporan pelapor (<strong>${nama}</strong>) untuk keperluan : <strong>${keperluan}</strong>.</p>
+                        ${penutup}
+                    `;
+                    break;
+
+                case 'kematian':
+                    bodyHTML = `
+                        ${pembuka}
+                        ${biodataHTML}
+                        <p>Berdasarkan laporan dari pihak keluarga dan Ketua RT/RW setempat, orang tersebut di atas telah <strong>Meninggal Dunia</strong> pada :</p>
+                        <table class="biodata-table">
+                            <tr><td class="lbl">Hari / Tanggal</td><td class="sep">:</td><td class="val">${ext1}</td></tr>
+                            <tr><td class="lbl">Tempat Meninggal</td><td class="sep">:</td><td class="val">${ext2}</td></tr>
+                            <tr><td class="lbl">Disebabkan Karena</td><td class="sep">:</td><td class="val">${ext3}</td></tr>
+                        </table>
+                        <p>Surat Keterangan Kematian ini dibuat untuk keperluan : <strong>${keperluan}</strong>.</p>
+                        ${penutup}
+                    `;
+                    break;
+
+                case 'kependudukan':
+                    bodyHTML = `
+                        ${pembuka}
+                        ${biodataHTML}
+                        <p>Orang tersebut di atas adalah benar-benar penduduk Desa Buniasih Kecamatan Maleber Kabupaten Kuningan yang tercatat dalam Database Kependudukan Desa dan sedang dalam proses administrasi kependudukan (${ext1}).</p>
+                        <p>Surat Keterangan Kependudukan ini berlaku sementara dan diterbitkan untuk keperluan : <strong>${keperluan}</strong>.</p>
+                        ${penutup}
+                    `;
+                    break;
+
+                case 'pengantar':
+                    bodyHTML = `
+                        ${pembuka}
+                        ${biodataHTML}
+                        <p>Dengan ini memberikan pengantar kepada yang bersangkutan untuk mengurus administrasi pada instansi terkait sesuai dengan surat pengantar RT/RW (${ext1}).</p>
+                        <p>Adapun maksud dan keperluan yang bersangkutan adalah : <strong>${keperluan}</strong>.</p>
+                        ${penutup}
+                    `;
+                    break;
+
+                case 'permohonan':
+                    bodyHTML = `
+                        <table class="biodata-table" style="margin-left: 0; margin-bottom: 18px;">
+                            <tr><td class="lbl" style="width:90px;">Nomor</td><td class="sep">:</td><td class="val">${noSurat}</td></tr>
+                            <tr><td class="lbl" style="width:90px;">Lampiran</td><td class="sep">:</td><td class="val">${ext2}</td></tr>
+                            <tr><td class="lbl" style="width:90px;">Perihal</td><td class="sep">:</td><td class="val"><strong>${ext1}</strong></td></tr>
+                        </table>
+                        <p class="no-indent" style="margin-bottom: 16px;">Kepada Yth.<br><strong>${nama}</strong><br>Di Tempat</p>
+                        <p class="no-indent">Dengan hormat,</p>
+                        <p>${ext3}</p>
+                        <p>Adapun maksud dan tujuan permohonan ini berkaitan dengan : <strong>${keperluan}</strong>.</p>
+                        <p>Demikian surat permohonan ini kami sampaikan. Atas perhatian, dukungan, dan kerja samanya kami ucapkan terima kasih.</p>
+                    `;
+                    break;
+
+                case 'usaha':
+                    bodyHTML = `
+                        ${pembuka}
+                        ${biodataHTML}
+                        <p>Berdasarkan keterangan yang bersangkutan serta pengamatan kami di lapangan, orang tersebut di atas benar-benar memiliki dan menjalankan kegiatan usaha sebagai berikut :</p>
+                        <table class="biodata-table">
+                            <tr><td class="lbl">Nama Usaha</td><td class="sep">:</td><td class="val"><strong>${ext1}</strong></td></tr>
+                            <tr><td class="lbl">Jenis / Bidang Usaha</td><td class="sep">:</td><td class="val">${ext2}</td></tr>
+                            <tr><td class="lbl">Alamat Lokasi Usaha</td><td class="sep">:</td><td class="val">${ext3}</td></tr>
+                        </table>
+                        <p>Surat Keterangan Usaha (SKU) ini diberikan untuk keperluan : <strong>${keperluan}</strong>.</p>
+                        ${penutup}
+                    `;
+                    break;
+
+                case 'skck':
+                    bodyHTML = `
+                        ${pembuka}
+                        ${biodataHTML}
+                        <p>Berdasarkan catatan yang ada pada kantor kami serta pengantar RT/RW (${ext1}), bahwa nama tersebut di atas selama bertempat tinggal di Desa Buniasih berkelakuan baik, tidak pernah tersangkut perkara tindak pidana/kriminal, dan tidak terlibat penyalahgunaan narkotika.</p>
+                        <p>Surat pengantar ini diberikan kepada yang bersangkutan sebagai persyaratan pembuatan <strong>Surat Keterangan Catatan Kepolisian (SKCK)</strong> untuk keperluan : <strong>${keperluan}</strong>.</p>
+                        ${penutup}
+                    `;
+                    break;
+
+                case 'belum_menikah':
+                    bodyHTML = `
+                        ${pembuka}
+                        ${biodataHTML}
+                        <p>Berdasarkan data administrasi kependudukan yang ada pada kantor kami dan surat pengantar RT/RW (${ext1}), orang tersebut di atas sampai dengan diterbitkannya surat keterangan ini benar-benar berstatus <strong>BELUM PERNAH MENIKAH (JEJAKA / PERAWAN)</strong>.</p>
+                        <p>Surat Keterangan Belum Menikah ini diberikan untuk keperluan : <strong>${keperluan}</strong>.</p>
+                        ${penutup}
+                    `;
+                    break;
+
+                case 'lainnya':
+                    bodyHTML = `
+                        ${pembuka}
+                        ${biodataHTML}
+                        <p>${ext2}</p>
+                        <p>Surat keterangan ini diterbitkan untuk keperluan : <strong>${keperluan}</strong>.</p>
+                        ${penutup}
+                    `;
+                    break;
+            }
+
+            document.getElementById('prevBodyContent').innerHTML = bodyHTML;
+        }
+
+        // Simpan ke Arsip LocalStorage
+        function simpanKeArsip() {
+            const dataBaru = {
+                id: Date.now(),
+                noSurat: document.getElementById('inpNoSurat').value,
+                jenisId: suratAktif.id,
+                jenisNama: suratAktif.nama,
+                nama: document.getElementById('inpNama').value || 'Tanpa Nama',
+                nik: document.getElementById('inpNik').value,
+                ttl: document.getElementById('inpTtl').value,
+                jk: document.getElementById('inpJk').value,
+                agama: document.getElementById('inpAgama').value,
+                statusKawin: document.getElementById('inpStatusKawin').value,
+                pekerjaan: document.getElementById('inpPekerjaan').value,
+                alamat: document.getElementById('inpAlamat').value,
+                keperluan: document.getElementById('inpKeperluan').value,
+                tanggal: document.getElementById('inpTglSurat').value
+            };
+
+            arsipSurat.unshift(dataBaru);
+            localStorage.setItem('arsipSuratBuniasih', JSON.stringify(arsipSurat));
+            renderArsipTable();
+            
+            // Update nomor surat berikutnya otomatis
+            document.getElementById('inpNoSurat').value = generateNomorSurat(suratAktif.kode);
+            alert('Berhasil! Surat nomor ' + dataBaru.noSurat + ' telah disimpan ke Arsip Desa.');
+        }
+
+        // Render Tabel Arsip
+        function renderArsipTable() {
+            const tbody = document.getElementById('arsipTableBody');
+            document.getElementById('totalArsipCount').textContent = arsipSurat.length;
+
+            if (arsipSurat.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #64748b; padding: 24px;">Belum ada surat yang disimpan ke arsip.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = arsipSurat.map((item, idx) => `
+                <tr>
+                    <td>${idx + 1}</td>
+                    <td><strong>${item.noSurat}</strong></td>
+                    <td>${item.jenisNama}</td>
+                    <td>${item.nama.toUpperCase()}</td>
+                    <td>${item.tanggal}</td>
+                    <td>
+                        <button type="button" class="btn-mini load" onclick="muatDariArsip(${item.id})"><i class="fa-solid fa-eye"></i> Lihat</button>
+                        <button type="button" class="btn-mini del" onclick="hapusArsip(${item.id})"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Muat Kembali Surat dari Arsip
+        function muatDariArsip(id) {
+            const found = arsipSurat.find(x => x.id === id);
+            if (!found) return;
+
+            const jenisObj = daftarSurat.find(d => d.id === found.jenisId) || daftarSurat[0];
+            pilihJenisSurat(jenisObj);
+
+            document.getElementById('inpNoSurat').value = found.noSurat;
+            document.getElementById('inpTglSurat').value = found.tanggal;
+            document.getElementById('inpNama').value = found.nama;
+            document.getElementById('inpNik').value = found.nik;
+            document.getElementById('inpTtl').value = found.ttl;
+            document.getElementById('inpJk').value = found.jk;
+            document.getElementById('inpAgama').value = found.agama;
+            document.getElementById('inpStatusKawin').value = found.statusKawin;
+            document.getElementById('inpPekerjaan').value = found.pekerjaan;
+            document.getElementById('inpAlamat').value = found.alamat;
+            document.getElementById('inpKeperluan').value = found.keperluan;
+
+            updatePreview();
+            window.scrollTo({ top: 320, behavior: 'smooth' });
+        }
+
+        // Hapus Item Arsip
+        function hapusArsip(id) {
+            if (!confirm('Hapus riwayat surat ini dari arsip?')) return;
+            arsipSurat = arsipSurat.filter(x => x.id !== id);
+            localStorage.setItem('arsipSuratBuniasih', JSON.stringify(arsipSurat));
+            renderArsipTable();
+        }
+
+        // Cetak / Simpan ke PDF
+        function cetakSuratPDF() {
+            window.print();
+        }
+
+        // Inisialisasi Halaman
+        document.addEventListener('DOMContentLoaded', () => {
+            const dataUser = JSON.parse(localStorage.getItem('userAktifDesa'));
+            if (dataUser && dataUser.namaLengkap) {
+                document.getElementById('navUserName').textContent = dataUser.namaLengkap;
+            }
+
+            // Tanggal Realtime di Banner
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('realtimeDate').textContent = new Date().toLocaleDateString('id-ID', options);
+
+            // Set default tanggal surat hari ini
+            document.getElementById('inpTglSurat').value = getTanggalSuratIndo();
+
+            // Render awal
+            pilihJenisSurat(daftarSurat[0]);
+            renderArsipTable();
+
+            // Tombol Logout
+            document.getElementById('btnLogout').addEventListener('click', () => {
+                localStorage.removeItem('userAktifDesa');
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+    <!-- Pastikan dibungkus rapi dalam tag script seperti ini -->
+    <script>
+        // INTEGRASI DATABASE PENDUDUK KE FORM PERSURATAN
+        document.addEventListener('DOMContentLoaded', () => {
+            const dbWarga = JSON.parse(localStorage.getItem('db_penduduk_buniasih_2026')) || [];
+            // ... sisa kode JavaScript ...
+        });
+    </script>
+    <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+      overflow-x: hidden;
+    }
+
+    .site-footer {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 100%;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      background: #14532d;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 2px;
+    }
+
+    .site-footer .footer-copy {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.4;
+    }
+
+    .site-footer .footer-dev {
+      font-size: 12px;
+      font-weight: 500;
+      color: #dcfce7;
+      line-height: 1.4;
+    }
+
+    .site-footer .footer-ver {
+      font-size: 11px;
+      font-weight: 500;
+      color: #bbf7d0;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 1024px) {
+      .navbar {
+        padding-left: 16px;
+        padding-right: 16px;
+        gap: 8px;
+      }
+
+      .nav-menu {
+        gap: 6px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 10px 12px;
+      }
+
+      .nav-menu {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .site-footer {
+        margin-top: 16px;
+        padding: 10px 12px;
+      }
+
+      .site-footer .footer-copy {
+        font-size: 11.5px;
+      }
+
+      .site-footer .footer-dev,
+      .site-footer .footer-ver {
+        font-size: 10.5px;
+      }
+    }
+  </style>
+
+  <footer class="site-footer">
+    <div class="footer-copy">&copy; 2026 SIP-BUNIASIH · Pemerintah Desa Buniasih</div>
+    <div class="footer-dev">Dikembangkan oleh Ahmad Novaldi</div>
+    <div class="footer-ver">Kec. Maleber, Kab. Kuningan · Hak Cipta Dilindungi</div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Kependudukan - SIP-BUNIASIH ONLINE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: #070d19; color: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; }
+
+        /* NAVBAR */
+        .navbar {
+            background: rgba(10, 17, 32, 0.95); backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding: 12px 32px;
+            display: flex; align-items: center; justify-content: space-between;
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .nav-left { display: flex; align-items: center; gap: 14px; }
+        .brand-box { display: flex; align-items: center; gap: 12px; }
+        .logo-wrapper {
+            width: 42px; height: 42px; border-radius: 10px; background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3); display: flex; align-items: center; justify-content: center; padding: 3px;
+        }
+        .logo-wrapper img { width: 100%; height: 100%; object-fit: contain; }
+        .brand-text h1 { font-size: 15px; font-weight: 800; color: #ffffff; }
+        .brand-text span { font-size: 11px; color: #94a3b8; display: block; }
+        .nav-divider { width: 1px; height: 28px; background: rgba(255, 255, 255, 0.12); margin: 0 8px; }
+
+        .nav-menu { display: flex; align-items: center; list-style: none; gap: 8px; }
+        .nav-menu a {
+            text-decoration: none; color: #cbd5e1; font-size: 11.5px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.4px; padding: 9px 15px;
+            border-radius: 50px; display: flex; align-items: center; gap: 7px; transition: all 0.25s ease;
+        }
+        .nav-menu a.active {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: #ffffff; box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
+        }
+        .nav-menu a:hover:not(.active) { background: rgba(255, 255, 255, 0.06); color: #ffffff; }
+
+        .nav-right { display: flex; align-items: center; gap: 10px; }
+        .user-pill {
+            display: flex; align-items: center; gap: 9px; background: rgba(30, 41, 59, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.12); padding: 6px 14px 6px 8px; border-radius: 50px;
+            font-size: 12.5px; font-weight: 600;
+        }
+        .user-avatar-dot {
+            width: 24px; height: 24px; border-radius: 50%; background: #0ea5e9;
+            display: flex; align-items: center; justify-content: center; font-size: 11px;
+        }
+        .btn-keluar {
+            background: rgba(127, 29, 29, 0.45); border: 1px solid rgba(239, 68, 68, 0.45);
+            color: #fca5a5; padding: 7px 14px; border-radius: 50px; font-size: 12px; font-weight: 600; cursor: pointer;
+        }
+
+        /* MAIN CONTAINER */
+        .main-wrapper { max-width: 1380px; width: 100%; margin: 0 auto; padding: 24px 32px 50px; flex: 1; }
+
+        .top-bar {
+            display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+            gap: 16px; margin-bottom: 22px; background: #0f172a; padding: 22px 26px;
+            border-radius: 18px; border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .top-bar h2 { font-size: 22px; font-weight: 800; color: #ffffff; }
+        .top-bar p { font-size: 13px; color: #94a3b8; margin-top: 4px; }
+
+        .stat-chips { display: flex; gap: 12px; flex-wrap: wrap; }
+        .chip {
+            background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1);
+            padding: 10px 16px; border-radius: 12px; text-align: center; min-width: 110px;
+        }
+        .chip span { display: block; font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 700; }
+        .chip strong { font-size: 18px; color: #4ade80; font-weight: 800; }
+
+        /* TOOLBAR */
+        .toolbar {
+            display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+            gap: 12px; margin-bottom: 18px;
+        }
+        .search-group { display: flex; gap: 10px; flex: 1; min-width: 300px; }
+        .search-box { position: relative; flex: 1; }
+        .search-box i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #94a3b8; }
+        .search-box input {
+            width: 100%; padding: 11px 16px 11px 40px; border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.12); background: #0f172a;
+            color: #ffffff; font-size: 13.5px; outline: none;
+        }
+        .search-box input:focus { border-color: #22c55e; }
+
+        .filter-select {
+            padding: 11px 14px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.12);
+            background: #0f172a; color: #ffffff; font-size: 13px; outline: none; cursor: pointer;
+        }
+
+        .action-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn {
+            padding: 10px 16px; border-radius: 12px; border: none; font-size: 13px; font-weight: 700;
+            cursor: pointer; display: inline-flex; align-items: center; gap: 7px; transition: 0.2s;
+        }
+        .btn-primary { background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff; }
+        .btn-primary:hover { filter: brightness(1.1); }
+        .btn-blue { background: #0284c7; color: #fff; }
+        .btn-slate { background: #1e293b; color: #e2e8f0; border: 1px solid rgba(255,255,255,0.12); }
+
+        /* TABLE */
+        .table-card {
+            background: #0f172a; border-radius: 18px; border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+        .table-responsive { width: 100%; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th {
+            background: #1e293b; color: #94a3b8; padding: 14px 12px; text-align: left;
+            font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;
+        }
+        td {
+            padding: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            color: #e2e8f0; vertical-align: middle;
+        }
+        tbody tr:hover { background: rgba(34, 197, 94, 0.07); }
+
+        .badge-jk { padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+        .jk-l { background: rgba(14, 165, 233, 0.2); color: #38bdf8; }
+        .jk-p { background: rgba(236, 72, 153, 0.2); color: #f472b6; }
+
+        .btn-sm {
+            padding: 6px 10px; border-radius: 8px; border: none; font-size: 11.5px;
+            font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;
+        }
+        .btn-surat { background: #16a34a; color: #fff; }
+        .btn-edit { background: #d97706; color: #fff; }
+        .btn-hapus { background: #dc2626; color: #fff; }
+
+        /* PAGINATION */
+        .pagination {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 16px 20px; background: #0b1222; font-size: 13px; color: #94a3b8;
+        }
+        .page-btns { display: flex; gap: 8px; }
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(4px);
+            display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px;
+        }
+        .modal-overlay.show { display: flex; }
+        .modal-box {
+            background: #0f172a; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 18px;
+            width: 100%; max-width: 720px; max-height: 90vh; overflow-y: auto; padding: 26px;
+        }
+        .modal-header {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 14px; margin-bottom: 18px;
+        }
+        .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group label { font-size: 12px; font-weight: 700; color: #94a3b8; }
+        .form-group input, .form-group select {
+            padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.15);
+            background: #1e293b; color: #fff; font-size: 13px;
+        }
+        .modal-footer {
+            display: flex; justify-content: flex-end; gap: 10px; margin-top: 22px;
+            border-top: 1px solid rgba(255,255,255,0.1); padding-top: 14px;
+        }
+
+        .site-footer {
+            background: #060a14; border-top: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 16px 32px; display: flex; justify-content: space-between; font-size: 12px; color: #94a3b8;
+        }
+        @media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; } .nav-menu { display: none; } }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="nav-left">
+            <div class="brand-box">
+                <div class="logo-wrapper">
+                    <img src="logo-desa.png" alt="Logo" onerror="this.style.display='none';">
+                </div>
+                <div class="brand-text">
+                    <h1>SIP-BUNIASIH ONLINE</h1>
+                    <span>Pemerintah Desa Buniasih</span>
+                </div>
+            </div>
+            <div class="nav-divider"></div>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Beranda</a></li>
+            <li><a href="bagan-struktur.html"><i class="fa-solid fa-sitemap"></i> Struktur Lembaga</a></li>
+            <li><a href="sejarah-desa.html"><i class="fa-solid fa-landmark"></i> Sejarah Desa</a></li>
+            <li><a href="database-penduduk.html" class="active"><i class="fa-solid fa-users"></i> Database Penduduk</a></li>
+            <li><a href="persuratan.html"><i class="fa-solid fa-file-signature"></i> Persuratan</a></li>
+            <li><a href="berita.html"><i class="fa-solid fa-newspaper"></i> Berita</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <div class="user-pill">
+                <div class="user-avatar-dot"><i class="fa-solid fa-user"></i></div>
+                <span id="navUserName">Muhamad Ishak</span>
+            </div>
+            <button type="button" class="btn-keluar" id="btnLogout"><i class="fa-solid fa-right-from-bracket"></i> Keluar</button>
+        </div>
+    </header>
+
+    <!-- KONTEN UTAMA -->
+    <main class="main-wrapper">
+        <div class="top-bar">
+            <div>
+                <h2><i class="fa-solid fa-database" style="color:#4ade80;"></i> Database Kependudukan Desa Buniasih</h2>
+                <p>Data total 990 jiwa terintegrasi otomatis dengan layanan pembuatan surat desa.</p>
+            </div>
+            <div class="stat-chips">
+                <div class="chip"><span>Total Jiwa</span><strong id="statTotal">990</strong></div>
+                <div class="chip"><span>Laki-Laki</span><strong id="statL" style="color:#38bdf8;">519</strong></div>
+                <div class="chip"><span>Perempuan</span><strong id="statP" style="color:#f472b6;">470</strong></div>
+            </div>
+        </div>
+
+        <!-- TOOLBAR -->
+        <div class="toolbar">
+            <div class="search-group">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="searchInput" placeholder="Cari Nama Warga, NIK (16 digit), No. KK, atau Kepala Keluarga...">
+                </div>
+                <select id="filterRT" class="filter-select">
+                    <option value="">Semua RT</option>
+                    <option value="001">RT 001</option>
+                    <option value="002">RT 002</option>
+                    <option value="003">RT 003</option>
+                    <option value="004">RT 004</option>
+                    <option value="005">RT 005</option>
+                    <option value="006">RT 006</option>
+                </select>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="bukaModalTambah()"><i class="fa-solid fa-user-plus"></i> Tambah Penduduk</button>
+                <label class="btn btn-blue" style="cursor:pointer;">
+                    <i class="fa-solid fa-file-csv"></i> Muat Ulang CSV
+                    <input type="file" id="csvFileInput" accept=".csv" style="display:none;">
+                </label>
+                <button class="btn btn-slate" onclick="exportCSV()"><i class="fa-solid fa-download"></i> Export CSV</button>
+            </div>
+        </div>
+
+        <!-- TABEL DATA -->
+        <div class="table-card">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>NIK</th>
+                            <th>Nama Lengkap</th>
+                            <th>JK</th>
+                            <th>Tempat, Tgl Lahir</th>
+                            <th>Umur</th>
+                            <th>RT/RW</th>
+                            <th>Pekerjaan</th>
+                            <th>Status</th>
+                            <th style="text-align:center;">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelPendudukBody">
+                        <tr><td colspan="10" style="text-align:center; padding:30px;">Memuat data kependudukan...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination">
+                <span id="pageInfo">Menampilkan 0 data</span>
+                <div class="page-btns">
+                    <button class="btn btn-slate btn-sm" id="btnPrev" onclick="gantiHalaman(-1)">&laquo; Sebelumnya</button>
+                    <button class="btn btn-slate btn-sm" id="btnNext" onclick="gantiHalaman(1)">Berikutnya &raquo;</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- MODAL TAMBAH / EDIT -->
+    <div class="modal-overlay" id="modalPenduduk">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modalTitle" style="font-size:17px; font-weight:800;">Tambah Data Penduduk</h3>
+                <button onclick="tutupModal()" style="background:none; border:none; color:#94a3b8; font-size:20px; cursor:pointer;">&times;</button>
+            </div>
+            <form id="formPenduduk">
+                <input type="hidden" id="editIndex" value="-1">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>NIK (16 Digit) *</label>
+                        <input type="text" id="f_NIK" required maxlength="16" placeholder="3208...">
+                    </div>
+                    <div class="form-group">
+                        <label>Nomor KK (16 Digit) *</label>
+                        <input type="text" id="f_NO_KK" required maxlength="16" placeholder="3208...">
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Lengkap *</label>
+                        <input type="text" id="f_NAMA" required style="text-transform:uppercase;">
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Kepala Keluarga</label>
+                        <input type="text" id="f_NAMA_KEP_KEL" style="text-transform:uppercase;">
+                    </div>
+                    <div class="form-group">
+                        <label>Jenis Kelamin</label>
+                        <select id="f_JK">
+                            <option value="L">Laki-Laki (L)</option>
+                            <option value="P">Perempuan (P)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Status Hubungan Dalam Keluarga</label>
+                        <select id="f_SHDK">
+                            <option value="Kepala Keluarga">Kepala Keluarga</option>
+                            <option value="Istri">Istri</option>
+                            <option value="Anak">Anak</option>
+                            <option value="Famili Lain">Famili Lain</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tempat Lahir</label>
+                        <input type="text" id="f_TMPT_LHR" value="KUNINGAN" style="text-transform:uppercase;">
+                    </div>
+                    <div class="form-group">
+                        <label>Tanggal Lahir (DD/MM/YYYY)</label>
+                        <input type="text" id="f_TGL_LHR" placeholder="04/08/1978">
+                    </div>
+                    <div class="form-group">
+                        <label>RT</label>
+                        <select id="f_RT">
+                            <option value="001">001</option>
+                            <option value="002">002</option>
+                            <option value="003">003</option>
+                            <option value="004">004</option>
+                            <option value="005">005</option>
+                            <option value="006">006</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>RW</label>
+                        <select id="f_RW">
+                            <option value="001">001</option>
+                            <option value="002">002</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Status Perkawinan</label>
+                        <select id="f_STATUS">
+                            <option value="Belum Kawin">Belum Kawin</option>
+                            <option value="Kawin">Kawin</option>
+                            <option value="Cerai Hidup">Cerai Hidup</option>
+                            <option value="Cerai Mati">Cerai Mati</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Pendidikan Terakhir</label>
+                        <input type="text" id="f_PDDK_AKHIR" placeholder="SLTA/Sederajat">
+                    </div>
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label>Pekerjaan</label>
+                        <input type="text" id="f_PEKERJAAN" placeholder="Wiraswasta / Petani / Pelajar">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-slate" onclick="tutupModal()">Batal</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save"></i> Simpan Data</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        const STORAGE_KEY = 'db_penduduk_buniasih_v2026_auto_990';
+        let dataPenduduk = [];
+        let dataTersaring = [];
+        let halamanAktif = 1;
+        const perHalaman = 25;
+        function getUserAktifDesa() {
+    try {
+        return JSON.parse(localStorage.getItem('userAktifDesa')) || null;
+    } catch (err) {
+        return null;
+    }
+}
+
+function getRoleWilayahAktif() {
+    const user = getUserAktifDesa();
+    if (!user) return 'ALL';
+
+    const role = String(user.role || '').toLowerCase().trim();
+    const dusun = String(user.dusun || '').toLowerCase().trim();
+    const jabatan = String(user.jabatan || '').toLowerCase().trim();
+    const nama = String(user.namaLengkap || user.username || '').toLowerCase().trim();
+
+    if (
+        role === 'admin' ||
+        dusun === 'all' ||
+        jabatan.includes('admin') ||
+        jabatan.includes('bihi') ||
+        jabatan.includes('kasi pemerintahan') ||
+        nama.includes('muhamad ishak')
+    ) {
+        return 'ALL';
+    }
+
+    if (
+        role === 'kadus1' ||
+        role === 'kadus 1' ||
+        dusun.includes('01') ||
+        dusun.includes('1') ||
+        dusun.includes('buniaga') ||
+        nama.includes('samsudin')
+    ) {
+        return 'DUSUN_1';
+    }
+
+    if (
+        role === 'kadus2' ||
+        role === 'kadus 2' ||
+        dusun.includes('02') ||
+        dusun.includes('2') ||
+        nama.includes('samsun')
+    ) {
+        return 'DUSUN_2';
+    }
+
+    return 'ALL';
+}
+
+function cekWargaSesuaiWilayahAktif(warga) {
+    const wilayah = getRoleWilayahAktif();
+    if (wilayah === 'ALL') return true;
+
+    const teksDusun = String(
+        warga.DUSUN || warga.dusun || warga.WILAYAH || warga.wilayah || warga.ALAMAT || warga.alamat || ''
+    ).toLowerCase();
+
+    const angkaRT = parseInt(String(warga.RT || warga.rt || warga.NO_RT || '').replace(/\D/g, ''), 10);
+
+    if (wilayah === 'DUSUN_1') {
+        return (
+            teksDusun.includes('01') ||
+            teksDusun.includes('1') ||
+            teksDusun.includes('buniaga') ||
+            (!Number.isNaN(angkaRT) && angkaRT >= 1 && angkaRT <= 3)
+        );
+    }
+
+    if (wilayah === 'DUSUN_2') {
+        return (
+            teksDusun.includes('02') ||
+            teksDusun.includes('2') ||
+            (!Number.isNaN(angkaRT) && angkaRT >= 4 && angkaRT <= 6)
+        );
+    }
+
+    return true;
+}
+
+function terapkanFilterWilayahPadaData(listWarga) {
+    if (!Array.isArray(listWarga)) return [];
+    const wilayah = getRoleWilayahAktif();
+    if (wilayah === 'ALL') return listWarga;
+    return listWarga.filter(w => cekWargaSesuaiWilayahAktif(w));
+}
+        function parseCSVText(text) {
+            const lines = text.split(/\r?\n/);
+            if (lines.length < 2) return [];
+            const headers = lines[0].split(';').map(h => h.trim());
+            const hasil = [];
+            for (let i = 1; i < lines.length; i++) {
+                if (!lines[i].trim()) continue;
+                const cols = lines[i].split(';');
+                if (!cols[5] || !cols[6]) continue;
+                const obj = {};
+                headers.forEach((h, idx) => {
+                    obj[h] = (cols[idx] || '').replace(/\u00a0/g, ' ').trim();
+                });
+                hasil.push(obj);
+            }
+            return hasil;
+        }
+
+        async function inisialisasiData() {
+            // Cek localStorage dulu agar cepat
+            const tersimpan = localStorage.getItem(STORAGE_KEY);
+            if (tersimpan) {
+                dataPenduduk = terapkanFilterWilayahPadaData(JSON.parse(tersimpan));
+                terapkanFilter();
+                return;
+            }
+
+            // Jika belum ada di memori browser, baca otomatis file CSV dari folder lokal via fetch (pastikan akses via http://localhost/...)
+            try {
+                const res = await fetch('penduduk 2026 buniasih.csv');
+                if (res.ok) {
+                    const buffer = await res.arrayBuffer();
+                    const decoder = new TextDecoder('iso-8859-1');
+                    const text = decoder.decode(buffer);
+                    dataPenduduk = terapkanFilterWilayahPadaData(parseCSVText(text));
+                    simpanKeStorage();
+                    terapkanFilter();
+                } else {
+                    tampilkanPesanKosong();
+                }
+            } catch (e) {
+                tampilkanPesanKosong();
+            }
+        }
+
+        function tampilkanPesanKosong() {
+            document.getElementById('tabelPendudukBody').innerHTML = `
+                <tr>
+                    <td colspan="10" style="text-align:center; padding:35px;">
+                        <p style="color:#f87171; margin-bottom:8px;">Gagal memuat otomatis karena dibuka langsung dari sistem file komputer (file:///...).</p>
+                        <p style="color:#cbd5e1;">Silakan akses melalui server XAMPP (<strong>http://localhost/praktik_lapangan/database_penduduk.html</strong>) atau klik tombol <strong>Muat Ulang CSV</strong> di kanan atas dan pilih file <code>penduduk 2026 buniasih.csv</code>.</p>
+                    </td>
+                </tr>`;
+        }
+
+        function simpanKeStorage() {
+    const wilayah = typeof getRoleWilayahAktif === 'function' ? getRoleWilayahAktif() : 'ALL';
+
+    if (wilayah === 'ALL') {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(dataPenduduk));
+        return;
+    }
+
+    let dataLama = [];
+    try {
+        const rawLama = localStorage.getItem(STORAGE_KEY);
+        dataLama = rawLama ? JSON.parse(rawLama) : [];
+    } catch (e) {
+        dataLama = [];
+    }
+
+    const dataDusunLain = Array.isArray(dataLama)
+        ? dataLama.filter(w => typeof cekWargaSesuaiWilayahAktif === 'function' && !cekWargaSesuaiWilayahAktif(w))
+        : [];
+
+    const dataMilikUser = Array.isArray(dataPenduduk)
+        ? dataPenduduk.filter(w => typeof cekWargaSesuaiWilayahAktif === 'function' && cekWargaSesuaiWilayahAktif(w))
+        : [];
+
+    const hasilGabungan = [...dataDusunLain, ...dataMilikUser];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(hasilGabungan));
+    }
+
+        function hitungUmur(tglStr) {
+            if (!tglStr || !tglStr.includes('/')) return '-';
+            const parts = tglStr.split('/');
+            const thn = parseInt(parts[2], 10);
+            if (isNaN(thn)) return '-';
+            return (2026 - thn) + ' Th';
+        }
+
+        function terapkanFilter() {
+            const q = document.getElementById('searchInput').value.toLowerCase().trim();
+            const rt = document.getElementById('filterRT').value;
+
+            dataTersaring = dataPenduduk.filter(w => {
+                const cocokRT = !rt || w.RT === rt;
+                const cocokCari = !q ||
+                    (w.NAMA && w.NAMA.toLowerCase().includes(q)) ||
+                    (w.NIK && w.NIK.includes(q)) ||
+                    (w.NO_KK && w.NO_KK.includes(q)) ||
+                    (w.NAMA_KEP_KEL && w.NAMA_KEP_KEL.toLowerCase().includes(q));
+                return cocokRT && cocokCari;
+            });
+
+            document.getElementById('statTotal').textContent = dataPenduduk.length;
+            document.getElementById('statL').textContent = dataPenduduk.filter(w => w.JK === 'L').length;
+            document.getElementById('statP').textContent = dataPenduduk.filter(w => w.JK === 'P').length;
+
+            halamanAktif = 1;
+            renderTabel();
+        }
+
+        function renderTabel() {
+            const tbody = document.getElementById('tabelPendudukBody');
+            if (dataTersaring.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; padding:28px; color:#94a3b8;">Data warga tidak ditemukan.</td></tr>`;
+                document.getElementById('pageInfo').textContent = 'Menampilkan 0 data';
+                return;
+            }
+
+            const mulai = (halamanAktif - 1) * perHalaman;
+            const akhir = Math.min(mulai + perHalaman, dataTersaring.length);
+            const slice = dataTersaring.slice(mulai, akhir);
+
+            tbody.innerHTML = slice.map((w, idx) => {
+                const indexAsli = dataPenduduk.indexOf(w);
+                const badgeJK = w.JK === 'L'
+                    ? `<span class="badge-jk jk-l">L</span>`
+                    : `<span class="badge-jk jk-p">P</span>`;
+
+                return `
+                <tr>
+                    <td>${mulai + idx + 1}</td>
+                    <td style="font-family:monospace; font-weight:700; color:#38bdf8;">${w.NIK}</td>
+                    <td>
+                        <strong style="color:#ffffff;">${w.NAMA}</strong>
+                        <div style="font-size:11px; color:#94a3b8;">KK: ${w.NO_KK} (${w.SHDK})</div>
+                    </td>
+                    <td>${badgeJK}</td>
+                    <td>${w.TMPT_LHR}, ${w.TGL_LHR}</td>
+                    <td>${w.U ? w.U + ' Th' : hitungUmur(w.TGL_LHR)}</td>
+                    <td>RT ${w.RT} / RW ${w.RW}</td>
+                    <td>${w.PEKERJAAN}</td>
+                    <td>${w.STATUS}</td>
+                    <td style="white-space:nowrap; text-align:center;">
+                        <button class="btn-sm btn-surat" title="Buat Surat" onclick="buatSuratWarga(${indexAsli})">
+                            <i class="fa-solid fa-file-signature"></i> Surat
+                        </button>
+                        <button class="btn-sm btn-edit" title="Edit Data" onclick="bukaModalEdit(${indexAsli})">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button class="btn-sm btn-hapus" title="Hapus Data" onclick="hapusWarga(${indexAsli})">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>`;
+            }).join('');
+
+            document.getElementById('pageInfo').textContent =
+                `Menampilkan ${mulai + 1} - ${akhir} dari ${dataTersaring.length} warga`;
+            document.getElementById('btnPrev').disabled = halamanAktif === 1;
+            document.getElementById('btnNext').disabled = akhir >= dataTersaring.length;
+        }
+
+        function gantiHalaman(arah) {
+            halamanAktif += arah;
+            renderTabel();
+        }
+
+        function buatSuratWarga(index) {
+            const warga = dataPenduduk[index];
+            localStorage.setItem('wargaTerpilihSurat', JSON.stringify(warga));
+            window.location.href = 'persuratan.html';
+        }
+
+        function bukaModalTambah() {
+            document.getElementById('modalTitle').textContent = 'Tambah Data Penduduk Baru';
+            document.getElementById('editIndex').value = '-1';
+            document.getElementById('formPenduduk').reset();
+            document.getElementById('f_TMPT_LHR').value = 'KUNINGAN';
+            document.getElementById('modalPenduduk').classList.add('show');
+        }
+
+        function bukaModalEdit(index) {
+            const w = dataPenduduk[index];
+            document.getElementById('modalTitle').textContent = 'Edit Data Penduduk';
+            document.getElementById('editIndex').value = index;
+            document.getElementById('f_NIK').value = w.NIK || '';
+            document.getElementById('f_NO_KK').value = w.NO_KK || '';
+            document.getElementById('f_NAMA').value = w.NAMA || '';
+            document.getElementById('f_NAMA_KEP_KEL').value = w.NAMA_KEP_KEL || '';
+            document.getElementById('f_JK').value = w.JK || 'L';
+            document.getElementById('f_SHDK').value = w.SHDK || 'Kepala Keluarga';
+            document.getElementById('f_TMPT_LHR').value = w.TMPT_LHR || 'KUNINGAN';
+            document.getElementById('f_TGL_LHR').value = w.TGL_LHR || '';
+            document.getElementById('f_RT').value = w.RT || '001';
+            document.getElementById('f_RW').value = w.RW || '001';
+            document.getElementById('f_STATUS').value = w.STATUS || 'Belum Kawin';
+            document.getElementById('f_PDDK_AKHIR').value = w.PDDK_AKHIR || '';
+            document.getElementById('f_PEKERJAAN').value = w.PEKERJAAN || '';
+            document.getElementById('modalPenduduk').classList.add('show');
+        }
+
+        function tutupModal() {
+            document.getElementById('modalPenduduk').classList.remove('show');
+        }
+
+        document.getElementById('formPenduduk').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const idx = parseInt(document.getElementById('editIndex').value, 10);
+            const tgl = document.getElementById('f_TGL_LHR').value.trim();
+            const thn = tgl.includes('/') ? parseInt(tgl.split('/')[2], 10) : NaN;
+
+            const record = {
+                RW: document.getElementById('f_RW').value,
+                RT: document.getElementById('f_RT').value,
+                NO_KK: document.getElementById('f_NO_KK').value.trim(),
+                NAMA_KEP_KEL: document.getElementById('f_NAMA_KEP_KEL').value.toUpperCase().trim(),
+                SHDK: document.getElementById('f_SHDK').value,
+                NIK: document.getElementById('f_NIK').value.trim(),
+                NAMA: document.getElementById('f_NAMA').value.toUpperCase().trim(),
+                JK: document.getElementById('f_JK').value,
+                TMPT_LHR: document.getElementById('f_TMPT_LHR').value.toUpperCase().trim(),
+                TGL_LHR: tgl,
+                U: !isNaN(thn) ? String(2026 - thn) : '',
+                STATUS: document.getElementById('f_STATUS').value,
+                PDDK_AKHIR: document.getElementById('f_PDDK_AKHIR').value.trim(),
+                PEKERJAAN: document.getElementById('f_PEKERJAAN').value.trim()
+            };
+
+            if (idx === -1) {
+                dataPenduduk.unshift(record);
+            } else {
+                dataPenduduk[idx] = record;
+            }
+            simpanKeStorage();
+            terapkanFilter();
+            tutupModal();
+        });
+
+        function hapusWarga(index) {
+            const w = dataPenduduk[index];
+            if (confirm(`Yakin ingin menghapus data warga:\n${w.NAMA} (NIK: ${w.NIK})?`)) {
+                dataPenduduk.splice(index, 1);
+                simpanKeStorage();
+                terapkanFilter();
+            }
+        }
+
+        // Import CSV Manual / Muat Ulang
+        document.getElementById('csvFileInput').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                const parsed = parseCSVText(evt.target.result);
+                if (parsed.length > 0) {
+                    dataPenduduk = parsed;
+                    simpanKeStorage();
+                    terapkanFilter();
+                    alert(`Berhasil memuat ${parsed.length} data penduduk Desa Buniasih!`);
+                } else {
+                    alert('Format CSV tidak sesuai.');
+                }
+            };
+            reader.readAsText(file, 'ISO-8859-1');
+        });
+
+        function exportCSV() {
+            const headers = ['RW','RT','NO_KK','NAMA_KEP_KEL','SHDK','NIK','NAMA','JK','TMPT_LHR','TGL_LHR','U','STATUS','PDDK_AKHIR','PEKERJAAN'];
+            const rows = [headers.join(';')];
+            dataPenduduk.forEach(w => {
+                rows.push(headers.map(h => w[h] || '').join(';'));
+            });
+            const blob = new Blob([rows.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'penduduk_2026_buniasih_update.csv';
+            link.click();
+        }
+
+        document.getElementById('searchInput').addEventListener('input', terapkanFilter);
+        document.getElementById('filterRT').addEventListener('change', terapkanFilter);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const dataUser = JSON.parse(localStorage.getItem('userAktifDesa'));
+            if (dataUser && dataUser.namaLengkap) {
+                document.getElementById('navUserName').textContent = dataUser.namaLengkap;
+            }
+            document.getElementById('btnLogout').addEventListener('click', () => {
+                localStorage.removeItem('userAktifDesa');
+                window.location.href = 'index.html';
+            });
+            inisialisasiData();
+        });
+    </script>
+    <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+      overflow-x: hidden;
+    }
+
+    .site-footer {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 100%;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      background: #14532d;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 2px;
+    }
+
+    .site-footer .footer-copy {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.4;
+    }
+
+    .site-footer .footer-dev {
+      font-size: 12px;
+      font-weight: 500;
+      color: #dcfce7;
+      line-height: 1.4;
+    }
+
+    .site-footer .footer-ver {
+      font-size: 11px;
+      font-weight: 500;
+      color: #bbf7d0;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 1024px) {
+      .navbar {
+        padding-left: 16px;
+        padding-right: 16px;
+        gap: 8px;
+      }
+
+      .nav-menu {
+        gap: 6px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 10px 12px;
+      }
+
+      .nav-menu {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .site-footer {
+        margin-top: 16px;
+        padding: 10px 12px;
+      }
+
+      .site-footer .footer-copy {
+        font-size: 11.5px;
+      }
+
+      .site-footer .footer-dev,
+      .site-footer .footer-ver {
+        font-size: 10.5px;
+      }
+    }
+  </style>
+
+  <footer class="site-footer">
+    <div class="footer-copy">&copy; 2026 SIP-BUNIASIH · Pemerintah Desa Buniasih</div>
+    <div class="footer-dev">Dikembangkan oleh Ahmad Novaldi</div>
+    <div class="footer-ver">Kec. Maleber, Kab. Kuningan · Hak Cipta Dilindungi</div>
+  </footer>
+</body>
+</html>

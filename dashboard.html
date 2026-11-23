@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda - SIP-BUNIASIH ONLINE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body {
+            background-color: #070d19;
+            background-image: radial-gradient(circle at 12% 15%, rgba(16, 185, 129, 0.08), transparent 42%),
+                              radial-gradient(circle at 88% 85%, rgba(14, 165, 233, 0.08), transparent 42%);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        /* NAVBAR */
+        .navbar {
+            background: rgba(10, 17, 32, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-left { display: flex; align-items: center; gap: 14px; }
+        .brand-box { display: flex; align-items: center; gap: 12px; }
+        .logo-wrapper {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3px;
+        }
+        .logo-wrapper img { width: 100%; height: 100%; object-fit: contain; }
+        .brand-text h1 { font-size: 15px; font-weight: 800; color: #ffffff; letter-spacing: 0.3px; }
+        .brand-text span { font-size: 11px; color: #94a3b8; display: block; }
+        .nav-divider { width: 1px; height: 28px; background: rgba(255, 255, 255, 0.12); margin: 0 8px; }
+
+        .nav-menu { display: flex; align-items: center; list-style: none; gap: 8px; }
+        .nav-menu a {
+            text-decoration: none;
+            color: #cbd5e1;
+            font-size: 11.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            padding: 9px 15px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: all 0.25s ease;
+        }
+        .nav-menu a.active {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
+        }
+        .nav-menu a:hover:not(.active) { background: rgba(255, 255, 255, 0.06); color: #ffffff; }
+
+        .nav-right { display: flex; align-items: center; gap: 10px; }
+        .user-pill {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            background: rgba(30, 41, 59, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 6px 14px 6px 8px;
+            border-radius: 50px;
+            font-size: 12.5px;
+            font-weight: 600;
+        }
+        .user-avatar-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #0ea5e9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+        }
+        .btn-keluar {
+            background: rgba(127, 29, 29, 0.45);
+            border: 1px solid rgba(239, 68, 68, 0.45);
+            color: #fca5a5;
+            padding: 7px 14px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-keluar:hover { background: rgba(153, 27, 27, 0.75); color: #ffffff; }
+
+        /* CONTAINER UTAMA */
+        .main-wrapper { max-width: 1380px; width: 100%; margin: 0 auto; padding: 24px 32px 50px; flex: 1; }
+
+        /* HERO BANNER DENGAN GAPURA DESA BUNIASIH */
+        .hero-banner {
+            position: relative;
+            border-radius: 22px;
+            overflow: hidden;
+            margin-bottom: 24px;
+            background: linear-gradient(90deg, #0b241f 0%, #0b241f 45%, rgba(11, 36, 31, 0.5) 100%);
+            border: 1px solid rgba(34, 197, 94, 0.28);
+            padding: 36px 40px;
+            min-height: 240px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+        }
+        .hero-bg-gapura {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 58%;
+            height: 100%;
+            background-image: url('gapura_desa.jpg');
+            background-size: cover;
+            background-position: center 35%;
+            z-index: 1;
+        }
+        .hero-bg-gapura::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                #0b241f 0%,
+                rgba(11, 36, 31, 0.92) 18%,
+                rgba(13, 46, 38, 0.45) 45%,
+                rgba(15, 23, 42, 0.1) 100%
+            );
+        }
+        @media(max-width: 900px) {
+            .hero-banner { padding: 28px 24px; }
+            .hero-bg-gapura { width: 100%; opacity: 0.4; }
+        }
+
+        .hero-content { position: relative; z-index: 2; max-width: 610px; }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(34, 197, 94, 0.18);
+            border: 1px solid rgba(74, 222, 128, 0.45);
+            color: #4ade80;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 11.5px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            width: fit-content;
+        }
+        .hero-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 10px;
+            letter-spacing: -0.3px;
+        }
+        .hero-desc {
+            font-size: 13.5px;
+            color: #d1fae5;
+            max-width: 560px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .hero-footer-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 12.5px;
+            color: #a7f3d0;
+            flex-wrap: wrap;
+        }
+        .hero-explore-btn {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
+            transition: transform 0.2s ease;
+        }
+        .hero-explore-btn:hover { transform: translateY(-1px); }
+
+        /* GRID 4 KARTU MENU UTAMA (BISA DIKLIK) */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+        @media(max-width: 1100px) { .menu-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media(max-width: 650px) { .menu-grid { grid-template-columns: 1fr; } }
+
+        .menu-card {
+            background: #0f172a;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-decoration: none;
+            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            min-height: 180px;
+        }
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(34, 197, 94, 0.15);
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+        .card-icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 14px;
+        }
+        .card-content h3 { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+        .card-content p { font-size: 12px; color: #94a3b8; line-height: 1.5; }
+
+        .card-arrow {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #cbd5e1;
+            font-size: 12px;
+            transition: 0.2s;
+        }
+        .menu-card:hover .card-arrow { background: #22c55e; color: #fff; transform: scale(1.1); }
+
+        .card-persuratan .card-icon-box { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
+        .card-struktur .card-icon-box { background: rgba(14, 165, 233, 0.15); color: #38bdf8; }
+        .card-sejarah .card-icon-box { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+        .card-berita .card-icon-box { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
+
+        /* SECTION DATA DESA & PENGUMUMAN */
+        .info-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 24px; }
+        @media(max-width: 992px) { .info-grid { grid-template-columns: 1fr; } }
+
+        .section-box {
+            background: #0f172a;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 12px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .section-header h3 { font-size: 16px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px; }
+
+        /* STATS CHIPS */
+        .stats-grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+        @media(max-width: 560px) { .stats-grid-4 { grid-template-columns: 1fr; } }
+        .stat-item {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 18px;
+            transition: 0.2s;
+            cursor: pointer;
+            text-align: left;
+        }
+        .stat-item:hover { background: rgba(34, 197, 94, 0.08); border-color: rgba(34, 197, 94, 0.3); transform: translateY(-2px); }
+        .stat-item span { font-size: 11.5px; color: #94a3b8; font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 6px; }
+        .stat-item strong { font-size: 22px; font-weight: 800; color: #4ade80; display: block; }
+        .stat-item small { font-size: 11px; color: #38bdf8; display: block; margin-top: 4px; }
+
+        /* BAGIAN VISI & MISI KEPALA DESA DI BAWAH */
+        .visi-misi-section {
+            background: #0f172a;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 26px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+        .visi-card {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.12), rgba(16, 185, 129, 0.04));
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            border-left: 4px solid #22c55e;
+            border-radius: 14px;
+            padding: 18px 20px;
+            margin-bottom: 20px;
+        }
+        .visi-label {
+            font-size: 11.5px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: #4ade80;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .visi-quote {
+            font-size: 16px;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        .visi-sub {
+            font-size: 12.5px;
+            color: #cbd5e1;
+            line-height: 1.6;
+            text-align: justify;
+        }
+        .misi-heading {
+            font-size: 14px;
+            font-weight: 800;
+            color: #38bdf8;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+        .misi-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        @media(max-width: 860px) { .misi-list { grid-template-columns: 1fr; } }
+        .misi-item {
+            background: rgba(30, 41, 59, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 12px;
+            padding: 13px 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 11px;
+            font-size: 12.5px;
+            color: #e2e8f0;
+            line-height: 1.55;
+            text-align: justify;
+        }
+        .misi-num {
+            min-width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(34, 197, 94, 0.18);
+            border: 1px solid rgba(74, 222, 128, 0.4);
+            color: #4ade80;
+            font-size: 11px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1px;
+        }
+
+        /* MODAL DUSUN */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+        .modal-overlay.show { display: flex; }
+        .modal-box {
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
+            width: 100%;
+            max-width: 600px;
+            padding: 24px;
+        }
+        .dusun-box { background: #1e293b; border-radius: 12px; padding: 16px; margin-bottom: 14px; border-left: 4px solid #22c55e; }
+        .dusun-box h4 { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+        .dusun-box p { font-size: 12.5px; color: #94a3b8; }
+
+        .site-footer {
+            background: #060a14;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: auto;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="nav-left">
+            <div class="brand-box">
+                <div class="logo-wrapper">
+                    <img src="logo-desa.png" alt="Logo Desa Buniasih" onerror="this.style.display='none';">
+                </div>
+                <div class="brand-text">
+                    <h1>SIP-BUNIASIH ONLINE</h1>
+                    <span>Pemerintah Desa Buniasih</span>
+                </div>
+            </div>
+            <div class="nav-divider"></div>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="dashboard.html" class="active"><i class="fa-solid fa-house"></i> Beranda</a></li>
+            <li><a href="bagan-struktur.html"><i class="fa-solid fa-sitemap"></i> Struktur Lembaga</a></li>
+            <li><a href="sejarah-desa.html"><i class="fa-solid fa-landmark"></i> Sejarah Desa</a></li>
+            <li><a href="database-penduduk.html"><i class="fa-solid fa-users"></i> Database Penduduk</a></li>
+            <li><a href="persuratan.html"><i class="fa-solid fa-file-signature"></i> Persuratan</a></li>
+            <li><a href="berita.html"><i class="fa-solid fa-newspaper"></i> Berita</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <div class="user-pill">
+                <div class="user-avatar-dot"><i class="fa-solid fa-user"></i></div>
+                <span id="navUserName">Muhamad Ishak</span>
+            </div>
+            <button type="button" class="btn-keluar" id="btnLogout"><i class="fa-solid fa-right-from-bracket"></i> Keluar</button>
+        </div>
+    </header>
+
+    <!-- KONTEN UTAMA BERANDA -->
+    <main class="main-wrapper">
+
+        <!-- HERO BANNER DENGAN GAPURA DESA BUNIASIH -->
+        <section class="hero-banner">
+            <div class="hero-bg-gapura"></div>
+
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fa-solid fa-location-dot"></i> Desa Buniasih &bull; Kecamatan Maleber
+                </div>
+                <h2 class="hero-title" id="salamHeader">Selamat Datang, Muhamad Ishak!</h2>
+                <p class="hero-desc">Akses informasi dan kelola data kependudukan Desa Buniasih lebih mudah, cepat, dan transparan melalui SIP-BUNIASIH ONLINE.</p>
+                <div class="hero-footer-info">
+                    <span class="hero-explore-btn" onclick="window.location.href='persuratan.html'">
+                        <i class="fa-solid fa-compass"></i> Jelajahi Fitur &rarr;
+                    </span>
+                    <span>&bull;</span>
+                    <span><i class="fa-regular fa-calendar"></i> <span id="currentDateText">Kamis, 19 November 2026</span></span>
+                </div>
+            </div>
+        </section>
+        <!-- 4 KARTU MENU UTAMA (BISA DIKLIK) -->
+        <div class="menu-grid">
+            <a href="persuratan.html" class="menu-card card-persuratan">
+                <div class="card-icon-box"><i class="fa-solid fa-file-signature"></i></div>
+                <div class="card-content">
+                    <h3>Layanan Persuratan</h3>
+                    <p>Kelola pembuatan surat keterangan domisili, pernyataan nikah, dan administrasi warga secara otomatis.</p>
+                </div>
+                <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            </a>
+
+            <a href="bagan-struktur.html" class="menu-card card-struktur">
+                <div class="card-icon-box"><i class="fa-solid fa-sitemap"></i></div>
+                <div class="card-content">
+                    <h3>Struktur &amp; Perangkat</h3>
+                    <p>Informasi lengkap mengenai hierarki lembaga desa dan jajaran aparatur pemerintahan Desa Buniasih.</p>
+                </div>
+                <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            </a>
+
+            <a href="sejarah-desa.html" class="menu-card card-sejarah">
+                <div class="card-icon-box"><i class="fa-solid fa-landmark"></i></div>
+                <div class="card-content">
+                    <h3>Sejarah &amp; Profil</h3>
+                    <p>Dokumentasi arsip sejarah berdirinya Desa Buniasih serta profil wilayah domisili desa.</p>
+                </div>
+                <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            </a>
+
+            <a href="berita.html" class="menu-card card-berita">
+                <div class="card-icon-box"><i class="fa-solid fa-newspaper"></i></div>
+                <div class="card-content">
+                    <h3>Berita &amp; Pengumuman</h3>
+                    <p>Publikasi informasi kegiatan warga, program pembangunan, dan agenda penting desa terbaru.</p>
+                </div>
+                <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            </a>
+        </div>
+
+        <!-- SECTION GOOGLE MAPS BALAI DESA BUNIASIH -->
+        <section class="maps-section-box">
+            <div class="maps-section-header">
+                <div class="maps-title-group">
+                    <div class="maps-badge-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    <div>
+                        <h3>Lokasi Kantor Balai Desa Buniasih</h3>
+                        <p>Kecamatan Maleber, Kabupaten Kuningan &bull; Peta interaktif bisa di-zoom dan dijauhkan</p>
+                    </div>
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=Kantor+Balai+Desa+Buniasih+Kecamatan+Maleber+Kabupaten+Kuningan"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="btn-direct-gmaps">
+                    <i class="fa-solid fa-diamond-turn-right"></i> Buka di Google Maps
+                </a>
+            </div>
+
+            <div class="maps-iframe-container">
+                <iframe
+                    src="https://maps.google.com/maps?q=Kantor%20Balai%20Desa%20Buniasih%20Kecamatan%20Maleber%20Kabupaten%20Kuningan&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Peta Lokasi Kantor Balai Desa Buniasih Kecamatan Maleber Kabupaten Kuningan"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <!-- SECTION DATA DESA AKURAT & PENGUMUMAN -->
+        <div class="info-grid">
+
+            <!-- DATA DESA (TERHUBUNG KE DATABASE PENDUDUK 990 JIWA) -->
+            <div class="section-box">
+                <div class="section-header">
+                    <h3><i class="fa-solid fa-chart-pie" style="color:#4ade80;"></i> Data Desa Terintegrasi</h3>
+                    <span style="font-size:11.5px; color:#94a3b8;" id="updateInfo">Update Terakhir: 19 Nov 2026</span>
+                </div>
+
+                <div class="stats-grid-4">
+                    <!-- 1. TOTAL PENDUDUK -->
+                    <div class="stat-item" onclick="bukaDatabasePenduduk('')" title="Klik untuk lihat seluruh data penduduk">
+                        <span>Total Penduduk</span>
+                        <strong id="statTotalPenduduk">990</strong>
+                        <small><i class="fa-solid fa-users"></i> 519 L | 470 P &rarr;</small>
+                    </div>
+
+                    <!-- 2. KEPALA KELUARGA -->
+                    <div class="stat-item" onclick="bukaDatabasePenduduk('Kepala Keluarga')" title="Klik untuk lihat daftar Kepala Keluarga">
+                        <span>Kepala Keluarga</span>
+                        <strong id="statKK">...</strong>
+                        <small><i class="fa-solid fa-house-chimney"></i> Lihat KK &rarr;</small>
+                    </div>
+
+                    <!-- 3. DUSUN -->
+                    <div class="stat-item" onclick="bukaModalDusun()" title="Klik untuk lihat rincian Dusun">
+                        <span>Wilayah Dusun</span>
+                        <strong>2 Dusun</strong>
+                        <small><i class="fa-solid fa-map-location-dot"></i> Dusun 1 &amp; 2 &rarr;</small>
+                    </div>
+
+                    <!-- 4. CAKUPAN RT -->
+                    <div class="stat-item" onclick="bukaDatabasePenduduk('')">
+                        <span>Cakupan RT / RW</span>
+                        <strong>6 RT</strong>
+                        <small><i class="fa-solid fa-layer-group"></i> RT 001 - 006 &rarr;</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PENGUMUMAN TERBARU -->
+            <div class="section-box">
+                <div class="section-header">
+                    <h3><i class="fa-solid fa-bullhorn" style="color:#38bdf8;"></i> Pengumuman Terbaru</h3>
+                    <a href="berita.html" style="font-size:12px; color:#38bdf8; text-decoration:none; font-weight:700;">Lihat Semua &rarr;</a>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:14px;">
+                    <div style="background:rgba(30,41,59,0.5); padding:12px 14px; border-radius:12px; border-left:3px solid #22c55e;">
+                        <div style="font-size:12px; font-weight:800; color:#fff; margin-bottom:4px;">Pelayanan Administrasi Desa</div>
+                        <p style="font-size:11.5px; color:#94a3b8; line-height:1.4;">Pembuatan surat menyurat dan administrasi kependudukan kini dapat diakses online.</p>
+                    </div>
+                    <div style="background:rgba(30,41,59,0.5); padding:12px 14px; border-radius:12px; border-left:3px solid #38bdf8;">
+                        <div style="font-size:12px; font-weight:800; color:#fff; margin-bottom:4px;">Musrenbangdes RKPDes 2026</div>
+                        <p style="font-size:11.5px; color:#94a3b8; line-height:1.4;">Pemerintah Desa Buniasih melaksanakan musyawarah prioritas pembangunan.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- VISI & MISI KEPALA DESA BUNIASIH DI BAGIAN BAWAH -->
+        <section class="visi-misi-section">
+            <div class="section-header">
+                <h3><i class="fa-solid fa-bullseye" style="color:#4ade80;"></i> Visi &amp; Misi Kepala Desa Buniasih</h3>
+                <span style="font-size:11.5px; color:#94a3b8;">Kepala Desa: <strong style="color:#e2e8f0;">Carka Abdul Halim</strong> &bull; Kec. Maleber, Kab. Kuningan</span>
+            </div>
+
+            <div class="visi-card">
+                <div class="visi-label"><i class="fa-solid fa-star"></i> Visi Kepala Desa</div>
+                <div class="visi-quote">"Mewujudkan Desa Buniasih MAKMUR (Mandiri, Agamis, Kompetitif, Maju, dan Berkeadilan)"</div>
+                <p class="visi-sub">Gambaran cita-cita keadaan masa depan dalam jangka waktu 8 (delapan) tahun masa jabatan yang disusun secara partisipatif bersama pemerintah desa, BPD, tokoh masyarakat, tokoh agama, lembaga kemasyarakatan, dan warga Desa Buniasih.</p>
+            </div>
+
+            <div class="misi-heading"><i class="fa-solid fa-list-check"></i> Misi Kepala Desa Buniasih</div>
+            <ul class="misi-list">
+                <li class="misi-item">
+                    <span class="misi-num">1</span>
+                    <span>Membangun tata kelola pemerintahan Desa yang profesional, efektif, efisien, demokratis, akuntabel, dan transparan dengan pengambilan keputusan yang cepat dan tepat berdasarkan musyawarah mufakat.</span>
+                </li>
+                <li class="misi-item">
+                    <span class="misi-num">2</span>
+                    <span>Meningkatkan profesionalisme Aparatur Pemerintahan desa Buniasih yang unggul di bidang ilmu pengetahuan dan teknologi.</span>
+                </li>
+                <li class="misi-item">
+                    <span class="misi-num">3</span>
+                    <span>Mewujudkan manajemen pelayanan masyarakat yang merata, adil, dan berkualitas serta mampu memenuhi pelayanan dasar bagi masyarakat.</span>
+                </li>
+                <li class="misi-item">
+                    <span class="misi-num">4</span>
+                    <span>Mewujudkan pemerataan infrastruktur pembangunan dalam lingkungan yang lestari, dengan sarana dan prasarana yang memadai.</span>
+                </li>
+                <li class="misi-item">
+                    <span class="misi-num">5</span>
+                    <span>Mewujudkan pengelolaan lingkungan yang bersih dan sehat dengan peningkatan pengelolaan persampahan dan sanitasi lingkungan (Buniasih Go Green).</span>
+                </li>
+                <li class="misi-item">
+                    <span class="misi-num">6</span>
+                    <span>Mewujudkan perekonomian dan kesejahteraan masyarakat desa Buniasih dengan mengedepankan sektor pertanian, peternakan, perikanan, dan usaha kecil menengah lainnya berbasis kearifan lokal.</span>
+                </li>
+                <li class="misi-item">
+                    <span class="misi-num">7</span>
+                    <span>Meningkatkan pemberdayaan dan kualitas generasi muda dalam menyongsong masa depan / dunia pekerjaan.</span>
+                </li>
+                <li class="misi-item">
+                    <span class="misi-num">8</span>
+                    <span>Meningkatkan kualitas pemberdayaan perempuan (mendorong kesetaraan gender).</span>
+                </li>
+                <li class="misi-item">
+                    <span class="misi-num">9</span>
+                    <span>Meningkatkan kehidupan masyarakat desa yang religius dilandasi akhlaqul karimah.</span>
+                </li>
+                <li class="misi-item">
+                    <span class="misi-num">10</span>
+                    <span>Meningkatkan keamanan, ketertiban, kenyamanan, dan ketentraman masyarakat Desa Buniasih.</span>
+                </li>
+                <li class="misi-item">
+                    <span class="misi-num">11</span>
+                    <span>Mewujudkan Sumber Daya Manusia yang agamis, berkualitas, dan berdaya saing.</span>
+                </li>
+                <li class="misi-item">
+                    <span class="misi-num">12</span>
+                    <span>Peningkatan Sumber Pendapatan Asli Desa dengan menggali potensi pendapatan yang ada di desa dan dengan optimalisasi BUMDes.</span>
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- MODAL RINCIAN DUSUN & RT -->
+    <div class="modal-overlay" id="modalDusun">
+        <div class="modal-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:10px;">
+                <h3 style="font-size:16px; font-weight:800; color:#fff;"><i class="fa-solid fa-map" style="color:#4ade80;"></i> Rincian Wilayah Dusun &amp; RT</h3>
+                <button onclick="tutupModalDusun()" style="background:none; border:none; color:#94a3b8; font-size:20px; cursor:pointer;">&times;</button>
+            </div>
+
+            <div class="dusun-box">
+                <h4>Dusun 01 Buniaga</h4>
+                <p><strong>Kepala Dusun:</strong> Samsudin Ruslani</p>
+                <p style="margin-top:4px; color:#cbd5e1;">Membawahi wilayah: <strong>RT 001, RT 002, dan RT 003</strong></p>
+            </div>
+
+            <div class="dusun-box" style="border-left-color:#0ea5e9;">
+                <h4>Dusun 02</h4>
+                <p><strong>Kepala Dusun:</strong> E Samsun</p>
+                <p style="margin-top:4px; color:#cbd5e1;">Membawahi wilayah: <strong>RT 004, RT 005, dan RT 006</strong></p>
+            </div>
+
+            <div style="text-align:right; margin-top:16px;">
+                <button onclick="tutupModalDusun()" style="padding:8px 16px; border-radius:8px; background:#1e293b; color:#fff; border:none; cursor:pointer; font-weight:700;">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-copy">&copy; 2026 SIP-BUNIASIH · Pemerintah Desa Buniasih</div>
+        <div class="footer-dev">Dikembangkan oleh Ahmad Novaldi</div>
+        <div class="footer-ver">Kec. Maleber, Kab. Kuningan · Hak Cipta Dilindungi</div>
+    </footer>
+
+    <script>
+        function hitungStatistikDesa() {
+            const saved = localStorage.getItem('db_penduduk_buniasih_v2026_auto_990');
+            if (saved) {
+                const data = JSON.parse(saved);
+                const total = data.length;
+                const kk = data.filter(w => w.SHDK === 'Kepala Keluarga' || (w.NO_KK && !w.SHDK)).length;
+
+                document.getElementById('statTotalPenduduk').textContent = total;
+                document.getElementById('statKK').textContent = kk > 0 ? kk : '321';
+            } else {
+                document.getElementById('statTotalPenduduk').textContent = '990';
+                document.getElementById('statKK').textContent = '321';
+            }
+        }
+
+        function bukaDatabasePenduduk(filterKategori) {
+            if (filterKategori) {
+                localStorage.setItem('filterKeluargaMode', 'true');
+            } else {
+                localStorage.removeItem('filterKeluargaMode');
+            }
+            window.location.href = 'database-penduduk.html';
+        }
+
+        function bukaModalDusun() {
+            document.getElementById('modalDusun').classList.add('show');
+        }
+
+        function tutupModalDusun() {
+            document.getElementById('modalDusun').classList.remove('show');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = JSON.parse(localStorage.getItem('userAktifDesa'));
+            if (user && user.namaLengkap) {
+                document.getElementById('salamHeader').textContent = `Selamat Datang, ${user.namaLengkap}!`;
+                document.getElementById('navUserName').textContent = user.namaLengkap;
+            }
+
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const tglStr = new Date().toLocaleDateString('id-ID', options);
+            document.getElementById('currentDateText').textContent = tglStr;
+
+            document.getElementById('btnLogout').addEventListener('click', () => {
+                localStorage.removeItem('userAktifDesa');
+                window.location.href = 'index.html';
+            });
+            hitungStatistikDesa();
+        });
+    </script>
+
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: clip;
+            overflow-x: hidden;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .menu-card, .section-box, .visi-misi-section, .misi-item, .stat-item {
+            min-width: 0;
+            max-width: 100%;
+        }
+
+        /* SECTION GOOGLE MAPS DI BAWAH MENU GRID */
+        .maps-section-box {
+            background: #0f172a;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 22px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+        }
+
+        .maps-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .maps-title-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .maps-badge-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(74, 222, 128, 0.35);
+            color: #4ade80;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .maps-title-group h3 {
+            font-size: 16px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 2px;
+        }
+
+        .maps-title-group p {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .btn-direct-gmaps {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 12.5px;
+            font-weight: 700;
+            padding: 9px 16px;
+            border-radius: 50px;
+            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
+            white-space: nowrap;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .btn-direct-gmaps:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.08);
+        }
+
+        .maps-iframe-container {
+            width: 100%;
+            height: 290px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: #0b1324;
+        }
+
+        .maps-iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        .site-footer {
+            margin-top: 24px;
+            width: 100%;
+            max-width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
+            background: #14532d;
+            padding: 12px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 2px;
+        }
+
+        .site-footer .footer-copy {
+            font-size: 12.5px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.4;
+        }
+
+        .site-footer .footer-dev {
+            font-size: 12px;
+            font-weight: 500;
+            color: #dcfce7;
+            line-height: 1.4;
+        }
+
+        .site-footer .footer-ver {
+            font-size: 11px;
+            font-weight: 500;
+            color: #bbf7d0;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 1100px) {
+            .menu-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .navbar {
+                padding: 12px 16px;
+                gap: 8px;
+            }
+
+            .nav-menu {
+                gap: 6px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                gap: 8px;
+                padding: 10px 14px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .main-wrapper {
+                padding: 18px 14px 32px;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .maps-section-box {
+                padding: 16px;
+            }
+
+            .maps-iframe-container {
+                height: 220px;
+            }
+
+            .btn-direct-gmaps {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .site-footer {
+                margin-top: 18px;
+                padding: 10px 12px;
+            }
+
+            .site-footer .footer-copy {
+                font-size: 11.5px;
+            }
+
+            .site-footer .footer-dev,
+            .site-footer .footer-ver {
+                font-size: 10.5px;
+            }
+        }
+    </style>
+</body>
+</html>
