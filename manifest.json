@@ -1,0 +1,22 @@
+{
+  "name": "SIP-BUNIASIH - Sistem Informasi Pemerintahan Desa",
+  "short_name": "SIP-BUNIASIH",
+  "description": "Sistem Informasi Kependudukan dan Administrasi Desa Buniasih",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "./logo-desa.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./logo-desa.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
